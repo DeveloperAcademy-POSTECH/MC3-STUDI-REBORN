@@ -1,8 +1,11 @@
 # MC3-STUDI-REBORN
 
 # Commit Template
+
 커밋 메시지 템플릿입니다. 어기면 밖에서 물구나무 1분 서기.
+
 ---
+
 type: subject
 
 body (optional)
@@ -11,9 +14,11 @@ body (optional)
 ...
 
 footer (optional)
+
 ---
 
 ## Type - 타입	설명
+
 `feat` =	새로운 기능 추가
 `fix` =	버그 수정
 `docs` =	문서 수정
@@ -24,8 +29,11 @@ footer (optional)
 `chore` =	빌드 과정 또는 보조 기능(문서 생성기능 등) 수정
 
 ## 예시
+
 아래처러 작성하며 됩니다.
+
 ---
+
 feat: 압축파일 미리보기 기능 추가
 
 사용자의 편의를 위해 압축을 풀기 전에
@@ -34,4 +42,5 @@ feat: 압축파일 미리보기 기능 추가
  - 윈도우 탐색기 또는 맥 파인더의 미리보기 창
 
 Closes #125
+
 ---
