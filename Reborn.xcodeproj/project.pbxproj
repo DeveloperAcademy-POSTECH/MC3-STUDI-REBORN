@@ -112,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F7EFE2288435F900D19B44 /* UIColor.swift */,
+				AB17C7C728857F880045795E /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -128,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				B7F7EFEB2885491D00D19B44 /* BaseLabel.swift */,
-				AB17C7C728857F880045795E /* UIImageView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
