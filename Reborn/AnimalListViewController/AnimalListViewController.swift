@@ -38,9 +38,10 @@ class AnimalListViewController: UIViewController {
 extension AnimalListViewController {
     private func configureNavigationBar() {
         addLocationItem()
+        addRightBarButtonItems()
     }
     
-    // MARK: - location item
+    // MARK: - 지역 변경 아이템
     private func addLocationItem() {
         let labelStack = generateLocationLabelStack()
         let button = wrapWithButton(subview: labelStack)
@@ -87,5 +88,27 @@ extension AnimalListViewController {
         locationLabel.text = location
         
         // TODO: 지역 변경 시 추가 로직 구현
+    }
+    
+    // MARK: - 우측 아이템
+    private func addRightBarButtonItems() {
+        let likeItem = generateLikeItem()
+        navigationItem.rightBarButtonItems = [likeItem]
+    }
+    
+    // MARK: - 관심 목록 아이템
+    private func generateLikeItem() -> UIBarButtonItem {
+        let likeImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .medium)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToLikeListViewController))
+        likeImageView.gestureRecognizers = [tapGesture]
+        
+        return UIBarButtonItem(customView: likeImageView)
+    }
+    
+    @objc private func goToLikeListViewController() {
+        let dummyVC = UIViewController()
+        dummyVC.view.backgroundColor = .black
+        
+        navigationController?.pushViewController(dummyVC, animated: true)
     }
 }
