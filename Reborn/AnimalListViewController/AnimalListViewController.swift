@@ -15,17 +15,6 @@ class AnimalListViewController: UIViewController {
         return label
     }()
     
-    var locationMenu: UIMenu {
-        let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
-        var actions = [UIAction]()
-        
-        for location in locations {
-            actions.append(UIAction(title: location) { _ in self.changeLocation(to: location) })
-        }
-        
-        return UIMenu(children: actions)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -40,8 +29,21 @@ extension AnimalListViewController {
         addLocationItem()
         addRightBarButtonItems()
     }
-    
-    // MARK: - 지역 변경 아이템
+}
+
+// MARK: - 지역 변경 아이템
+extension AnimalListViewController {
+    var locationMenu: UIMenu {
+        let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
+        var actions = [UIAction]()
+        
+        for location in locations {
+            actions.append(UIAction(title: location) { _ in self.changeLocation(to: location) })
+        }
+        
+        return UIMenu(children: actions)
+    }
+
     private func addLocationItem() {
         let labelStack = generateLocationLabelStack()
         let button = wrapWithButton(subview: labelStack)
@@ -89,8 +91,10 @@ extension AnimalListViewController {
         
         // TODO: 지역 변경 시 추가 로직 구현
     }
-    
-    // MARK: - 우측 아이템
+}
+
+// MARK: - 우측 아이템들
+extension AnimalListViewController {
     private func addRightBarButtonItems() {
         let likeItem = generateLikeItem()
         let filterItem = generateFilterItem()
@@ -110,6 +114,7 @@ extension AnimalListViewController {
     }
     
     @objc private func goToLikeListViewController() {
+        // TODO: LikeListViewController로 변경
         let dummyVC = UIViewController()
         dummyVC.view.backgroundColor = .black
         
@@ -126,6 +131,7 @@ extension AnimalListViewController {
     }
     
     @objc private func popUpFilterModal() {
+        // TODO: FilterViewController로 변경
         let dummyVC = UIViewController()
         dummyVC.view.backgroundColor = .black
         
