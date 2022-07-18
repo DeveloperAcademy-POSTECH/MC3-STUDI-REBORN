@@ -28,7 +28,7 @@ final class NetworkManager {
 
     // TODO: searchTerm으로 원하는거 검색 가능하게 수정 필요
     func fetchAnimal(searchTerm: String? = nil, completion: @escaping NetworkCompletion) {
-        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.state)&\(AnimalApi.pageNumber)&\(AnimalApi.numberOfRows)"
+        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&\(AnimalApi.pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)"
         
         performRequest(with: urlString) { result in
             completion(result)
@@ -43,8 +43,8 @@ final class NetworkManager {
         
         let task = session.dataTask(with: url) { data, response, error in
             // 1. 에러 확인
-            if error != nil {
-                print(error!)
+            if let error = error {
+                print(error)
                 completion(.failure(.networkingError))
                 return
             }
