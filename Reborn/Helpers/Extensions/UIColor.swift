@@ -16,4 +16,5 @@ extension UIColor {
     static let cBeige = UIColor(named: "CBeige")
     static let cGray = UIColor(named: "CGray")
     static let cLightGray = UIColor(named: "CLightGray")
+    static let cDarkGray = UIColor(named: "CDarkGray")
 }
