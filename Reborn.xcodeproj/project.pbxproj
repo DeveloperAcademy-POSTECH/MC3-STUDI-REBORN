@@ -15,6 +15,7 @@
 		B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF282D287D5E47002781F7 /* ViewController.swift */; };
 		B7EF2833287D5E49002781F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7EF2832287D5E49002781F7 /* Assets.xcassets */; };
 		B7EF2836287D5E49002781F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7EF2834287D5E49002781F7 /* LaunchScreen.storyboard */; };
+		B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7EFE2288435F900D19B44 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B7EF2832287D5E49002781F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7EF2835287D5E49002781F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7EF2837287D5E49002781F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F7EFE2288435F900D19B44 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		7BF76DD22883D51400A3A370 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B7F7EFE1288435DA00D19B44 /* Extensions */,
 				7BF76DD32883D51400A3A370 /* Constants.swift */,
 			);
 			path = Helpers;
@@ -87,6 +90,14 @@
 				B7EF2837287D5E49002781F7 /* Info.plist */,
 			);
 			path = Reborn;
+			sourceTree = "<group>";
+		};
+		B7F7EFE1288435DA00D19B44 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7EFE2288435F900D19B44 /* UIColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BF76DD02883D50500A3A370 /* NetworkManager.swift in Sources */,
+				B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */,
 				B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */,
 				B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */,
 				B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */,
