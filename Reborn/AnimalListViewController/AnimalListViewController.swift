@@ -94,8 +94,10 @@ extension AnimalListViewController {
     private func addRightBarButtonItems() {
         let likeItem = generateLikeItem()
         let filterItem = generateFilterItem()
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 15
         
-        navigationItem.rightBarButtonItems = [filterItem, likeItem]
+        navigationItem.rightBarButtonItems = [filterItem, spacer, likeItem]
     }
     
     // MARK: - 관심 목록 아이템
