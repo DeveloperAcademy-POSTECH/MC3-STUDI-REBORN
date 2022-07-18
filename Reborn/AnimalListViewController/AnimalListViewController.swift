@@ -93,7 +93,9 @@ extension AnimalListViewController {
     // MARK: - 우측 아이템
     private func addRightBarButtonItems() {
         let likeItem = generateLikeItem()
-        navigationItem.rightBarButtonItems = [likeItem]
+        let filterItem = generateFilterItem()
+        
+        navigationItem.rightBarButtonItems = [filterItem, likeItem]
     }
     
     // MARK: - 관심 목록 아이템
@@ -110,5 +112,21 @@ extension AnimalListViewController {
         dummyVC.view.backgroundColor = .black
         
         navigationController?.pushViewController(dummyVC, animated: true)
+    }
+    
+    // MARK: - 필터 모달 아이템
+    private func generateFilterItem() -> UIBarButtonItem {
+        let filterImageView = UIImageView.ofSystemImage(systemName: "slider.horizontal.3", fontSize: 22, weight: .medium)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpFilterModal))
+        filterImageView.gestureRecognizers = [tapGesture]
+        
+        return UIBarButtonItem(customView: filterImageView)
+    }
+    
+    @objc private func popUpFilterModal() {
+        let dummyVC = UIViewController()
+        dummyVC.view.backgroundColor = .black
+        
+        navigationController?.present(dummyVC, animated: true)
     }
 }
