@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - AnimalInfoCell
-class AnimalInfoCell: UITableViewCell {
+final class AnimalInfoCell: UITableViewCell {
 
     static let identifier = "AnimalInfoCell"
 
@@ -48,7 +48,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configure 함수
-    public func configure(text: String, imageName: String, genderAge: String, shelter: String, isLiked: Bool) {
+    private func configure(text: String, imageName: String, genderAge: String, shelter: String, isLiked: Bool) {
         
         animalImage.image = UIImage(named: imageName)
         
@@ -87,14 +87,14 @@ class AnimalInfoCell: UITableViewCell {
     }
 
     // MARK: - configureImage 함수
-    func configureImage() {
+    private func configureImage() {
         animalImage.clipsToBounds = true
         animalImage.layer.cornerRadius = 14
         animalImage.contentMode = .scaleAspectFill
     }
     
     // MARK: - configureText 함수
-    func configureAllText() {
+    private func configureAllText() {
         animalKind.numberOfLines = 0
         animalKind.adjustsFontSizeToFitWidth = true
         animalKind.font = .systemFont(ofSize: 14, weight: .regular)
@@ -109,7 +109,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configureLike 함수
-    func configureLike() {  //하트 크기, 색깔 불확실
+    private func configureLike() {  //하트 크기, 색깔 불확실
         animalIsLiked.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         
         if animalIsLiked.currentImage == UIImage(systemName: "heart") {
@@ -120,7 +120,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configureDaysLeftLabel 함수
-    func configureDaysLeftLabel() {
+    private func configureDaysLeftLabel() {
         daysLeftLabel.translatesAutoresizingMaskIntoConstraints = false
         daysLeftLabel.backgroundColor = UIColor(named: "CRed")
         daysLeftLabel.layer.cornerRadius = 12
@@ -128,7 +128,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setImageConstraints 함수
-    func setImageConstraints() {
+    private func setImageConstraints() {
         animalImage.translatesAutoresizingMaskIntoConstraints = false   //false로 설정해야 오토레이아웃 가능
         
         //activate 한번에 묶는게 성능 향상에 좋음
@@ -141,7 +141,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setAllTextConstraint 함수
-    func setAllTextConstraint() {
+    private func setAllTextConstraint() {
         animalKind.translatesAutoresizingMaskIntoConstraints = false
         animalGenderAge.translatesAutoresizingMaskIntoConstraints = false
         animalShelter.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +159,7 @@ class AnimalInfoCell: UITableViewCell {
     }
 
     // MARK: - setLikeConstraint 함수
-    func setLikeConstraint() {  //constant 불확실
+    private func setLikeConstraint() {  //constant 불확실
         animalIsLiked.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             animalIsLiked.leadingAnchor.constraint(equalTo: animalImage.leadingAnchor, constant: 323),
@@ -168,7 +168,7 @@ class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setDaysLeftLabelConstraints 함수
-    func setDaysLeftLabelConstraints() {
+    private func setDaysLeftLabelConstraints() {
         animalIsLiked.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             daysLeftLabel.topAnchor.constraint(equalTo: animalImage.topAnchor),

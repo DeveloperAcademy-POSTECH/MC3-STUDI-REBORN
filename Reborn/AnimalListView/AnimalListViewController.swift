@@ -9,9 +9,9 @@ import UIKit
 // TODO: private 체크
 
 // MARK: - AnimalListViewController
-class AnimalListViewController: UIViewController {
+final class AnimalListViewController: UIViewController {
 
-    var tableView: UITableView!
+    private var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class AnimalListViewController: UIViewController {
     }
     
     // MARK: - setupTableView
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView(frame: .zero)
         view.addSubview(tableView)
         
@@ -46,6 +46,7 @@ class AnimalListViewController: UIViewController {
 extension AnimalListViewController: UITableViewDataSource {
     
     //cell 개수
+    //프로토콜에 있는 함수라 여기서 private 붙일 순 없다
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
