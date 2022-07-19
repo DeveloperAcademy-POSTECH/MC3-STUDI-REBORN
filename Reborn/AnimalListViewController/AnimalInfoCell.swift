@@ -28,6 +28,33 @@ final class AnimalInfoCell: UITableViewCell {
         return imageView
     }()
     
+    private let daysLeftLabel: UILabel = {
+        let label = BaseLabel(size: 12, textColor: .white, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "공고 종료 1일 전"
+        
+        return label
+    }()
+    
+    private lazy var daysLeftView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cRed
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(daysLeftLabel)
+        
+        NSLayoutConstraint.activate([
+            daysLeftLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
+            daysLeftLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
+            daysLeftLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            view.heightAnchor.constraint(equalToConstant: 24)
+        ])
+        
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -43,6 +70,12 @@ final class AnimalInfoCell: UITableViewCell {
         NSLayoutConstraint.activate([
             photoView.centerYAnchor.constraint(equalTo: centerYAnchor),
             photoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        ])
+        
+        contentView.addSubview(daysLeftView)
+        NSLayoutConstraint.activate([
+            daysLeftView.topAnchor.constraint(equalTo: photoView.topAnchor),
+            daysLeftView.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20)
         ])
     }
 }
