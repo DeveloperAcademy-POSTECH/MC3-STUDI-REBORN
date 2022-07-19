@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AnimalListViewController: UIViewController {
+final class AnimalListViewController: UIViewController {
     private let locationLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
         label.text = "서울특별시"
@@ -15,24 +15,6 @@ class AnimalListViewController: UIViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-        configureNavigationBar()
-    }
-}
-
-// MARK: - navigation bar button items
-extension AnimalListViewController {
-    private func configureNavigationBar() {
-        addLocationItem()
-        addRightBarButtonItems()
-    }
-}
-
-// MARK: - 지역 변경 아이템
-extension AnimalListViewController {
     var locationMenu: UIMenu {
         let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
         var actions = [UIAction]()
@@ -43,8 +25,8 @@ extension AnimalListViewController {
         
         return UIMenu(children: actions)
     }
-
-    private func addLocationItem() {
+    
+    private lazy var locationItem: UIBarButtonItem = {
         let labelStack = generateLocationLabelStack()
         let button = wrapWithButton(subview: labelStack)
         
@@ -53,10 +35,43 @@ extension AnimalListViewController {
             button.showsMenuAsPrimaryAction = true
         }
         
-        let item = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = item
+        return UIBarButtonItem(customView: button)
+    }()
+    
+    private lazy var likeItem: UIBarButtonItem = {
+        let likeImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .medium)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToLikeListViewController))
+        likeImageView.gestureRecognizers = [tapGesture]
+        
+        return UIBarButtonItem(customView: likeImageView)
+    }()
+    
+    private lazy var filterItem: UIBarButtonItem = {
+        let filterImageView = UIImageView.ofSystemImage(systemName: "slider.horizontal.3", fontSize: 22, weight: .medium)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpFilterModal))
+        filterImageView.gestureRecognizers = [tapGesture]
+        
+        return UIBarButtonItem(customView: filterImageView)
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        
+        configureNavigationBar()
     }
     
+    private func configureNavigationBar() {
+        navigationItem.leftBarButtonItem = locationItem
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 15
+        navigationItem.rightBarButtonItems = [filterItem, spacer, likeItem]
+    }
+}
+
+// MARK: - locationItem
+extension AnimalListViewController {
     private func generateLocationLabelStack() -> UIStackView {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -93,26 +108,8 @@ extension AnimalListViewController {
     }
 }
 
-// MARK: - 우측 아이템들
+// MARK: - likeItem
 extension AnimalListViewController {
-    private func addRightBarButtonItems() {
-        let likeItem = generateLikeItem()
-        let filterItem = generateFilterItem()
-        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spacer.width = 15
-        
-        navigationItem.rightBarButtonItems = [filterItem, spacer, likeItem]
-    }
-    
-    // MARK: - 관심 목록 아이템
-    private func generateLikeItem() -> UIBarButtonItem {
-        let likeImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .medium)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToLikeListViewController))
-        likeImageView.gestureRecognizers = [tapGesture]
-        
-        return UIBarButtonItem(customView: likeImageView)
-    }
-    
     @objc private func goToLikeListViewController() {
         // TODO: LikeListViewController로 변경
         let dummyVC = UIViewController()
@@ -120,8 +117,10 @@ extension AnimalListViewController {
         
         navigationController?.pushViewController(dummyVC, animated: true)
     }
-    
-    // MARK: - 필터 모달 아이템
+}
+
+// MARK: - filterItem
+extension AnimalListViewController {
     private func generateFilterItem() -> UIBarButtonItem {
         let filterImageView = UIImageView.ofSystemImage(systemName: "slider.horizontal.3", fontSize: 22, weight: .medium)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpFilterModal))
