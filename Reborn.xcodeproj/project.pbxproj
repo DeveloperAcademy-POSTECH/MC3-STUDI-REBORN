@@ -12,6 +12,7 @@
 		7BF76DD42883D51400A3A370 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF76DD32883D51400A3A370 /* Constants.swift */; };
 		AB17C7C2288562690045795E /* AnimalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C1288562690045795E /* AnimalListViewController.swift */; };
 		AB17C7C828857F880045795E /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C728857F880045795E /* UIImageView.swift */; };
+		ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */; };
 		B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF2829287D5E47002781F7 /* AppDelegate.swift */; };
 		B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF282B287D5E47002781F7 /* SceneDelegate.swift */; };
 		B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF282D287D5E47002781F7 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 		7BF76DD32883D51400A3A370 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AB17C7C1288562690045795E /* AnimalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewController.swift; sourceTree = "<group>"; };
 		AB17C7C728857F880045795E /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalInfoCell.swift; sourceTree = "<group>"; };
 		B7EF2826287D5E47002781F7 /* Reborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EF2829287D5E47002781F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EF282B287D5E47002781F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				AB17C7C1288562690045795E /* AnimalListViewController.swift */,
+				ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */,
 			);
 			path = AnimalListViewController;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */,
 				B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */,
 				B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */,
+				ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */,
 				B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */,
 				AB17C7C828857F880045795E /* UIImageView.swift in Sources */,
 				B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */,
