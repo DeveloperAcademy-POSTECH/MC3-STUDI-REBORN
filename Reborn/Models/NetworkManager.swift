@@ -27,7 +27,7 @@ final class NetworkManager {
     typealias NetworkCompletion = (Result<[Item], NetworkError>) -> Void
     
     // 지역으로 유기동물 데이터 받아오기
-    func fetchAnimal(regionQuery: String = Region.none.label, completion: @escaping NetworkCompletion) {
+    func fetchAnimal(regionQuery: String = Region.none.query, completion: @escaping NetworkCompletion) {
         let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&\(AnimalApi.pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(regionQuery)"
         
         performRequest(with: urlString) { result in

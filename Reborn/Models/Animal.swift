@@ -72,6 +72,16 @@ struct Item: Codable {
         case telNumber = "officetel"
     }
     
+    var leftDays: String? {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        
+        let today = formatter.string(from: now)
+        let date = Int(noticeEndDate ?? "0")! - Int(today)!
+        return String(date)
+    }
+    
 }
 
 // MARK: - Header
