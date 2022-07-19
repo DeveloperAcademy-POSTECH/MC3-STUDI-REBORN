@@ -37,7 +37,7 @@ enum Region {
     case gyeongnam
     case jeju
     
-    var label: String {
+    var query: String {
         switch self {
         case .none:
             return ""
