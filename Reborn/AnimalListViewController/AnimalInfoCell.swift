@@ -55,6 +55,30 @@ final class AnimalInfoCell: UITableViewCell {
         return view
     }()
     
+    private let speciesLabel: BaseLabel = {
+        let label = BaseLabel(size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "품종"
+        
+        return label
+    }()
+    
+    private let sexAgeLabel: BaseLabel = {
+        let label = BaseLabel(size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "성별, 나이"
+        
+        return label
+    }()
+    
+    private let shelterLabel: BaseLabel = {
+        let label = BaseLabel(size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "보호소"
+        
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -77,5 +101,41 @@ final class AnimalInfoCell: UITableViewCell {
             daysLeftView.topAnchor.constraint(equalTo: photoView.topAnchor),
             daysLeftView.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20)
         ])
+        
+        let infoStack = generateInfoStack()
+        contentView.addSubview(infoStack)
+        NSLayoutConstraint.activate([
+            infoStack.leadingAnchor.constraint(equalTo: daysLeftView.leadingAnchor),
+            infoStack.topAnchor.constraint(equalTo: daysLeftView.bottomAnchor, constant: 14)
+        ])
+    }
+    
+    private func generateInfoStack() -> UIStackView {
+        let speicesRow = generateInfoRow(imageName: "pawprint.circle", label: speciesLabel)
+        let sexAgeRow = generateInfoRow(imageName: "info.circle", label: sexAgeLabel)
+        let shelterRow = generateInfoRow(imageName: "location.circle", label: shelterLabel)
+        
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.alignment = .leading
+        
+        [speicesRow, sexAgeRow, shelterRow].forEach { stack.addArrangedSubview($0) }
+        
+        return stack
+    }
+    
+    private func generateInfoRow(imageName: String, label: UILabel) -> UIStackView {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 5
+        stack.alignment = .center
+        
+        let imageView = UIImageView.ofSystemImage(systemName: imageName, fontSize: 12, weight: .regular, color: .cDarkGray)
+        [imageView, label].forEach { stack.addArrangedSubview($0) }
+        
+        return stack
     }
 }
