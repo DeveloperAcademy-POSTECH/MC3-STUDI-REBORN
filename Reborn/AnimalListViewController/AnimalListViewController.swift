@@ -121,14 +121,6 @@ extension AnimalListViewController {
 
 // MARK: - filterItem
 extension AnimalListViewController {
-    private func generateFilterItem() -> UIBarButtonItem {
-        let filterImageView = UIImageView.ofSystemImage(systemName: "slider.horizontal.3", fontSize: 22, weight: .medium)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpFilterModal))
-        filterImageView.gestureRecognizers = [tapGesture]
-        
-        return UIBarButtonItem(customView: filterImageView)
-    }
-    
     @objc private func popUpFilterModal() {
         // TODO: FilterViewController로 변경
         let dummyVC = UIViewController()
