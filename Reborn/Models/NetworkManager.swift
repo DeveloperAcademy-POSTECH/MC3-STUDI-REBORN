@@ -25,15 +25,16 @@ final class NetworkManager {
     
     // Result 타입 typealias 설정
     typealias NetworkCompletion = (Result<[Item], NetworkError>) -> Void
-
-    // TODO: searchTerm으로 원하는거 검색 가능하게 수정 필요
-    func fetchAnimal(searchTerm: String? = nil, completion: @escaping NetworkCompletion) {
-        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&\(AnimalApi.pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)"
+    
+    // 지역으로 유기동물 데이터 받아오기
+    func fetchAnimal(locationQuery: String = Location.none, completion: @escaping NetworkCompletion) {
+        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&\(AnimalApi.pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(locationQuery)"
         
         performRequest(with: urlString) { result in
             completion(result)
         }
     }
+
     
     // request 하는 함수(비동기)
     private func performRequest(with urlString: String, completion: @escaping NetworkCompletion) {
