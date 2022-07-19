@@ -79,6 +79,8 @@ final class AnimalInfoCell: UITableViewCell {
         return label
     }()
     
+    let heartImageView: UIImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .regular, color: .cGray)
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -107,6 +109,12 @@ final class AnimalInfoCell: UITableViewCell {
         NSLayoutConstraint.activate([
             infoStack.leadingAnchor.constraint(equalTo: daysLeftView.leadingAnchor),
             infoStack.topAnchor.constraint(equalTo: daysLeftView.bottomAnchor, constant: 14)
+        ])
+        
+        contentView.addSubview(heartImageView)
+        NSLayoutConstraint.activate([
+            heartImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            heartImageView.bottomAnchor.constraint(equalTo: photoView.bottomAnchor)
         ])
     }
     
