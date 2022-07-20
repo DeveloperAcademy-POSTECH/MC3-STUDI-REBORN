@@ -19,6 +19,8 @@
 		B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7EFEB2885491D00D19B44 /* BaseLabel.swift */; };
 		B7F7EFEF2885537F00D19B44 /* AnimalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7EFEE2885537F00D19B44 /* AnimalDetailView.swift */; };
 		B7F7EFF12885538E00D19B44 /* AnimalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */; };
+		B7F7F01128864C3900D19B44 /* AnimalDetailTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01028864C3900D19B44 /* AnimalDetailTabbar.swift */; };
+		B7F7F01328864C7500D19B44 /* AnimalDetailTabbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		B7F7EFEB2885491D00D19B44 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		B7F7EFEE2885537F00D19B44 /* AnimalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailView.swift; sourceTree = "<group>"; };
 		B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailViewController.swift; sourceTree = "<group>"; };
+		B7F7F01028864C3900D19B44 /* AnimalDetailTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailTabbar.swift; sourceTree = "<group>"; };
+		B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailTabbarDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,10 +131,20 @@
 		B7F7EFED2885534F00D19B44 /* AnimalDetail */ = {
 			isa = PBXGroup;
 			children = (
+				B7F7F00F28864C0F00D19B44 /* AnimalDetailTabbar */,
 				B7F7EFEE2885537F00D19B44 /* AnimalDetailView.swift */,
 				B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */,
 			);
 			path = AnimalDetail;
+			sourceTree = "<group>";
+		};
+		B7F7F00F28864C0F00D19B44 /* AnimalDetailTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7F01028864C3900D19B44 /* AnimalDetailTabbar.swift */,
+				B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */,
+			);
+			path = AnimalDetailTabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F7F01128864C3900D19B44 /* AnimalDetailTabbar.swift in Sources */,
 				B7F7EFF12885538E00D19B44 /* AnimalDetailViewController.swift in Sources */,
 				7BF76DD02883D50500A3A370 /* NetworkManager.swift in Sources */,
 				B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */,
@@ -212,6 +227,7 @@
 				B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */,
 				7BF76DD12883D50500A3A370 /* Animal.swift in Sources */,
 				7BF76DD42883D51400A3A370 /* Constants.swift in Sources */,
+				B7F7F01328864C7500D19B44 /* AnimalDetailTabbarDelegate.swift in Sources */,
 				B7F7EFEF2885537F00D19B44 /* AnimalDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -26,7 +26,9 @@ final class AnimalDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        defaultScrollYOffset = self.animalDetailView.scrollView.contentOffset.y
+        setScrollView()
+        
+        animalDetailView.tabbar.delegate = self
     }
     
     override func loadView() {
@@ -56,6 +58,10 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
         
         // 아래 구문을 실행하면 이미지가 상단 상태바까지 적용이 됨
         animalDetailView.scrollView.contentInsetAdjustmentBehavior = .scrollableAxes
+        
+        // 상세 화면에 들어가게 되면, ScrollView의 Scroll Y축 Offset값이 iPhone13기준 -91의 값을 가지고 있으며
+        // Navigation Bar의 색상 변경 기능을 위해 해당 값을 저장함
+        defaultScrollYOffset = self.animalDetailView.scrollView.contentOffset.y
     }
     
     // TODO: - 이미지 비율 자연스럽게 변경 추후 구현
@@ -84,5 +90,34 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
         }
         
         setNavBarAppearance()
+    }
+}
+
+// MARK: - Tabbar Delegate
+
+extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
+    
+    // TODO: - 전화 걸기 기능 추후 구현
+    
+    func contactButtonDidTap() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "전화 " + "010 1234 1234", style: .default , handler:{ _ in
+            print("전화 걸기")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler:{ _ in
+            print("취소 버튼 탭")
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("액션 시트 올라옴")
+        })
+    }
+    
+    // TODO: - 관심 목록 추가 기능 추후 구현
+    
+    func likeButtonDidTap() {
+        
     }
 }
