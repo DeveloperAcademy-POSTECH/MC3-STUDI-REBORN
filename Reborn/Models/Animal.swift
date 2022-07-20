@@ -72,14 +72,16 @@ struct Item: Codable {
         case telNumber = "officetel"
     }
     
-    var leftDays: String? {
+    // 공고 종료일 계산
+    var noticeLeftDays: String? {
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         
-        let today = formatter.string(from: now)
-        let date = Int(noticeEndDate ?? "0")! - Int(today)!
-        return String(date)
+        let formattedDate = formatter.date(from: noticeEndDate ?? "0")
+        let leftDays = now.distance(to: formattedDate!) / (60 * 60 * 24)
+        let result = Int(leftDays)
+        return String(result)
     }
     
 }
