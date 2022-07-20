@@ -23,12 +23,14 @@ final class AnimalDetailViewController: UIViewController {
     
     private var defaultScrollYOffset: CGFloat = 0
 
+    // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpNavigationBar()
         setScrollView()
-        
-        animalDetailView.tabbar.delegate = self
+        setTabbar()
     }
     
     override func loadView() {
@@ -96,6 +98,10 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
 // MARK: - Tabbar Delegate
 
 extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
+    
+    private func setTabbar() {
+        animalDetailView.tabbar.delegate = self
+    }
     
     // TODO: - 전화 걸기 기능 추후 구현
     
