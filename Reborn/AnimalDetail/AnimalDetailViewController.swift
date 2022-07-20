@@ -31,6 +31,7 @@ final class AnimalDetailViewController: UIViewController {
         setUpNavigationBar()
         setScrollView()
         setTabbar()
+        setUpTapGesture()
     }
     
     override func loadView() {
@@ -125,5 +126,21 @@ extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
     
     func likeButtonDidTap() {
         
+    }
+}
+
+extension AnimalDetailViewController {
+    private func setUpTapGesture() {
+        self.animalDetailView.animalImageView.isUserInteractionEnabled = true
+        self.animalDetailView.animalImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animalImageViewDidTap)))
+    }
+    
+    // MARK: - Animal Image View Tap
+    
+    @objc func animalImageViewDidTap() {
+        let vc = DetailImageViewController()
+        vc.detailImageView.animalImageView = animalDetailView.animalImageView
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }
