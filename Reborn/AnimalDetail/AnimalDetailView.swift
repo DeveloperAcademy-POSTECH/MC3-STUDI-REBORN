@@ -12,4 +12,6 @@ final class AnimalDetailView: UIView {
     // MARK: - Properties
     
     let scrollView = UIScrollView()
+    
+    let tabbar = AnimalDetailTabbar()
 }
