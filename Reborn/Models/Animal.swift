@@ -73,15 +73,14 @@ struct Item: Codable {
     }
     
     // 공고 종료일 계산
-    var noticeLeftDays: String? {
+    var noticeLeftDays: Int? {
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         
         let formattedDate = formatter.date(from: noticeEndDate ?? "0")
         let leftDays = now.distance(to: formattedDate!) / (60 * 60 * 24)
-        let result = Int(leftDays)
-        return String(result)
+        return Int(leftDays)
     }
     
 }
