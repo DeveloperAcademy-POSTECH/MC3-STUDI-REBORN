@@ -55,21 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B2240472887D00D0085731B /* Controllers */ = {
+		7B22404D2887D4740085731B /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				B7EF282D287D5E47002781F7 /* ViewController.swift */,
 				7B2240452887D0090085731B /* FilterViewController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		7B2240482887D0250085731B /* Views */ = {
-			isa = PBXGroup;
-			children = (
+				7B22404B2887D0760085731B /* CustomDelegates.swift */,
 				7B2240492887D0390085731B /* FilterCategoryButton.swift */,
 			);
-			path = Views;
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		7BF76DCD2883D50500A3A370 /* Models */ = {
@@ -84,9 +77,8 @@
 		7BF76DD22883D51400A3A370 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				B7F7EFE1288435DA00D19B44 /* Extensions */,
 				7BF76DD32883D51400A3A370 /* Constants.swift */,
-				7B22404B2887D0760085731B /* CustomDelegates.swift */,
+				B7F7EFE1288435DA00D19B44 /* Extensions */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -110,14 +102,14 @@
 		B7EF2828287D5E47002781F7 /* Reborn */ = {
 			isa = PBXGroup;
 			children = (
-				B7F7EFED2885534F00D19B44 /* AnimalDetail */,
-				B7F7EFE9288548BE00D19B44 /* Components */,
 				B7EF2829287D5E47002781F7 /* AppDelegate.swift */,
 				B7EF282B287D5E47002781F7 /* SceneDelegate.swift */,
-				7BF76DD22883D51400A3A370 /* Helpers */,
+				B7F7EFE9288548BE00D19B44 /* Components */,
 				7BF76DCD2883D50500A3A370 /* Models */,
-				7B2240482887D0250085731B /* Views */,
-				7B2240472887D00D0085731B /* Controllers */,
+				7BF76DD22883D51400A3A370 /* Helpers */,
+				B7F7EFED2885534F00D19B44 /* AnimalDetail */,
+				7B22404D2887D4740085731B /* Filter */,
+				B7EF282D287D5E47002781F7 /* ViewController.swift */,
 				B7EF2832287D5E49002781F7 /* Assets.xcassets */,
 				B7EF2834287D5E49002781F7 /* LaunchScreen.storyboard */,
 				B7EF2837287D5E49002781F7 /* Info.plist */,
