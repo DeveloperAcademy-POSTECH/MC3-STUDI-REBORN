@@ -15,14 +15,9 @@ class LikeCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setImageViewConstraints()
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-            heartImageView.isUserInteractionEnabled = true
-            heartImageView.addGestureRecognizer(tapGestureRecognizer)
+
     }
-    
-    
-    
+
 //    하트버튼
     private let heartImageView: UIImageView = {
         let image = UIImage(systemName: "heart.fill")
@@ -32,8 +27,6 @@ class LikeCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    
-
 //    이미지
     private let animalImageView: UIImageView = {
         let imageView = UIImageView()
@@ -86,13 +79,6 @@ class LikeCollectionViewCell: UICollectionViewCell {
             heartImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             heartImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         ])
-    }
-    
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-    {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-
-        // Your action
     }
 }
 

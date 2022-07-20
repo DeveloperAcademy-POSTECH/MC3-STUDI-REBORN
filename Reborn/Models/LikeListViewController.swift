@@ -15,7 +15,6 @@ final class LikeListViewController: UIViewController {
 
     private let label: UILabel = {
         let label = UILabel()
-        
         label.frame = CGRect(x: 20, y: 108, width: 350, height: 66)
         label.textColor = .cBlack
         label.backgroundColor = .cBeige
@@ -25,7 +24,6 @@ final class LikeListViewController: UIViewController {
         label.clipsToBounds = true
         label.layer.cornerRadius = 14
         label.numberOfLines = 0
-        
         return label
     }()
     
@@ -71,15 +69,6 @@ final class LikeListViewController: UIViewController {
     }
     
 }
-//class heartButton : UIButton {
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//
-//        self.setTitle("button", for: .normal)
-//        self.backgroundColor = .red
-//    }
-//}
-
 
 extension LikeListViewController: UICollectionViewDataSource {
     
@@ -89,7 +78,6 @@ extension LikeListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeCollectionViewCell.identifier, for: indexPath) as! LikeCollectionViewCell
-
         return cell
     }
 }
