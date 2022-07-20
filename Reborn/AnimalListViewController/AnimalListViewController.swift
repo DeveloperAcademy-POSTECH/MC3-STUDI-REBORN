@@ -86,6 +86,18 @@ final class AnimalListViewController: UIViewController {
         ])
         
         tableView.dataSource = self
+        
+        addTableViewHeader()
+    }
+    
+    private func addTableViewHeader() {
+        tableView.sectionHeaderHeight = AnimalListTableViewHeader.height
+        let header = AnimalListTableViewHeader(frame: .zero)
+        
+        let size = CGSize(width: view.frame.width, height: AnimalListTableViewHeader.height)
+        header.frame.size = size
+        
+        tableView.tableHeaderView = header
     }
 }
 
