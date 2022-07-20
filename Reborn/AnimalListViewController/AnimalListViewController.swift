@@ -26,6 +26,8 @@ final class AnimalListViewController: UIViewController {
         return UIMenu(children: actions)
     }
     
+    var tableView = UITableView()
+    
     private lazy var locationItem: UIBarButtonItem = {
         let labelStack = generateLocationLabelStack()
         let button = wrapWithButton(subview: labelStack)
@@ -59,6 +61,7 @@ final class AnimalListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         configureNavigationBar()
+        setupTableView()
     }
     
     private func configureNavigationBar() {
@@ -67,6 +70,34 @@ final class AnimalListViewController: UIViewController {
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 15
         navigationItem.rightBarButtonItems = [filterItem, spacer, likeItem]
+    }
+    
+    private func setupTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(AnimalInfoCell.self, forCellReuseIdentifier: AnimalInfoCell.reuseID)
+        tableView.rowHeight = AnimalInfoCell.rowHeight
+        
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        tableView.dataSource = self
+        
+        addTableViewHeader()
+    }
+    
+    private func addTableViewHeader() {
+        tableView.sectionHeaderHeight = AnimalListTableViewHeader.height
+        let header = AnimalListTableViewHeader(frame: .zero)
+        
+        let size = CGSize(width: view.frame.width, height: AnimalListTableViewHeader.height)
+        header.frame.size = size
+        
+        tableView.tableHeaderView = header
     }
 }
 
@@ -129,3 +160,16 @@ extension AnimalListViewController {
         navigationController?.present(dummyVC, animated: true)
     }
 }
+
+extension AnimalListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
+        
+        return cell
+    }
+}
+
