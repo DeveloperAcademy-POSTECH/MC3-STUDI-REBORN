@@ -73,13 +73,20 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		7B22407D288923280085731B /* LikeList */ = {
+			isa = PBXGroup;
+			children = (
+				3FA6775B288692C3000ED816 /* LikeListViewController.swift */,
+				3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */,
+			);
+			path = LikeList;
+			sourceTree = "<group>";
+		};
 		7BF76DCD2883D50500A3A370 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7BF76DCF2883D50500A3A370 /* Animal.swift */,
 				7BF76DCE2883D50500A3A370 /* NetworkManager.swift */,
-				3FA6775B288692C3000ED816 /* LikeListViewController.swift */,
-				3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 				7BF76DD22883D51400A3A370 /* Helpers */,
 				B7F7EFED2885534F00D19B44 /* AnimalDetail */,
 				7B22404D2887D4740085731B /* Filter */,
+				7B22407D288923280085731B /* LikeList */,
 				B7EF282D287D5E47002781F7 /* ViewController.swift */,
 				B7EF2832287D5E49002781F7 /* Assets.xcassets */,
 				B7EF2834287D5E49002781F7 /* LaunchScreen.storyboard */,
