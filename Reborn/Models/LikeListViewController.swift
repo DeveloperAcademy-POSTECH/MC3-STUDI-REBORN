@@ -13,6 +13,7 @@ final class LikeListViewController: UIViewController {
     
     private let flowLayout = UICollectionViewFlowLayout()
 
+    //공고종료 배너
     private let label: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: 20, y: 108, width: 350, height: 66)
@@ -36,16 +37,17 @@ final class LikeListViewController: UIViewController {
         setCollectionView()
         setCollectionViewConstraints()
     }
-    
+    //네비게이션 바
     func setNavBar() {
         navigationItem.title = "관심 목록"
         navigationController?.navigationBar.tintColor = .cBlack
     }
-    
+    //배너
     func setBanner() {
         view.addSubview(label)
     }
     
+    //컬렉션뷰
     func setCollectionView() {
         collectionView.dataSource = self
         
@@ -58,16 +60,17 @@ final class LikeListViewController: UIViewController {
         collectionView.register(LikeCollectionViewCell.self, forCellWithReuseIdentifier: LikeCollectionViewCell.identifier)
     }
     
+    //컬렉션뷰 오토레이아웃
     func setCollectionViewConstraints(){
         view.addSubview(collectionView)
-        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 197).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 197),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
-    
 }
 
 extension LikeListViewController: UICollectionViewDataSource {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LikeCollectionViewCell: UICollectionViewCell {
+final class LikeCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "LikeCollectionViewCell"
     
@@ -17,17 +17,19 @@ class LikeCollectionViewCell: UICollectionViewCell {
         setImageViewConstraints()
 
     }
-
-//    하트버튼
-    private let heartImageView: UIImageView = {
-        let image = UIImage(systemName: "heart.fill")
-        let imageView = UIImageView(image: image)
-        imageView.clipsToBounds = true
-        imageView.tintColor = UIColor(named: "CRed")
-        return imageView
+    
+    //하트버튼
+    
+    private lazy var heartButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+        button.clipsToBounds = true
+        button.tintColor = UIColor(named: "CRed")
+        button.addTarget(self, action: #selector(heartButtonTouch), for: .touchUpInside)
+        return button
     }()
     
-//    이미지
+    //동물이미지
     private let animalImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "1.png")
@@ -37,7 +39,7 @@ class LikeCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-//    레이블
+    //공고날짜 레이블
     private let animalLabel: UILabel = {
         let label = UILabel()
         label.text = "공고 종료 1일 전"
@@ -54,6 +56,7 @@ class LikeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //오토레이아웃
     func setImageViewConstraints() {
         self.addSubview(animalImageView)
         animalImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,15 +76,21 @@ class LikeCollectionViewCell: UICollectionViewCell {
             animalLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1)
         ])
         
-        self.addSubview(heartImageView)
-        heartImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(heartButton)
+        heartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            heartImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            heartImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            heartButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            heartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         ])
     }
+    
+    //하트버튼 터치
+    @objc func heartButtonTouch(){
+        let button = UIButton.self()
+        button.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+        button.clipsToBounds = true
+        button.tintColor = UIColor(named: "CGray")
+        print("button")
+    }
 }
-
-
-
 
