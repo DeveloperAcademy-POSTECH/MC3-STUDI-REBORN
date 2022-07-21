@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FA6775C288692C3000ED816 /* LikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6775B288692C3000ED816 /* LikeListViewController.swift */; };
+		3FA6775E28869341000ED816 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */; };
 		7B2240462887D0090085731B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2240452887D0090085731B /* FilterViewController.swift */; };
 		7B22404A2887D0390085731B /* FilterCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2240492887D0390085731B /* FilterCategoryButton.swift */; };
 		7B22404C2887D0760085731B /* CustomDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22404B2887D0760085731B /* CustomDelegates.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FA6775B288692C3000ED816 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
+		3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7B2240452887D0090085731B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		7B2240492887D0390085731B /* FilterCategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCategoryButton.swift; sourceTree = "<group>"; };
 		7B22404B2887D0760085731B /* CustomDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDelegates.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 			children = (
 				7BF76DCF2883D50500A3A370 /* Animal.swift */,
 				7BF76DCE2883D50500A3A370 /* NetworkManager.swift */,
+				3FA6775B288692C3000ED816 /* LikeListViewController.swift */,
+				3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -244,6 +250,8 @@
 				B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */,
 				B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */,
 				B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */,
+				3FA6775C288692C3000ED816 /* LikeListViewController.swift in Sources */,
+				3FA6775E28869341000ED816 /* LikeCollectionViewCell.swift in Sources */,
 				7BF76DD12883D50500A3A370 /* Animal.swift in Sources */,
 				7BF76DD42883D51400A3A370 /* Constants.swift in Sources */,
 				7B22404A2887D0390085731B /* FilterCategoryButton.swift in Sources */,
@@ -387,6 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -414,6 +423,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
