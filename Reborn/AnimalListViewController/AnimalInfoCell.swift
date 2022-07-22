@@ -79,7 +79,26 @@ final class AnimalInfoCell: UITableViewCell {
         return label
     }()
     
-    let heartImageView: UIImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .regular, color: .cGray)
+    private lazy var heartButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
+        button.tintColor = isLiked ? .cRed : .cDarkGray
+        button.addTarget(self, action: #selector(toggleHeart), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 22),
+            button.heightAnchor.constraint(equalToConstant: 22)
+        ])
+        
+        return button
+    }()
+    
+    var isLiked = false {
+        didSet {
+            // TODO: Core Data 작업 추가
+            changeHeartImage()
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -111,10 +130,10 @@ final class AnimalInfoCell: UITableViewCell {
             infoStack.topAnchor.constraint(equalTo: daysLeftView.bottomAnchor, constant: 14)
         ])
         
-        contentView.addSubview(heartImageView)
+        contentView.addSubview(heartButton)
         NSLayoutConstraint.activate([
-            heartImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            heartImageView.bottomAnchor.constraint(equalTo: photoView.bottomAnchor)
+            heartButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            heartButton.bottomAnchor.constraint(equalTo: photoView.bottomAnchor)
         ])
     }
     
@@ -145,5 +164,14 @@ final class AnimalInfoCell: UITableViewCell {
         [imageView, label].forEach { stack.addArrangedSubview($0) }
         
         return stack
+    }
+    
+    @objc private func toggleHeart() {
+        isLiked.toggle()
+    }
+    
+    @objc private func changeHeartImage() {
+        heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
+        heartButton.tintColor = isLiked ? .cRed : .cDarkGray
     }
 }
