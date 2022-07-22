@@ -7,18 +7,18 @@
 
 import UIKit
 
-class AnimalListTableViewHeader: UIView {
+final class AnimalListTableViewHeader: UIView {
     static let id = "BenefitHeader"
     static let height: CGFloat = 125
     
-    var linkLabel: UILabel = {
+    private var linkLabel: UILabel = {
         let linkLabel = BaseLabel(size: 16, weight: .semibold)
         linkLabel.text = "🎉 서울특별시의 입양 혜택을 확인해보세요"
         
         return linkLabel
     }()
     
-    var linkUrlString = "https://www.naver.com"
+    private var linkUrlString = "https://www.naver.com"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,11 +96,7 @@ class AnimalListTableViewHeader: UIView {
     }
     
     @objc func openLink() {
-        openWebPage(linkUrlString)
-    }
-    
-    func openWebPage(_ urlString: String) {
-        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return }
+        guard let url = URL(string: linkUrlString), UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         // 출처: https://zeddios.tistory.com/375 [ZeddiOS:티스토리]
     }
