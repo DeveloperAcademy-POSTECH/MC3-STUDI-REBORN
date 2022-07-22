@@ -24,8 +24,8 @@ final class AnimalDetailView: UIView {
     }()
     
     let animalImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: ""))
-        imageView.contentMode = .scaleToFill
+        let imageView = UIImageView(image: UIImage(named: "test"))
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -46,6 +46,7 @@ final class AnimalDetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         makeSubviews()
         makeConstraints()
     }
@@ -59,13 +60,13 @@ final class AnimalDetailView: UIView {
     }
     
     private func makeConstraints() {
-        let scrollViewConstraints = [scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                                     scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                                     scrollView.topAnchor.constraint(equalTo: topAnchor),
+        let scrollViewConstraints = [scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                                     scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                                     scrollView.topAnchor.constraint(equalTo: self.topAnchor),
                                      scrollView.bottomAnchor.constraint(equalTo: tabbar.topAnchor)]
         
-        let animalImageContainerConstraints = [animalImageContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
-                                               animalImageContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+        let animalImageContainerConstraints = [animalImageContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                                               animalImageContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                                                animalImageContainer.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
                                                animalImageContainer.bottomAnchor.constraint(equalTo: animalInfoView.topAnchor, constant: -20),
                                                animalImageContainer.heightAnchor.constraint(equalToConstant: 420),
@@ -79,8 +80,8 @@ final class AnimalDetailView: UIView {
         let animalImageViewHeightConstraints = animalImageView.heightAnchor.constraint(greaterThanOrEqualTo: animalImageContainer.heightAnchor, constant: -40)
         animalImageViewHeightConstraints.priority = .required
         
-        let animalInfoViewConstraints = [animalInfoView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-                                         animalInfoView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+        let animalInfoViewConstraints = [animalInfoView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                                         animalInfoView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                                          animalInfoView.topAnchor.constraint(equalTo: animalImageContainer.bottomAnchor, constant: 20),
                                          animalInfoView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)]
         let animalInfoViewHeightConstraints = animalInfoView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, constant: -300)

@@ -20,26 +20,36 @@ final class ShelterInfoView: UIView {
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let categoryStackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 8
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let informationStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     // Name
-    let nameInfo: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.spacing = 14
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     let nameInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
         label.text = "보호소명"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let nameInfoLabel: BaseLabel = {
@@ -50,46 +60,26 @@ final class ShelterInfoView: UIView {
     }()
     
     // Address
-    let addressInfo: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.spacing = 40
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     let addressInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
         label.text = "주소"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let addressInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
         label.text = "경상북도 경주시 천북면 천북로 8-4"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     // Contact
-    let contactInfo: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.spacing = 27
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     let contactInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
         label.text = "연락처"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let contactInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
         label.text = "010-1234-1234"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -103,12 +93,18 @@ final class ShelterInfoView: UIView {
     }
     
     private func makeSubviews() {
-        [title, stackView].forEach { self.addSubview($0) }
-        [nameInfo, addressInfo, contactInfo].forEach { stackView.addArrangedSubview($0) }
+        [nameInfoTitle,
+         addressInfoTitle,
+         contactInfoTitle].forEach { categoryStackView.addArrangedSubview($0) }
         
-        [nameInfoTitle, nameInfoLabel].forEach { nameInfo.addArrangedSubview($0) }
-        [addressInfoTitle, addressInfoLabel].forEach { addressInfo.addArrangedSubview($0) }
-        [contactInfoTitle, contactInfoLabel].forEach { contactInfo.addArrangedSubview($0) }
+        [nameInfoLabel,
+         addressInfoLabel,
+         contactInfoLabel].forEach { informationStackView.addArrangedSubview($0) }
+        
+        [categoryStackView,
+         informationStackView].forEach { stackView.addArrangedSubview($0) }
+        
+        [title, stackView].forEach { self.addSubview($0) }
     }
     
     private func makeConstraints() {

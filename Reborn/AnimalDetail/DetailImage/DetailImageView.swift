@@ -19,7 +19,18 @@ final class DetailImageView: UIView {
         return button
     }()
     
-    var animalImageView: UIImageView?
+    let animalImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "test"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let animalImageViewContainer: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
     // MARK: - Methods
     
@@ -32,23 +43,31 @@ final class DetailImageView: UIView {
     }
     
     func makeSubviews() {
-        self.addSubview(closeButton)
-        if let animalImageView = animalImageView {
-            self.addSubview(animalImageView)
-        }
+        animalImageViewContainer.addSubview(animalImageView)
+        
+        [animalImageViewContainer,
+         closeButton].forEach { self.addSubview($0) }
     }
     
     func makeConstraints() {
         let closeButtonConstraints = [closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 24),
                                       closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24)]
         
-        guard let animalImageView = animalImageView else { return }
-        let animalImageViewConstraints = [animalImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                                          animalImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                                          animalImageView.topAnchor.constraint(equalTo: self.topAnchor),
-                                          animalImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
+        let animalImageViewContainerConstraints = [animalImageViewContainer.topAnchor.constraint(equalTo: self.topAnchor),
+                                                   animalImageViewContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                                                   animalImageViewContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                                                   animalImageViewContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor)]
         
-        [closeButtonConstraints, animalImageViewConstraints].forEach { NSLayoutConstraint.activate($0) }
+        let animalImageViewConstraints = [animalImageView.leadingAnchor.constraint(equalTo: animalImageViewContainer.contentLayoutGuide.leadingAnchor),
+                                          animalImageView.trailingAnchor.constraint(equalTo: animalImageViewContainer.contentLayoutGuide.trailingAnchor),
+                                          animalImageView.topAnchor.constraint(equalTo: animalImageViewContainer.contentLayoutGuide.topAnchor),
+                                          animalImageView.bottomAnchor.constraint(equalTo: animalImageViewContainer.contentLayoutGuide.bottomAnchor),
+                                          animalImageView.widthAnchor.constraint(equalTo: animalImageViewContainer.frameLayoutGuide.widthAnchor),
+                                          animalImageView.heightAnchor.constraint(equalTo: animalImageViewContainer.frameLayoutGuide.heightAnchor)]
+        
+        [closeButtonConstraints,
+         animalImageViewContainerConstraints,
+         animalImageViewConstraints].forEach { NSLayoutConstraint.activate($0) }
     }
     
     required init?(coder: NSCoder) {

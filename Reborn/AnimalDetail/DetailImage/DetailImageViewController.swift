@@ -18,23 +18,33 @@ final class DetailImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.detailImageView.closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
+        detailImageView.closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         
-        self.detailImageView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(doPinch)))
+        setUpScroll()
     }
     
     override func loadView() {
         super.loadView()
+        
         self.view = self.detailImageView
     }
     
     @objc func closeButtonDidTap() {
         self.dismiss(animated: true)
     }
+}
+
+// MARK: - Scroll Delegate
+
+extension DetailImageViewController: UIScrollViewDelegate {
     
-    @objc func doPinch(_ pinch: UIPinchGestureRecognizer) {
-        self.detailImageView.animalImageView?.transform = self.detailImageView.animalImageView?.transform.scaledBy(x: pinch.scale, y: pinch.scale) ?? .init()
-        
-        pinch.scale = 1
+    private func setUpScroll() {
+        detailImageView.animalImageViewContainer.minimumZoomScale = 1
+        detailImageView.animalImageViewContainer.maximumZoomScale = 2
+        detailImageView.animalImageViewContainer.delegate = self
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return detailImageView.animalImageView
     }
 }

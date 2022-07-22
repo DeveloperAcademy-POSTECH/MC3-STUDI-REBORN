@@ -139,7 +139,7 @@ extension AnimalDetailViewController {
     
     @objc func animalImageViewDidTap() {
         let vc = DetailImageViewController()
-        vc.detailImageView.animalImageView = animalDetailView.animalImageView
+//        vc.detailImageView.animalImageView.image = animalDetailView.animalImageView.image
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
