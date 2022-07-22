@@ -7,6 +7,14 @@
 
 import UIKit
 
+final class CustomButton: UIButton {
+    override var isHighlighted: Bool {
+        didSet {
+            alpha = isHighlighted ? 0.5 : 1
+        }
+    }
+}
+
 final class AnimalListViewController: UIViewController {
     private let locationLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
@@ -41,19 +49,35 @@ final class AnimalListViewController: UIViewController {
     }()
     
     private lazy var likeItem: UIBarButtonItem = {
-        let likeImageView = UIImageView.ofSystemImage(systemName: "heart", fontSize: 22, weight: .medium)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToLikeListViewController))
-        likeImageView.gestureRecognizers = [tapGesture]
+        let button = CustomButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .cBlack
         
-        return UIBarButtonItem(customView: likeImageView)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 27.33),
+            button.heightAnchor.constraint(equalToConstant: 24.33)
+        ])
+        
+        button.addTarget(self, action: #selector(goToLikeListViewController), for: .touchUpInside)
+        
+        return UIBarButtonItem(customView: button)
     }()
     
     private lazy var filterItem: UIBarButtonItem = {
-        let filterImageView = UIImageView.ofSystemImage(systemName: "slider.horizontal.3", fontSize: 22, weight: .medium)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpFilterModal))
-        filterImageView.gestureRecognizers = [tapGesture]
+        let button = CustomButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+        button.tintColor = .cBlack
         
-        return UIBarButtonItem(customView: filterImageView)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 27.33),
+            button.heightAnchor.constraint(equalToConstant: 24.33)
+        ])
+        
+        button.addTarget(self, action: #selector(popUpFilterModal), for: .touchUpInside)
+        
+        return UIBarButtonItem(customView: button)
     }()
     
     override func viewDidLoad() {
@@ -116,7 +140,7 @@ extension AnimalListViewController {
     }
     
     private func wrapWithButton(subview: UIView) -> UIButton {
-        let button = UIButton()
+        let button = CustomButton()
         
         button.translatesAutoresizingMaskIntoConstraints = false
         subview.translatesAutoresizingMaskIntoConstraints = false
