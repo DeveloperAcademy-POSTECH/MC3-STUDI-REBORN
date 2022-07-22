@@ -8,11 +8,13 @@
 import UIKit
 
 // MARK: - AnimalListViewController
+
 final class AnimalListViewController: UIViewController {
 
     private var tableView: UITableView!
     
     // MARK: - 지역선택 변수
+    
     private var locationText: BaseLabel = {
         let label = BaseLabel()
         label.text = "서울특별시"
@@ -39,6 +41,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     // MARK: - viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -48,6 +51,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     // MARK: - setupTableView
+    
     private func setupTableView() {
         tableView = UITableView(frame: .zero)
         view.addSubview(tableView)
@@ -69,6 +73,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     // MARK: - setupNavBarButton
+    
     private func setupNavBarButton() {
         //NavigationBarButtonItem 구성
         navigationItem.leftBarButtonItem = generateButtonItemFromStack()
@@ -85,6 +90,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     // MARK: - 지역선택 함수
+    
     private func generateButtonItemFromStack() -> UIBarButtonItem {
         // 1. Stack -> Button
         let button = UIButton()
@@ -127,6 +133,7 @@ final class AnimalListViewController: UIViewController {
     }
 
     // MARK: - 관심목록 이동 함수
+    
     @objc private func goToLike() {
         if let from = navigationController {
             let destination = LikeDemoViewController()
@@ -135,6 +142,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     // MARK: - 필터 모달 구현 함수
+    
     @objc private func goToFilter() {
         let destination = FilterDemoViewController()
         present(destination, animated: true, completion: nil)
@@ -142,6 +150,7 @@ final class AnimalListViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource 프로토콜
+
 extension AnimalListViewController: UITableViewDataSource {
     
     //cell 개수
@@ -162,6 +171,7 @@ extension AnimalListViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate 프로토콜
+
 extension AnimalListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

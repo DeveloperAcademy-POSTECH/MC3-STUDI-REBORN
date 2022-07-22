@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - AnimalInfoCell
+
 final class AnimalInfoCell: UITableViewCell {
 
     static let identifier = "AnimalInfoCell"
@@ -27,6 +28,7 @@ final class AnimalInfoCell: UITableViewCell {
     }()
     
     // MARK: - init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -48,6 +50,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configure 함수
+    
     private func configure(text: String, imageName: String, genderAge: String, shelter: String, isLiked: Bool) {
         
         animalImage.image = UIImage(named: imageName)
@@ -87,6 +90,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
 
     // MARK: - configureImage 함수
+    
     private func configureImage() {
         animalImage.clipsToBounds = true
         animalImage.layer.cornerRadius = 14
@@ -94,6 +98,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configureText 함수
+    
     private func configureAllText() {
         animalKind.numberOfLines = 0
         animalKind.adjustsFontSizeToFitWidth = true
@@ -109,6 +114,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configureLike 함수
+    
     private func configureLike() {  //하트 크기, 색깔 불확실
         animalIsLiked.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         
@@ -120,6 +126,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - configureDaysLeftLabel 함수
+    
     private func configureDaysLeftLabel() {
         daysLeftLabel.translatesAutoresizingMaskIntoConstraints = false
         daysLeftLabel.backgroundColor = UIColor(named: "CRed")
@@ -128,6 +135,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setImageConstraints 함수
+    
     private func setImageConstraints() {
         animalImage.translatesAutoresizingMaskIntoConstraints = false   //false로 설정해야 오토레이아웃 가능
         
@@ -141,6 +149,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setAllTextConstraint 함수
+    
     private func setAllTextConstraint() {
         animalKind.translatesAutoresizingMaskIntoConstraints = false
         animalGenderAge.translatesAutoresizingMaskIntoConstraints = false
@@ -159,6 +168,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
 
     // MARK: - setLikeConstraint 함수
+    
     private func setLikeConstraint() {  //constant 불확실
         animalIsLiked.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -168,6 +178,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - setDaysLeftLabelConstraints 함수
+    
     private func setDaysLeftLabelConstraints() {
         animalIsLiked.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -177,6 +188,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     // MARK: - fatalError
+    
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
