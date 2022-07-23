@@ -41,8 +41,8 @@ struct Item: Codable {
     
     let kind: String?
     let color: String?
-    let age: String?                    // 나이 - 2019(년생)
-    let sex: String?                    // 성별 - M, F, Q
+    let birth: String?                    // 나이 - 2019(년생)
+    let sexCd: String?                    // 성별 - M, F, Q
     let neutralizationStatus: String?   // 중성화 여부 - Y, N, U
     let weight: String?
     let description: String?            // 특징
@@ -51,7 +51,7 @@ struct Item: Codable {
     let shelterName: String?
     let shelterAddress: String?
     let telNumber: String?              // 담당자 연락처
-
+    
     // 응답 메시지 항목명 원하는 이름으로
     enum CodingKeys: String, CodingKey {
         case thumbnailImage = "filename"
@@ -61,8 +61,8 @@ struct Item: Codable {
         case noticeEndDate = "noticeEdt"
         case kind = "kindCd"
         case color = "colorCd"
-        case age = "age"
-        case sex = "sexCd"
+        case birth = "age"
+        case sexCd = "sexCd"
         case neutralizationStatus = "neuterYn"
         case weight = "weight"
         case description = "specialMark"
@@ -83,6 +83,22 @@ struct Item: Codable {
         return Int(leftDays)
     }
     
+    // 성별 한글로 바꿔줌
+    var sex: String? {
+        if sexCd == "M" {
+            return "남"
+        } else if sexCd == "F" {
+            return "여"
+        } else {
+            return "미상"
+        }
+    }
+    
+    // 나이 계산
+    var age: Int? {
+        Calendar.current.component(.year, from: Date()) - (Int(birth?.prefix(4) ?? "0") ?? 0) + 1
+    }
+    
 }
 
 // MARK: - Header
@@ -90,3 +106,4 @@ struct Header: Codable {
     let reqNo: Int
     let resultCode, resultMsg: String
 }
+
