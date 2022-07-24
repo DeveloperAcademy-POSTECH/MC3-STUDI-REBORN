@@ -17,6 +17,7 @@ final class CustomButton: UIButton {
 
 final class AnimalListViewController: UIViewController {
     var currentRegion: Region = .none
+    let animalItems = [Item]()
     
     private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
