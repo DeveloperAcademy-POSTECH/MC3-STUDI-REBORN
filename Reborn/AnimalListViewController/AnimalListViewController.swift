@@ -16,8 +16,9 @@ final class CustomButton: UIButton {
 }
 
 final class AnimalListViewController: UIViewController {
+    private let networkManager = NetworkManager.shared
     var currentRegion: Region = .none
-    let animalItems = [Item]()
+    var animalItems = [Item]()
     
     private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
@@ -88,6 +89,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
+        setDatas()
     }
     
     private func configureNavigationBar() {
@@ -124,6 +126,21 @@ final class AnimalListViewController: UIViewController {
         header.frame.size = size
         
         tableView.tableHeaderView = header
+    }
+    
+    private func setDatas() {
+        networkManager.fetchAnimal { result in
+            switch result {
+            case .success(let animalDatas):
+                self.animalItems = animalDatas
+                // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -191,12 +208,13 @@ extension AnimalListViewController {
 
 extension AnimalListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return animalItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
         
+        cell.animalItem = animalItems[indexPath.row]
         return cell
     }
 }

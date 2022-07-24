@@ -10,6 +10,11 @@ import UIKit
 final class AnimalInfoCell: UITableViewCell {
     static let reuseID = "AnimalInfoCell"
     static let rowHeight: CGFloat = 172
+    var animalItem: Item! {
+        didSet {
+            configureCell(animalItem: animalItem)
+        }
+    }
     
     private let photoView: UIImageView = {
         let imageView = UIImageView()
@@ -149,5 +154,21 @@ final class AnimalInfoCell: UITableViewCell {
     @objc private func changeHeartImage() {
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartButton.tintColor = isLiked ? .cRed : .cDarkGray
+    }
+    
+    private func configureCell(animalItem: Item) {
+        if let url = URL(string: animalItem.thumbnailImage ?? "") {
+            do {
+                let data = try Data(contentsOf: url)
+                photoView.image = UIImage(data: data)
+            } catch {
+                print("image not exists")
+            }
+        }
+        
+        leftDaysView.leftDays = animalItem.noticeLeftDays ?? 0
+        speciesLabel.text = animalItem.kind ?? "품종"
+        sexAgeLabel.text = "\(animalItem.sex ?? "성별 미상") · \(animalItem.age ?? 0)세"
+        shelterLabel.text = animalItem.shelterName ?? "보호소 미상"
     }
 }
