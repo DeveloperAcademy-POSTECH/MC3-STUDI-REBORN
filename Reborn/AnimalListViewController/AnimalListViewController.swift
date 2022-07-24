@@ -25,10 +25,9 @@ final class AnimalListViewController: UIViewController {
     
     var locationMenu: UIMenu {
         let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
-        var actions = [UIAction]()
         
-        for location in locations {
-            actions.append(UIAction(title: location) { _ in self.changeLocation(to: location) })
+        let actions = locations.map { location in
+            UIAction(title: location) { _ in self.changeLocation(to: location) }
         }
         
         return UIMenu(children: actions)
