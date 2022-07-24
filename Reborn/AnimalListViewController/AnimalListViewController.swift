@@ -16,18 +16,20 @@ final class CustomButton: UIButton {
 }
 
 final class AnimalListViewController: UIViewController {
-    private let locationLabel: BaseLabel = {
+    var currentRegion: Region = .none
+    
+    private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
-        label.text = "서울특별시"
+        label.text = currentRegion.name
         
         return label
     }()
     
-    var locationMenu: UIMenu {
-        let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
-        
-        let actions = locations.map { location in
-            UIAction(title: location) { _ in self.changeLocation(to: location) }
+    var regionMenu: UIMenu {
+        let actions = Region.allCases.map { region in
+            UIAction(title: region.name) { _ in
+                self.changeRegion(to: region)
+            }
         }
         
         return UIMenu(children: actions)
@@ -40,7 +42,7 @@ final class AnimalListViewController: UIViewController {
         let button = wrapWithButton(subview: labelStack)
         
         if #available(iOS 14.0, *) {
-            button.menu = locationMenu
+            button.menu = regionMenu
             button.showsMenuAsPrimaryAction = true
         }
         
@@ -115,7 +117,7 @@ final class AnimalListViewController: UIViewController {
     
     private func addTableViewHeader() {
         tableView.sectionHeaderHeight = AnimalListTableViewHeader.height
-        let header = AnimalListTableViewHeader(frame: .zero)
+        let header = AnimalListTableViewHeader(frame: .zero, region: currentRegion)
         
         let size = CGSize(width: view.frame.width, height: AnimalListTableViewHeader.height)
         header.frame.size = size
@@ -133,7 +135,7 @@ extension AnimalListViewController {
         stack.spacing = 6
         
         let chevronImageView = UIImageView.ofSystemImage(systemName: "chevron.down", fontSize: 20)
-        [locationLabel, chevronImageView].forEach { stack.addArrangedSubview($0) }
+        [regionLabel, chevronImageView].forEach { stack.addArrangedSubview($0) }
         
         return stack
     }
@@ -155,10 +157,12 @@ extension AnimalListViewController {
         return button
     }
     
-    private func changeLocation(to location: String) {
-        locationLabel.text = location
+    private func changeRegion(to region: Region) {
+        currentRegion = region
+        regionLabel.text = region.name
         
         // TODO: 지역 변경 시 추가 로직 구현
+        (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
     }
 }
 

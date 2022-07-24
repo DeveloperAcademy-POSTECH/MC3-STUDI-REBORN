@@ -11,17 +11,25 @@ final class AnimalListTableViewHeader: UIView {
     static let id = "BenefitHeader"
     static let height: CGFloat = 125
     
-    private var linkLabel: UILabel = {
+    var currentRegion: Region {
+        didSet {
+            linkLabel.text = "🎉 \(currentRegion.name)의 입양 혜택을 확인해보세요"
+        }
+    }
+    
+    private lazy var linkLabel: UILabel = {
         let linkLabel = BaseLabel(size: 16, weight: .semibold)
-        linkLabel.text = "🎉 서울특별시의 입양 혜택을 확인해보세요"
+        linkLabel.text = "🎉 전국의 입양 혜택을 확인해보세요"
         
         return linkLabel
     }()
     
     private var linkUrlString = "https://www.naver.com"
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, region: Region) {
+        currentRegion = region
         super.init(frame: frame)
+        linkLabel.text = "🎉 \(currentRegion.name)의 입양 혜택을 확인해보세요"
         setup()
     }
     
