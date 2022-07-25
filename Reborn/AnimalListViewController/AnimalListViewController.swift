@@ -38,6 +38,12 @@ final class AnimalListViewController: UIViewController {
     }
     
     var tableView = UITableView()
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        return refreshControl
+    }()
     
     private lazy var locationItem: UIBarButtonItem = {
         let labelStack = generateLocationLabelStack()
@@ -115,6 +121,7 @@ final class AnimalListViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.refreshControl = refreshControl
         
         addTableViewHeader()
     }
@@ -137,6 +144,7 @@ final class AnimalListViewController: UIViewController {
                 // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
             case .failure(let error):
                 print(error)
@@ -227,5 +235,11 @@ extension AnimalListViewController: UITableViewDelegate {
         
         navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension AnimalListViewController {
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        setDatas()
     }
 }
