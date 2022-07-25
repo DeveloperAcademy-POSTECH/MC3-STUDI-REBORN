@@ -170,9 +170,9 @@ final class FilterViewController: UIViewController {
         
         if sender.isOn == true {
             switch sender.titleLabel?.text {
-            case "🐶강아지": kind = Kind.dog
-            case "🐱고양이": kind = Kind.cat
-            case "기타": kind = Kind.etc
+            case "🐶강아지": kind = .dog
+            case "🐱고양이": kind = .cat
+            case "기타": kind = .etc
             default: kind = nil
             }
         } else {
@@ -185,8 +185,8 @@ final class FilterViewController: UIViewController {
         sender.isOn.toggle()
         
         switch sender.titleLabel?.text {
-        case "예": neutralizationStatus = NeutralizationStatus.yes
-        case "아니오": neutralizationStatus = NeutralizationStatus.no
+        case "예": neutralizationStatus = .yes
+        case "아니오": neutralizationStatus = .no
         default: neutralizationStatus = nil
         }
     }
