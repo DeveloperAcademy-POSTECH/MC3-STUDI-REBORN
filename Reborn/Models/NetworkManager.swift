@@ -27,14 +27,13 @@ final class NetworkManager {
     typealias NetworkCompletion = (Result<[Item], NetworkError>) -> Void
     
     // 지역으로 유기동물 데이터 받아오기
-    func fetchAnimal(regionQuery: String = Region.none.query, completion: @escaping NetworkCompletion) {
-        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&\(AnimalApi.pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(regionQuery)"
+    func fetchAnimal(regionQuery: String = Region.none.query, pageNumberQuery: Int = 1, kindQuery: String = "", neutralizationQuery: String = "", completion: @escaping NetworkCompletion) {
+        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&pageNo=\(pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(regionQuery)&upkind=\(kindQuery)&neuter_yn=\(neutralizationQuery)"
         
         performRequest(with: urlString) { result in
             completion(result)
         }
     }
-
     
     // request 하는 함수(비동기)
     private func performRequest(with urlString: String, completion: @escaping NetworkCompletion) {
@@ -73,7 +72,7 @@ final class NetworkManager {
         do {
             // JSON 데이터 -> AnimalData 구조체
             let animalData = try JSONDecoder().decode(Animal.self, from: animalData)
-            return animalData.response.body.items.item
+            return animalData.response.body.items.item.sorted(by: { $0.noticeLeftDays ?? 0 < $1.noticeLeftDays ?? 0 })
         } catch {
             print(error)
             return nil
