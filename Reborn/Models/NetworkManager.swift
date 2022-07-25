@@ -28,7 +28,7 @@ final class NetworkManager {
     
     // 지역으로 유기동물 데이터 받아오기
     func fetchAnimal(regionQuery: String = Region.none.query, pageNumberQuery: Int = 1, kindQuery: String = "", neutralizationStatusQuery: String = "", completion: @escaping NetworkCompletion) {
-        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&pageNo=\(pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(regionQuery)&upkind=\(kindQuery)&neuter_yn=\(neutralizationStatusQuery)"
+        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&pageNo=\(pageNumberQuery)&\(AnimalApi.numberOfRowsQuery)&\(regionQuery)&\(kindQuery)&\(neutralizationStatusQuery)"
         
         performRequest(with: urlString) { result in
             completion(result)

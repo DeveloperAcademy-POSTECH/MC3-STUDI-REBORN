@@ -170,9 +170,9 @@ final class FilterViewController: UIViewController {
         
         if sender.isOn == true {
             switch sender.titleLabel?.text {
-            case "🐶강아지": kind = "417000"
-            case "🐱고양이": kind = "422400"
-            case "기타": kind = "429900"
+            case "🐶강아지": kind = "upkind=417000"
+            case "🐱고양이": kind = "upkind=422400"
+            case "기타": kind = "upkind=429900"
             default: kind = nil
             }
         } else {
@@ -185,8 +185,8 @@ final class FilterViewController: UIViewController {
         sender.isOn.toggle()
         
         switch sender.titleLabel?.text {
-        case "예": neutralizationStatus = "Y"
-        case "아니오": neutralizationStatus = "N"
+        case "예": neutralizationStatus = "neuter_yn=Y"
+        case "아니오": neutralizationStatus = "neuter_yn=N"
         default: neutralizationStatus = nil
         }
     }
@@ -198,7 +198,7 @@ final class FilterViewController: UIViewController {
     }
     
     @objc private func applyButtonTapped(sender: UIButton) {
-        delegate?.applyFilter(kind: kind ?? "", neutralizationStatus: neutralizationStatus ?? "")
+        delegate?.applyFilter(kindQuery: kind ?? "", neutralizationStatusQuery: neutralizationStatus ?? "")
         dismiss(animated: true)
     }
     

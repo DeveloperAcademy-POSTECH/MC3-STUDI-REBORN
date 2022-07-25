@@ -8,5 +8,5 @@
 import Foundation
 
 protocol FilterDelegate: AnyObject {
-    func applyFilter(kind: String, neutralizationStatus: String)
+    func applyFilter(kindQuery: String, neutralizationStatusQuery: String)
 }
