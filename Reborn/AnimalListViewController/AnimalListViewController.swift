@@ -80,12 +80,34 @@ final class AnimalListViewController: UIViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    // MARK: - UIRefreshControl
+    //UIRefreshControl 인스턴스 생성
+    let refreshControl = UIRefreshControl()
+    
+    func initRefresh() {
+        //refreshControl의 값이 바뀔 때, refreshTable 함수 동작
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        self.tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        print("새로고침 시작")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.tableView.reloadData()
+            refresh.endRefreshing() //endRefreshing으로 refreshControl 꺼준다 -> refreshControl이 default값으로 돌아감
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
         configureNavigationBar()
         setupTableView()
+        
+        //당겨서 새로 고침
+        initRefresh()
     }
     
     private func configureNavigationBar() {
