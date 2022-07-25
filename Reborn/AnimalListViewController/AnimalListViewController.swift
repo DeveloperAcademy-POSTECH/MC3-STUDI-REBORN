@@ -114,6 +114,7 @@ final class AnimalListViewController: UIViewController {
         ])
         
         tableView.dataSource = self
+        tableView.delegate = self
         
         addTableViewHeader()
     }
@@ -206,6 +207,7 @@ extension AnimalListViewController {
     }
 }
 
+// MARK: - UITableView
 extension AnimalListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return animalItems.count
@@ -219,3 +221,11 @@ extension AnimalListViewController: UITableViewDataSource {
     }
 }
 
+extension AnimalListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = AnimalDetailViewController(item: animalItems[indexPath.row])
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
