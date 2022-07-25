@@ -14,6 +14,7 @@ final class NoticeInfoView: UIView {
     let noticeName: BaseLabel = {
         let label = BaseLabel(size: 18, weight: .bold)
         label.text = "경남-함안-2022-00286"
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -68,6 +68,7 @@ final class ShelterInfoView: UIView {
     let addressInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
         label.text = "경상북도 경주시 천북면 천북로 8-4"
+        label.numberOfLines = 0
         return label
     }()
     
