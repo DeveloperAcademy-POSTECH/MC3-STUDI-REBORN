@@ -14,17 +14,6 @@ final class FilterViewController: UIViewController {
     
     weak var delegate: FilterDelegate?
     
-    enum Kind: Int {
-        case dog = 1
-        case cat
-        case etc
-    }
-    
-    enum Neutralized: Int {
-        case yes = 1
-        case no
-    }
-    
     // MARK: - 품종
     private let kindLabel: UILabel = {
         let label = UILabel()
@@ -36,7 +25,6 @@ final class FilterViewController: UIViewController {
     private let dogButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐶강아지", for: .normal)
-        button.tag = Kind.dog.rawValue
         button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -44,7 +32,6 @@ final class FilterViewController: UIViewController {
     private let catButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐱고양이", for: .normal)
-        button.tag = Kind.cat.rawValue
         button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -52,7 +39,6 @@ final class FilterViewController: UIViewController {
     private let etcButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("기타", for: .normal)
-        button.tag = Kind.etc.rawValue
         button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -87,7 +73,6 @@ final class FilterViewController: UIViewController {
     private let yesButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("예", for: .normal)
-        button.tag = Neutralized.yes.rawValue
         button.addTarget(self, action: #selector(neutralizedButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -95,7 +80,6 @@ final class FilterViewController: UIViewController {
     private let noButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("아니오", for: .normal)
-        button.tag = Neutralized.no.rawValue
         button.addTarget(self, action: #selector(neutralizedButtonTapped), for: .touchUpInside)
         return button
     }()
