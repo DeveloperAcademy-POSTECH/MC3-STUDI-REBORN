@@ -32,29 +32,31 @@ struct Items: Codable {
 // MARK: - 유기동물 데이터
 struct Item: Codable {
     
-    let thumbnailImage: String?         // 메인화면 이미지
+    let id: String?
     
-    let detailImage: String?            // 상세화면 이미지
+    let detailImage: String? // 상세화면 이미지
     let noticeNumber: String?
     let noticeStartDate: String?
     let noticeEndDate: String?
     
     let kind: String?
     let color: String?
-    let birth: String?                    // 나이 - 2019(년생)
-    let sexCd: String?                    // 성별 - M, F, Q
-    let neutralizationStatus: String?   // 중성화 여부 - Y, N, U
+    let birth: String? // 나이 - 2019(년생)
+    let sexCd: String? // 성별 - M, F, Q
+    let neutralizationStatus: String? // 중성화 여부 - Y, N, U
     let weight: String?
-    let description: String?            // 특징
-    let discoverdPlace: String?         // 발견장소
+    let description: String? // 특징
+    let discoverdPlace: String? // 발견장소
     
     let shelterName: String?
     let shelterAddress: String?
-    let telNumber: String?              // 담당자 연락처
+    let telNumber: String? // 담당자 연락처
+    
+    var isLiked: Bool = false
     
     // 응답 메시지 항목명 원하는 이름으로
     enum CodingKeys: String, CodingKey {
-        case thumbnailImage = "filename"
+        case id = "desertionNo"
         case detailImage = "popfile"
         case noticeNumber = "noticeNo"
         case noticeStartDate = "noticeSdt"
@@ -85,12 +87,10 @@ struct Item: Codable {
     
     // 성별 한글로 바꿔줌
     var sex: String? {
-        if sexCd == "M" {
-            return "남"
-        } else if sexCd == "F" {
-            return "여"
-        } else {
-            return "미상"
+        switch sexCd {
+        case "M": return "남"
+        case "F": return "여"
+        default: return "미상"
         }
     }
     
