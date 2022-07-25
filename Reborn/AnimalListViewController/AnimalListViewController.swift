@@ -190,6 +190,8 @@ extension AnimalListViewController {
         
         // TODO: 지역 변경 시 추가 로직 구현
         (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
+        
+        scrollToTop()
     }
 }
 
@@ -241,5 +243,9 @@ extension AnimalListViewController: UITableViewDelegate {
 extension AnimalListViewController {
     @objc func refreshTable(refresh: UIRefreshControl) {
         setDatas()
+    }
+    
+    private func scrollToTop() {
+        self.tableView.setContentOffset(CGPoint(x: 0, y: -90), animated: true)
     }
 }
