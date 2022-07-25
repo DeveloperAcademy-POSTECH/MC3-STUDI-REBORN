@@ -138,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				AB17C7C0288562510045795E /* AnimalListViewController */,
-				B7F7EFE9288548BE00D19B44 /* Components */,
 				B7EF2829287D5E47002781F7 /* AppDelegate.swift */,
 				B7EF282B287D5E47002781F7 /* SceneDelegate.swift */,
 				B7F7EFE9288548BE00D19B44 /* Components */,
