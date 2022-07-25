@@ -168,15 +168,11 @@ final class FilterViewController: UIViewController {
         deselectKindButtons()
         sender.isOn.toggle()
         
-        if sender.isOn == true {
-            switch sender.titleLabel?.text {
-            case "🐶강아지": kind = .dog
-            case "🐱고양이": kind = .cat
-            case "기타": kind = .etc
-            default: kind = nil
-            }
-        } else {
-            kind = nil
+        switch sender.titleLabel?.text {
+        case "🐶강아지": kind = .dog
+        case "🐱고양이": kind = .cat
+        case "기타": kind = .etc
+        default: kind = nil
         }
     }
     
