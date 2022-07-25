@@ -9,8 +9,8 @@ import UIKit
 
 final class FilterViewController: UIViewController {
     
-    private var kind: String?
-    private var neutralizationStatus: String?
+    private var kind: Kind?
+    private var neutralizationStatus: NeutralizationStatus?
     
     weak var delegate: FilterDelegate?
     
@@ -170,9 +170,9 @@ final class FilterViewController: UIViewController {
         
         if sender.isOn == true {
             switch sender.titleLabel?.text {
-            case "🐶강아지": kind = "upkind=417000"
-            case "🐱고양이": kind = "upkind=422400"
-            case "기타": kind = "upkind=429900"
+            case "🐶강아지": kind = Kind.dog
+            case "🐱고양이": kind = Kind.cat
+            case "기타": kind = Kind.etc
             default: kind = nil
             }
         } else {
@@ -185,8 +185,8 @@ final class FilterViewController: UIViewController {
         sender.isOn.toggle()
         
         switch sender.titleLabel?.text {
-        case "예": neutralizationStatus = "neuter_yn=Y"
-        case "아니오": neutralizationStatus = "neuter_yn=N"
+        case "예": neutralizationStatus = NeutralizationStatus.yes
+        case "아니오": neutralizationStatus = NeutralizationStatus.no
         default: neutralizationStatus = nil
         }
     }
@@ -198,7 +198,7 @@ final class FilterViewController: UIViewController {
     }
     
     @objc private func applyButtonTapped(sender: UIButton) {
-        delegate?.applyFilter(kindQuery: kind ?? "", neutralizationStatusQuery: neutralizationStatus ?? "")
+        delegate?.applyFilter(kind: kind, neutralizationStatus: neutralizationStatus)
         dismiss(animated: true)
     }
     
