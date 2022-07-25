@@ -207,13 +207,17 @@ extension AnimalListViewController {
 }
 
 // MARK: - filterItem
-extension AnimalListViewController {
+extension AnimalListViewController: FilterDelegate {
+    func applyFilter(by filter: [String]) {
+        scrollToTop()
+    }
+    
     @objc private func popUpFilterModal() {
         // TODO: FilterViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
+        let filterVC = FilterViewController()
+        filterVC.delegate = self
         
-        navigationController?.present(dummyVC, animated: true)
+        navigationController?.present(filterVC, animated: true)
     }
 }
 
