@@ -48,6 +48,51 @@ final class AnimalListViewController: UIViewController {
 
         setupTableView()
         setupNavBarButton()
+        
+        // MARK: - Header
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 250))
+        
+        let headerTitleLabel = UILabel()
+        headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerTitleLabel.text = "입양을 기다리는 아이들"
+        headerTitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        
+        let benefitLabelText = UILabel()
+        benefitLabelText.translatesAutoresizingMaskIntoConstraints = false
+        benefitLabelText.text = "서울시의 입양 혜택을 확인해보세요!"
+        
+        let benefitSymbol = UIImageView()
+        benefitSymbol.translatesAutoresizingMaskIntoConstraints = false
+        benefitSymbol.image = UIImage(systemName: "chevron.right")
+
+        let benefitStackLabel = UIStackView()
+        benefitStackLabel.translatesAutoresizingMaskIntoConstraints = false
+        benefitStackLabel.axis = .horizontal
+        benefitStackLabel.spacing = 10
+        [ benefitStackLabel, benefitSymbol ].forEach { benefitStackLabel.addArrangedSubview($0) }
+        
+        let benefitLabel = UIView()
+        benefitLabel.translatesAutoresizingMaskIntoConstraints = false
+        benefitLabel.backgroundColor = .cBeige
+        benefitLabel.layer.cornerRadius = 16
+        
+        benefitLabel.addSubview(benefitStackLabel)
+        NSLayoutConstraint.activate([
+            benefitLabel.heightAnchor.constraint(equalToConstant: 80),
+            benefitStackLabel.centerXAnchor.constraint(equalTo: benefitLabel.centerXAnchor),
+        ])
+        
+        let headerLabel = UIStackView()
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerLabel.axis = .vertical
+        headerLabel.alignment = .leading
+        headerLabel.spacing = 20
+        
+        [ headerTitleLabel, benefitLabel ].forEach{ headerLabel.addSubview($0) }
+        headerView.addSubview(headerLabel)
+        
+        tableView.tableHeaderView = headerView
     }
     
     // MARK: - setupTableView
