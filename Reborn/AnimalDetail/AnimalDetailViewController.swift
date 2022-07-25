@@ -66,7 +66,7 @@ final class AnimalDetailViewController: UIViewController {
 
 extension AnimalDetailViewController {
     private func setAnimalInformation() {
-        guard let imageURLstring = item.thumbnailImage else { return }
+        guard let imageURLstring = item.detailImage else { return }
         let imageURL = URL(string: imageURLstring)
         
         // 이미지를 다운 받는 시간동안 멈춤 현상을 방지하기 위해
