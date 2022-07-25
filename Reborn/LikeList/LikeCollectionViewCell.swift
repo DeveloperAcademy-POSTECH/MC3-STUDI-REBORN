@@ -23,7 +23,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
         button.clipsToBounds = true
-        button.tintColor = UIColor(named: "CRed")
+        button.tintColor = .cRed
         button.addTarget(self, action: #selector(heartButtonTouch), for: .touchUpInside)
         return button
     }()
@@ -42,7 +42,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     private let animalLabel: UILabel = {
         let label = UILabel()
         label.text = "공고 종료 1일 전"
-        label.backgroundColor = UIColor(named: "CRed")
+        label.backgroundColor = .cRed
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.textAlignment = .center
@@ -89,7 +89,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     @objc func heartButtonTouch(){
         isLiked.toggle()
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
-        heartButton.tintColor = isLiked ? UIColor(named: "CRed"):UIColor(named: "CGray")
+        heartButton.tintColor = isLiked ? .cRed : .cGray
     }
 }
 
