@@ -38,6 +38,7 @@ final class AnimalListViewController: UIViewController {
     }
     
     var tableView = UITableView()
+    var isFetchable = true // tableView의 스크롤이 맨 밑에 닿을 때 데이터를 한번만 fetch하도록 하기 위해 사용
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
@@ -137,14 +138,16 @@ final class AnimalListViewController: UIViewController {
     }
     
     private func setDatas() {
+        isFetchable = false
         networkManager.fetchAnimal { result in
             switch result {
             case .success(let animalDatas):
-                self.animalItems = animalDatas
+                self.animalItems += animalDatas
                 // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
+                    self.isFetchable = true
                 }
             case .failure(let error):
                 print(error)
@@ -241,6 +244,17 @@ extension AnimalListViewController: UITableViewDelegate {
         
         navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isFetchable else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            setDatas()
+        }
     }
 }
 
