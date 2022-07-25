@@ -127,6 +127,7 @@ final class DescriptionInfoView: UIView {
     let charactersInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
         label.text = "온순하고 차분함, 사상충감염"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -139,6 +140,7 @@ final class DescriptionInfoView: UIView {
     let locationInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
         label.text = "가야읍 왕궁2길 19-1"
+        label.numberOfLines = 0
         return label
     }()
     
