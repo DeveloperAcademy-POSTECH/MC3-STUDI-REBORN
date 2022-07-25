@@ -24,7 +24,7 @@ final class AnimalDetailViewController: UIViewController {
     var item: Item
     
     init(item: Item? = nil) {
-        self.item = item ?? Item(thumbnailImage: nil, detailImage: nil, noticeNumber: nil, noticeStartDate: nil, noticeEndDate: nil, kind: nil, color: nil, age: nil, sex: nil, neutralizationStatus: nil, weight: nil, description: nil, discoverdPlace: nil, shelterName: nil, shelterAddress: nil, telNumber: nil)
+        self.item = item ?? Item(thumbnailImage: nil, detailImage: nil, noticeNumber: nil, noticeStartDate: nil, noticeEndDate: nil, kind: nil, color: nil, birth: nil, sexCd: nil, neutralizationStatus: nil, weight: nil, description: nil, discoverdPlace: nil, shelterName: nil, shelterAddress: nil, telNumber: nil)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,7 +82,7 @@ extension AnimalDetailViewController {
                 self.animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = self.item.color!
                 self.animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = self.item.sex!
                 self.animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = self.item.neutralizationStatus!
-                self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = self.item.age!
+                self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(self.item.age ?? -1)
                 self.animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = self.item.weight!
                 self.animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = self.item.description!
                 self.animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = self.item.discoverdPlace!
