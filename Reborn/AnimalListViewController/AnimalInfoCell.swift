@@ -173,6 +173,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         photoView.image = nil
         isLiked = false
         leftDaysView.leftDays = 0
