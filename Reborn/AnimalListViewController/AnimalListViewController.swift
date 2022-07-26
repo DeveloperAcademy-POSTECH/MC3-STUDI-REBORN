@@ -23,6 +23,33 @@ final class AnimalListViewController: UIViewController {
     var currentKind: Kind?
     var animalItems = [Item]()
     
+    let container: UIView = {
+        let container: UIView = UIView()
+        container.backgroundColor = .cDarkGray!.withAlphaComponent(0.5)
+        return container
+    }()
+    
+    let activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.color = .white
+        return activityView
+    }()
+    
+    func showActivityIndicator() {
+        container.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        activityView.center = view.center
+        
+        container.addSubview(activityView)
+        self.view.addSubview(container)
+        
+        activityView.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        activityView.stopAnimating()
+        container.removeFromSuperview()
+    }
+    
     private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
         label.text = currentRegion.name
@@ -99,6 +126,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
+        showActivityIndicator()
         fetchData()
     }
     
@@ -157,6 +185,7 @@ final class AnimalListViewController: UIViewController {
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                     self.isFetchable = true
+                    self.hideActivityIndicator()
                 }
             case .failure(let error):
                 print(error)
@@ -203,6 +232,7 @@ extension AnimalListViewController {
         // TODO: 지역 변경 시 추가 로직 구현
         (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
         
+        showActivityIndicator()
         currentPage = 1
         scrollToTop()
         fetchData()
@@ -225,6 +255,7 @@ extension AnimalListViewController: FilterDelegate {
     func applyFilter(kind: Kind?) {
         currentKind = kind
         
+        showActivityIndicator()
         currentPage = 1
         scrollToTop()
         fetchData()
