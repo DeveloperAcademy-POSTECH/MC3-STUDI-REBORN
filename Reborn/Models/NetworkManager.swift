@@ -27,8 +27,8 @@ final class NetworkManager {
     typealias NetworkCompletion = (Result<[Item], NetworkError>) -> Void
     
     // 지역으로 유기동물 데이터 받아오기
-    func fetchAnimal(pageNumber: Int = 1, region: Region = .none, kind: Kind? = nil, neutralizationStatus: NeutralizationStatus? = nil, completion: @escaping NetworkCompletion) {
-        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&pageNo=\(pageNumber)&\(AnimalApi.numberOfRowsQuery)&\(region.query)&\(kind?.query ?? "")&\(neutralizationStatus?.query ?? "")"
+    func fetchAnimal(pageNumber: Int = 1, region: Region = .none, kind: Kind? = nil, completion: @escaping NetworkCompletion) {
+        let urlString = "\(AnimalApi.requestUrl)&\(AnimalApi.key)&\(AnimalApi.stateQuery)&pageNo=\(pageNumber)&\(AnimalApi.numberOfRowsQuery)&\(region.query)&\(kind?.query ?? "")"
         
         performRequest(with: urlString) { result in
             completion(result)
