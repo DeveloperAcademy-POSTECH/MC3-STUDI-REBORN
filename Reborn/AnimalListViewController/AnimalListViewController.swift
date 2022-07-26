@@ -126,8 +126,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
-        showActivityIndicator()
-        fetchData()
+        initializeData()
     }
     
     private func configureNavigationBar() {
@@ -192,6 +191,13 @@ final class AnimalListViewController: UIViewController {
             }
         }
     }
+    
+    private func initializeData() {
+        showActivityIndicator()
+        currentPage = 1
+        scrollToTop()
+        fetchData()
+    }
 }
 
 // MARK: - locationItem
@@ -232,10 +238,7 @@ extension AnimalListViewController {
         // TODO: 지역 변경 시 추가 로직 구현
         (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
         
-        showActivityIndicator()
-        currentPage = 1
-        scrollToTop()
-        fetchData()
+        initializeData()
     }
 }
 
@@ -255,10 +258,7 @@ extension AnimalListViewController: FilterDelegate {
     func applyFilter(kind: Kind?) {
         currentKind = kind
         
-        showActivityIndicator()
-        currentPage = 1
-        scrollToTop()
-        fetchData()
+        initializeData()
     }
     
     @objc private func popUpFilterModal() {
