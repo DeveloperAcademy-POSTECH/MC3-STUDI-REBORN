@@ -245,11 +245,9 @@ extension AnimalListViewController {
 // MARK: - likeItem
 extension AnimalListViewController {
     @objc private func goToLikeListViewController() {
-        // TODO: LikeListViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
+        let likeListVC = LikeListViewController()
         
-        navigationController?.pushViewController(dummyVC, animated: true)
+        navigationController?.pushViewController(likeListVC, animated: true)
     }
 }
 
@@ -262,7 +260,6 @@ extension AnimalListViewController: FilterDelegate {
     }
     
     @objc private func popUpFilterModal() {
-        // TODO: FilterViewController로 변경
         let filterVC = FilterViewController()
         filterVC.delegate = self
         
