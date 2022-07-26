@@ -44,6 +44,7 @@ final class AnimalListViewController: UIViewController {
                 self.changeLocation(to: location)
                 self.makeRegionQuery(location)
                 self.setDatas(by: self.regionQuery)
+                self.showActivityIndicator()
             })
         }
         
@@ -126,6 +127,40 @@ final class AnimalListViewController: UIViewController {
         setDatas()
         //당겨서 새로 고침
         initRefresh()
+        
+        //로딩화면
+        showActivityIndicator()
+    }
+    
+    // MARK: - Activity Indicator
+    
+    let container: UIView = {
+        let container: UIView = UIView()
+        container.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        return container
+    }()
+    
+    let activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.color = .white
+        return activityView
+    }()
+    
+    func showActivityIndicator() {
+        container.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        activityView.center = view.center
+        
+        container.addSubview(activityView)
+        self.view.addSubview(container)
+        
+        activityView.startAnimating()
+        // TODO: - 로딩화면 사라지는 트리거 설정 (API Fetch 완료했을 때)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { self.hideActivityIndicator() }
+    }
+    
+    func hideActivityIndicator() {
+        activityView.stopAnimating()
+        container.removeFromSuperview()
     }
     
     private func configureNavigationBar() {
@@ -241,7 +276,9 @@ extension AnimalListViewController {
     
     private func scrollToTop() {
         let topRow = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: topRow, at: .top, animated: false)
+        // 첫번째 at - 목표 cell
+        // 두번째 at - 목표 cell의 tableView 상에서 위치
+        self.tableView.scrollToRow(at: topRow, at: .bottom, animated: true)
     }
     
     // MARK: - 지역 문자열로 regionQuery에 할당
