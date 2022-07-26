@@ -76,7 +76,6 @@ final class AnimalInfoCell: UITableViewCell {
     
     var isLiked = false {
         didSet {
-            // TODO: Core Data 작업 추가
             changeHeartImage()
         }
     }
@@ -148,6 +147,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     @objc private func toggleHeart() {
+        // TODO: Core Data 작업 추가
         isLiked.toggle()
     }
     
@@ -157,18 +157,30 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     private func configureCell(animalItem: Item) {
-        if let url = URL(string: animalItem.thumbnailImage ?? "") {
-            do {
-                let data = try Data(contentsOf: url)
-                photoView.image = UIImage(data: data)
-            } catch {
-                print("image not exists")
-            }
-        }
-        
         leftDaysView.leftDays = animalItem.noticeLeftDays ?? 0
         speciesLabel.text = animalItem.kind ?? "품종"
         sexAgeLabel.text = "\(animalItem.sex ?? "성별 미상") · \(animalItem.age ?? 0)세"
         shelterLabel.text = animalItem.shelterName ?? "보호소 미상"
+        
+        guard let urlString = animalItem.detailImage, let url = URL(string: urlString) else { return }
+        
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            guard urlString == url.absoluteString else { return }
+            
+            DispatchQueue.main.async {
+                self.photoView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoView.image = nil
+        isLiked = false
+        leftDaysView.leftDays = 0
+        speciesLabel.text = "품종"
+        sexAgeLabel.text = "성별 · 나이"
+        shelterLabel.text = "보호소"
     }
 }

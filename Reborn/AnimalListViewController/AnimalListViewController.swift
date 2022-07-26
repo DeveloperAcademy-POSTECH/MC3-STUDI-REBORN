@@ -17,8 +17,38 @@ final class CustomButton: UIButton {
 
 final class AnimalListViewController: UIViewController {
     private let networkManager = NetworkManager.shared
+    
+    var currentPage = 1
     var currentRegion: Region = .none
+    var currentKind: Kind?
     var animalItems = [Item]()
+    
+    let container: UIView = {
+        let container: UIView = UIView()
+        container.backgroundColor = .cDarkGray!.withAlphaComponent(0.5)
+        return container
+    }()
+    
+    let activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.color = .white
+        return activityView
+    }()
+    
+    func showActivityIndicator() {
+        container.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        activityView.center = view.center
+        
+        container.addSubview(activityView)
+        self.view.addSubview(container)
+        
+        activityView.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        activityView.stopAnimating()
+        container.removeFromSuperview()
+    }
     
     private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
@@ -96,7 +126,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
-        setDatas()
+        initializeData()
     }
     
     private func configureNavigationBar() {
@@ -137,22 +167,36 @@ final class AnimalListViewController: UIViewController {
         tableView.tableHeaderView = header
     }
     
-    private func setDatas() {
+    private func fetchData() {
         isFetchable = false
-        networkManager.fetchAnimal { result in
+        
+        networkManager.fetchAnimal(pageNumber: currentPage, region: currentRegion, kind: currentKind) { result in
             switch result {
             case .success(let animalDatas):
-                self.animalItems += animalDatas
+                if self.currentPage == 1 {
+                    self.animalItems = animalDatas
+                } else {
+                    self.animalItems += animalDatas
+                }
+                
                 // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                     self.isFetchable = true
+                    self.hideActivityIndicator()
                 }
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    private func initializeData() {
+        showActivityIndicator()
+        currentPage = 1
+        scrollToTop()
+        fetchData()
     }
 }
 
@@ -194,29 +238,28 @@ extension AnimalListViewController {
         // TODO: 지역 변경 시 추가 로직 구현
         (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
         
-        scrollToTop()
+        initializeData()
     }
 }
 
 // MARK: - likeItem
 extension AnimalListViewController {
     @objc private func goToLikeListViewController() {
-        // TODO: LikeListViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
+        let likeListVC = LikeListViewController()
         
-        navigationController?.pushViewController(dummyVC, animated: true)
+        navigationController?.pushViewController(likeListVC, animated: true)
     }
 }
 
 // MARK: - filterItem
 extension AnimalListViewController: FilterDelegate {
-    func applyFilter(by filter: [String]) {
-        scrollToTop()
+    func applyFilter(kind: Kind?) {
+        currentKind = kind
+        
+        initializeData()
     }
     
     @objc private func popUpFilterModal() {
-        // TODO: FilterViewController로 변경
         let filterVC = FilterViewController()
         filterVC.delegate = self
         
@@ -253,14 +296,16 @@ extension AnimalListViewController: UITableViewDelegate {
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            setDatas()
+            currentPage += 1
+            fetchData()
         }
     }
 }
 
 extension AnimalListViewController {
     @objc func refreshTable(refresh: UIRefreshControl) {
-        setDatas()
+        currentPage = 1
+        fetchData()
     }
     
     private func scrollToTop() {
