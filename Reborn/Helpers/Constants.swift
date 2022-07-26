@@ -14,10 +14,10 @@ struct AnimalApi {
     static let key = "serviceKey=n1TP%2BU609SiYa5OWk03fYi1r4ASh04%2F2g54Hixw8os6IIzkhypv3doFp8CT2m4s9jfgTm%2F1G%2BPspd3XmzkbDcw%3D%3D"
     static let stateQuery = "state=notice"
     static let pageNumberQuery = "pageNo=1"
-    static let numberOfRowsQuery = "numOfRows=20"
+    static let numberOfRowsQuery = "numOfRows=200"
 }
 
-enum Region {
+enum Region: CaseIterable {
     
     case none
     case seoul

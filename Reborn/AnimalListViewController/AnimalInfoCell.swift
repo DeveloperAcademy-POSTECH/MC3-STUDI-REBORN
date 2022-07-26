@@ -11,6 +11,23 @@ final class AnimalInfoCell: UITableViewCell {
     static let reuseID = "AnimalInfoCell"
     static let rowHeight: CGFloat = 172
     
+    // MARK: - 받아온 데이터 세팅
+    var animal: Item? {
+        didSet {
+            daysLeftLabel.text = "공고 종료 \(animal?.noticeLeftDays ?? 0)일 전"
+            speciesLabel.text = animal?.kind
+            sexAgeLabel.text = "\(animal?.sex ?? "미상") · \(animal?.age ?? "0")세"
+            shelterLabel.text = animal?.shelterName
+        }
+    }
+    
+    // 이미지 URL을 전달받음
+    var imageUrl: String? {
+        didSet {
+            loadImage()
+        }
+    }
+    
     private let photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -24,7 +41,9 @@ final class AnimalInfoCell: UITableViewCell {
         
         imageView.layer.cornerRadius = 14
         imageView.clipsToBounds = true
+        imageView.image = UIImage(systemName: "pawprint")
         imageView.backgroundColor = .gray
+        imageView.tintColor = .white
         
         return imageView
     }()
@@ -107,6 +126,13 @@ final class AnimalInfoCell: UITableViewCell {
         setup()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // 이미지 바뀌는것처럼 보이는 현상 해결
+        photoView.image = UIImage(systemName: "pawprint")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -174,5 +200,24 @@ final class AnimalInfoCell: UITableViewCell {
     @objc private func changeHeartImage() {
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartButton.tintColor = isLiked ? .cRed : .cDarkGray
+    }
+    
+    // MARK: - loadImage
+    private func loadImage() {
+        guard let urlString = imageUrl, let url = URL(string: urlString) else { return }
+        
+        // 비동기 처리(Data 메서드가 동기라)
+        DispatchQueue.global().async {
+            // URL을 가지고 데이터를 만드는 메서드 (동기적인 실행)
+            guard let data = try? Data(contentsOf: url) else { return }
+            
+            // 오래걸리는 작업이 일어나고 있는 동안에 url이 바뀔 가능성 제거
+            guard urlString == url.absoluteString else { return }
+            
+            // 작업의 결과물을 이미지로 표시(메인 큐로 디스패치)
+            DispatchQueue.main.async {
+                self.photoView.image = UIImage(data: data)
+            }
+        }
     }
 }
