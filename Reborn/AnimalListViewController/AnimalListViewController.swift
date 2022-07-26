@@ -17,7 +17,10 @@ final class CustomButton: UIButton {
 
 final class AnimalListViewController: UIViewController {
     private let networkManager = NetworkManager.shared
+    
+    var currentPage = 1
     var currentRegion: Region = .none
+    var currentKind: Kind?
     var animalItems = [Item]()
     
     private lazy var regionLabel: BaseLabel = {
@@ -96,7 +99,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
-        setDatas()
+        fetchData()
     }
     
     private func configureNavigationBar() {
@@ -137,12 +140,18 @@ final class AnimalListViewController: UIViewController {
         tableView.tableHeaderView = header
     }
     
-    private func setDatas() {
+    private func fetchData() {
         isFetchable = false
-        networkManager.fetchAnimal { result in
+        
+        networkManager.fetchAnimal(pageNumber: currentPage, region: currentRegion, kind: currentKind) { result in
             switch result {
             case .success(let animalDatas):
-                self.animalItems += animalDatas
+                if self.currentPage == 1 {
+                    self.animalItems = animalDatas
+                } else {
+                    self.animalItems += animalDatas
+                }
+                
                 // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -194,7 +203,9 @@ extension AnimalListViewController {
         // TODO: 지역 변경 시 추가 로직 구현
         (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
         
+        currentPage = 1
         scrollToTop()
+        fetchData()
     }
 }
 
@@ -212,7 +223,11 @@ extension AnimalListViewController {
 // MARK: - filterItem
 extension AnimalListViewController: FilterDelegate {
     func applyFilter(kind: Kind?) {
+        currentKind = kind
+        
+        currentPage = 1
         scrollToTop()
+        fetchData()
     }
     
     @objc private func popUpFilterModal() {
@@ -253,14 +268,15 @@ extension AnimalListViewController: UITableViewDelegate {
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            setDatas()
+            currentPage += 1
+            fetchData()
         }
     }
 }
 
 extension AnimalListViewController {
     @objc func refreshTable(refresh: UIRefreshControl) {
-        setDatas()
+        fetchData()
     }
     
     private func scrollToTop() {
