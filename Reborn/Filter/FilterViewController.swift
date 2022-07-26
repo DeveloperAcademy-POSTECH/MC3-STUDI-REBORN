@@ -9,18 +9,13 @@ import UIKit
 
 final class FilterViewController: UIViewController {
     
-    private var filters: Set<String> = []
+    private var kind: Kind?
+    private var neutralizationStatus: NeutralizationStatus?
     
     weak var delegate: FilterDelegate?
     
-    enum Tag: Int {
-        case dog = 1
-        case cat
-        case etc
-    }
-    
     // MARK: - 품종
-    private let headerLabel: UILabel = {
+    private let kindLabel: UILabel = {
         let label = UILabel()
         label.text = "품종"
         label.font = .boldSystemFont(ofSize: 18)
@@ -30,28 +25,25 @@ final class FilterViewController: UIViewController {
     private let dogButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐶강아지", for: .normal)
-        button.tag = Tag.dog.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private let catButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐱고양이", for: .normal)
-        button.tag = Tag.cat.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private let etcButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("기타", for: .normal)
-        button.tag = Tag.etc.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private lazy var buttonStack: UIStackView = {
+    private lazy var firstButtonStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [dogButton, catButton, etcButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -60,12 +52,70 @@ final class FilterViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var superStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [headerLabel, buttonStack])
+    private lazy var firstSuperStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [kindLabel, firstButtonStack])
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 20
+        return stackView
+    }()
+    
+    // MARK: - 중성화 여부
+    
+    private let neutralizedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "중성화 여부"
+        label.font = .boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
+    private let yesButton: FilterCategoryButton = {
+        let button = FilterCategoryButton()
+        button.setTitle("예", for: .normal)
+        button.addTarget(self, action: #selector(neutralizedButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let noButton: FilterCategoryButton = {
+        let button = FilterCategoryButton()
+        button.setTitle("아니오", for: .normal)
+        button.addTarget(self, action: #selector(neutralizedButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let spacer: FilterCategoryButton = {
+        let button = FilterCategoryButton()
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    private lazy var secondButtonStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [yesButton, noButton, spacer])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    private lazy var secondSuperStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [neutralizedLabel, secondButtonStack])
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 20
+        return stackView
+    }()
+    
+    // MARK: - super stack
+    
+    private lazy var superStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [firstSuperStack, secondSuperStack])
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 40
         return stackView
     }()
     
@@ -102,48 +152,54 @@ final class FilterViewController: UIViewController {
     }()
     
     // MARK: - buttonSelected
-    @objc private func categoryButtonTapped(sender: FilterCategoryButton) {
+    
+    func deselectKindButtons() {
+        dogButton.isOn = false
+        catButton.isOn = false
+        etcButton.isOn = false
+    }
+    
+    func deselectNeutralizationButtons() {
+        yesButton.isOn = false
+        noButton.isOn = false
+    }
+    
+    @objc private func kindButtonTapped(sender: FilterCategoryButton) {
+        deselectKindButtons()
         sender.isOn.toggle()
         
-        if sender.isOn == true {
-            switch sender.tag {
-            case Tag.dog.rawValue:
-                filters.insert("개")
-            case Tag.cat.rawValue:
-                filters.insert("고양이")
-            case Tag.etc.rawValue:
-                filters.insert("기타")
-            default:
-                filters.insert(sender.currentTitle ?? "")
-            }
-        } else {
-            switch sender.tag {
-            case Tag.dog.rawValue:
-                filters.remove("개")
-            case Tag.cat.rawValue:
-                filters.remove("고양이")
-            case Tag.etc.rawValue:
-                filters.remove("기타")
-            default:
-                filters.remove(sender.currentTitle ?? "")
-            }
+        switch sender.titleLabel?.text {
+        case "🐶강아지": kind = .dog
+        case "🐱고양이": kind = .cat
+        case "기타": kind = .etc
+        default: kind = nil
         }
+    }
+    
+    @objc private func neutralizedButtonTapped(sender: FilterCategoryButton) {
+        deselectNeutralizationButtons()
+        sender.isOn.toggle()
         
-        print(filters)
+        switch sender.titleLabel?.text {
+        case "예": neutralizationStatus = .yes
+        case "아니오": neutralizationStatus = .no
+        default: neutralizationStatus = nil
+        }
     }
     
     @objc private func resetButtonTapped(sender: UIButton) {
-        [dogButton, catButton, etcButton].forEach { $0.isOn = false }
-        filters.removeAll()
+        [dogButton, catButton, etcButton, yesButton, noButton].forEach { $0.isOn = false }
+        kind = nil
+        neutralizationStatus = nil
     }
     
     @objc private func applyButtonTapped(sender: UIButton) {
-        let filtersArray = Array(filters)
-        delegate?.applyFilter(by: filtersArray)
+        delegate?.applyFilter(kind: kind, neutralizationStatus: neutralizationStatus)
         dismiss(animated: true)
     }
     
     // MARK: - viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -153,7 +209,8 @@ final class FilterViewController: UIViewController {
     }
     
     // MARK: - autolayouts
-    func setSuperStackConstraints() {
+    
+    private func setSuperStackConstraints() {
         view.addSubview(superStack)
         superStack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -164,7 +221,7 @@ final class FilterViewController: UIViewController {
         ])
     }
     
-    func setbottomButtonStackViewConstraints() {
+    private func setbottomButtonStackViewConstraints() {
         view.addSubview(bottomButtonStackView)
         bottomButtonStackView.translatesAutoresizingMaskIntoConstraints = false
         
