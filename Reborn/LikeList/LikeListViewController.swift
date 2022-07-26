@@ -14,26 +14,26 @@ final class LikeListViewController: UIViewController {
     private let flowLayout = UICollectionViewFlowLayout()
 
     //공고종료 배너
-    private let label: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 20, y: 108, width: 350, height: 66)
-        label.textColor = .cBlack
-        label.backgroundColor = .cBeige
-        label.text = "🐶  공고 종료된 아이들은 \n자동으로 목록에서 사라져요"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.textAlignment = .center
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 14
-        label.numberOfLines = 0
-        return label
-    }()
+//    private let label: UILabel = {
+//        let label = UILabel()
+//        label.frame = CGRect(x: 20, y: 108, width: 350, height: 66)
+//        label.textColor = .cBlack
+//        label.backgroundColor = .cBeige
+//        label.text = "🐶  공고 종료된 아이들은 \n자동으로 목록에서 사라져요"
+//        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+//        label.textAlignment = .center
+//        label.clipsToBounds = true
+//        label.layer.cornerRadius = 14
+//        label.numberOfLines = 0
+//        return label
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         setNavBar()
-        setBanner()
+//        setBanner()
         setCollectionView()
         setCollectionViewConstraints()
     }
@@ -43,14 +43,13 @@ final class LikeListViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .cBlack
     }
     //배너
-    func setBanner() {
-        view.addSubview(label)
-    }
+//    func setBanner() {
+//        view.addSubview(label)
+//    }
     
     //컬렉션뷰
     func setCollectionView() {
         collectionView.dataSource = self
-        
         flowLayout.scrollDirection = .vertical
         flowLayout.itemSize = CGSize(width: 165, height: 210)
         flowLayout.sectionInset = .init(top: 20, left: 20, bottom: 20, right: 20)
