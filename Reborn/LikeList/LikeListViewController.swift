@@ -55,8 +55,10 @@ final class LikeListViewController: UIViewController {
         flowLayout.sectionInset = .init(top: 20, left: 20, bottom: 20, right: 20)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 16
+        flowLayout.headerReferenceSize = CGSize(width: 350, height: 66)
         
         collectionView.register(LikeCollectionViewCell.self, forCellWithReuseIdentifier: LikeCollectionViewCell.identifier)
+        collectionView.register(LikeListViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "LikeListViewHeader")
     }
     
     //컬렉션뷰 오토레이아웃
@@ -64,7 +66,7 @@ final class LikeListViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 197),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -82,4 +84,10 @@ extension LikeListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeCollectionViewCell.identifier, for: indexPath) as! LikeCollectionViewCell
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "LikeListViewHeader", for: indexPath) as! LikeListViewHeader
+        return header
+    }
 }
+
