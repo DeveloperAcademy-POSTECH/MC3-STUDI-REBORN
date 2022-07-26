@@ -32,25 +32,25 @@ struct Items: Codable {
 // MARK: - 유기동물 데이터
 struct Item: Codable {
     
-    let id: String?
+    var id: String?
     
-    let detailImage: String? // 상세화면 이미지
-    let noticeNumber: String?
-    let noticeStartDate: String?
-    let noticeEndDate: String?
+    var detailImage: String? // 상세화면 이미지
+    var noticeNumber: String?
+    var noticeStartDate: String?
+    var noticeEndDate: String?
     
-    let kind: String?
-    let color: String?
-    let birth: String? // 나이 - 2019(년생)
-    let sexCd: String? // 성별 - M, F, Q
-    let neutralizationStatus: String? // 중성화 여부 - Y, N, U
-    let weight: String?
-    let description: String? // 특징
-    let discoverdPlace: String? // 발견장소
+    var kind: String?
+    var color: String?
+    var birth: String? // 나이 - 2019(년생)
+    var sexCd: String? // 성별 - M, F, Q
+    var neutralizationStatus: String? // 중성화 여부 - Y, N, U
+    var weight: String?
+    var description: String? // 특징
+    var discoverdPlace: String? // 발견장소
     
-    let shelterName: String?
-    let shelterAddress: String?
-    let telNumber: String? // 담당자 연락처
+    var shelterName: String?
+    var shelterAddress: String?
+    var telNumber: String? // 담당자 연락처
     
     var isLiked: Bool = false
     
