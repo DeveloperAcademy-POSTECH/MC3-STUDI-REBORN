@@ -24,7 +24,7 @@ final class AnimalDetailViewController: UIViewController {
     var item: Item
     
     init(item: Item? = nil) {
-        self.item = item ?? Item(thumbnailImage: nil, detailImage: nil, noticeNumber: nil, noticeStartDate: nil, noticeEndDate: nil, kind: nil, color: nil, birth: nil, sexCd: nil, neutralizationStatus: nil, weight: nil, description: nil, discoverdPlace: nil, shelterName: nil, shelterAddress: nil, telNumber: nil)
+        self.item = item ?? Item(id: nil, detailImage: nil, noticeNumber: nil, noticeStartDate: nil, noticeEndDate: nil, kind: nil, color: nil, birth: nil, sexCd: nil, neutralizationStatus: nil, weight: nil, description: nil, discoverdPlace: nil, shelterName: nil, shelterAddress: nil, telNumber: nil)
         super.init(nibName: nil, bundle: nil)
     }
     

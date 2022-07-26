@@ -19,12 +19,11 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     }
     
     //하트버튼
-    
     private lazy var heartButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
         button.clipsToBounds = true
-        button.tintColor = UIColor(named: "CRed")
+        button.tintColor = .cRed
         button.addTarget(self, action: #selector(heartButtonTouch), for: .touchUpInside)
         return button
     }()
@@ -43,7 +42,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     private let animalLabel: UILabel = {
         let label = UILabel()
         label.text = "공고 종료 1일 전"
-        label.backgroundColor = UIColor(named: "CRed")
+        label.backgroundColor = .cRed
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.textAlignment = .center
@@ -84,13 +83,13 @@ final class LikeCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    var isLiked = false
+    
     //하트버튼 터치
     @objc func heartButtonTouch(){
-        let button = UIButton.self()
-        button.setBackgroundImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
-        button.clipsToBounds = true
-        button.tintColor = UIColor(named: "CGray")
-        print("button")
+        isLiked.toggle()
+        heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
+        heartButton.tintColor = isLiked ? .cRed : .cGray
     }
 }
 

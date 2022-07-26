@@ -13,7 +13,6 @@ struct AnimalApi {
     static let requestUrl = "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic?_type=json"
     static let key = "serviceKey=n1TP%2BU609SiYa5OWk03fYi1r4ASh04%2F2g54Hixw8os6IIzkhypv3doFp8CT2m4s9jfgTm%2F1G%2BPspd3XmzkbDcw%3D%3D"
     static let stateQuery = "state=notice"
-    static let pageNumberQuery = "pageNo=1"
     static let numberOfRowsQuery = "numOfRows=200"
 }
 
@@ -78,6 +77,36 @@ enum Region: CaseIterable {
         case .gyeongbook: return "경상북도"
         case .gyeongnam: return "경상남도"
         case .jeju: return "제주특별자치도"
+        }
+    }
+    
+}
+
+enum Kind: CaseIterable {
+    
+    case dog
+    case cat
+    case etc
+    
+    var query: String {
+        switch self {
+        case .dog: return "upkind=417000"
+        case .cat: return "upkind=422400"
+        case .etc: return "upkind=429900"
+        }
+    }
+    
+}
+
+enum NeutralizationStatus: CaseIterable {
+    
+    case yes
+    case no
+    
+    var query: String {
+        switch self {
+        case .yes: return "neuter_yn=Y"
+        case .no: return "neuter_yn=N"
         }
     }
     
