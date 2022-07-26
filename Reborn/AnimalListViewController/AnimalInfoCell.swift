@@ -157,7 +157,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     private func configureCell(animalItem: Item) {
-        if let url = URL(string: animalItem.thumbnailImage ?? "") {
+        if let url = URL(string: animalItem.detailImage ?? "") {
             do {
                 let data = try Data(contentsOf: url)
                 photoView.image = UIImage(data: data)

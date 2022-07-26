@@ -211,7 +211,7 @@ extension AnimalListViewController {
 
 // MARK: - filterItem
 extension AnimalListViewController: FilterDelegate {
-    func applyFilter(by filter: [String]) {
+    func applyFilter(kind: Kind?) {
         scrollToTop()
     }
     
