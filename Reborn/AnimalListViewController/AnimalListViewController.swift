@@ -16,32 +16,42 @@ final class CustomButton: UIButton {
 }
 
 final class AnimalListViewController: UIViewController {
-    private let locationLabel: BaseLabel = {
+    private let networkManager = NetworkManager.shared
+    var currentRegion: Region = .none
+    var animalItems = [Item]()
+    
+    private lazy var regionLabel: BaseLabel = {
         let label = BaseLabel(size: 20, weight: .semibold)
-        label.text = "서울특별시"
+        label.text = currentRegion.name
         
         return label
     }()
     
-    var locationMenu: UIMenu {
-        let locations = ["서울특별시", "대전광역시", "부산광역시", "세종특별자치시", "충정북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "강원도", "경기도", "제주특별자치도"]
-        var actions = [UIAction]()
-        
-        for location in locations {
-            actions.append(UIAction(title: location) { _ in self.changeLocation(to: location) })
+    var regionMenu: UIMenu {
+        let actions = Region.allCases.map { region in
+            UIAction(title: region.name) { _ in
+                self.changeRegion(to: region)
+            }
         }
         
         return UIMenu(children: actions)
     }
     
     var tableView = UITableView()
+    var isFetchable = true // tableView의 스크롤이 맨 밑에 닿을 때 데이터를 한번만 fetch하도록 하기 위해 사용
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        return refreshControl
+    }()
     
     private lazy var locationItem: UIBarButtonItem = {
         let labelStack = generateLocationLabelStack()
         let button = wrapWithButton(subview: labelStack)
         
         if #available(iOS 14.0, *) {
-            button.menu = locationMenu
+            button.menu = regionMenu
             button.showsMenuAsPrimaryAction = true
         }
         
@@ -86,6 +96,7 @@ final class AnimalListViewController: UIViewController {
         
         configureNavigationBar()
         setupTableView()
+        setDatas()
     }
     
     private func configureNavigationBar() {
@@ -110,18 +121,38 @@ final class AnimalListViewController: UIViewController {
         ])
         
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.refreshControl = refreshControl
         
         addTableViewHeader()
     }
     
     private func addTableViewHeader() {
         tableView.sectionHeaderHeight = AnimalListTableViewHeader.height
-        let header = AnimalListTableViewHeader(frame: .zero)
+        let header = AnimalListTableViewHeader(frame: .zero, region: currentRegion)
         
         let size = CGSize(width: view.frame.width, height: AnimalListTableViewHeader.height)
         header.frame.size = size
         
         tableView.tableHeaderView = header
+    }
+    
+    private func setDatas() {
+        isFetchable = false
+        networkManager.fetchAnimal { result in
+            switch result {
+            case .success(let animalDatas):
+                self.animalItems += animalDatas
+                // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                    self.isFetchable = true
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -134,7 +165,7 @@ extension AnimalListViewController {
         stack.spacing = 6
         
         let chevronImageView = UIImageView.ofSystemImage(systemName: "chevron.down", fontSize: 20)
-        [locationLabel, chevronImageView].forEach { stack.addArrangedSubview($0) }
+        [regionLabel, chevronImageView].forEach { stack.addArrangedSubview($0) }
         
         return stack
     }
@@ -156,10 +187,14 @@ extension AnimalListViewController {
         return button
     }
     
-    private func changeLocation(to location: String) {
-        locationLabel.text = location
+    private func changeRegion(to region: Region) {
+        currentRegion = region
+        regionLabel.text = region.name
         
         // TODO: 지역 변경 시 추가 로직 구현
+        (tableView.tableHeaderView as! AnimalListTableViewHeader).currentRegion = region
+        
+        scrollToTop()
     }
 }
 
@@ -175,25 +210,60 @@ extension AnimalListViewController {
 }
 
 // MARK: - filterItem
-extension AnimalListViewController {
+extension AnimalListViewController: FilterDelegate {
+    func applyFilter(by filter: [String]) {
+        scrollToTop()
+    }
+    
     @objc private func popUpFilterModal() {
         // TODO: FilterViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
+        let filterVC = FilterViewController()
+        filterVC.delegate = self
         
-        navigationController?.present(dummyVC, animated: true)
+        navigationController?.present(filterVC, animated: true)
     }
 }
 
+// MARK: - UITableView
 extension AnimalListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return animalItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
         
+        cell.animalItem = animalItems[indexPath.row]
         return cell
     }
 }
 
+extension AnimalListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = AnimalDetailViewController(item: animalItems[indexPath.row])
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isFetchable else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            setDatas()
+        }
+    }
+}
+
+extension AnimalListViewController {
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        setDatas()
+    }
+    
+    private func scrollToTop() {
+        self.tableView.setContentOffset(CGPoint(x: 0, y: -90), animated: true)
+    }
+}

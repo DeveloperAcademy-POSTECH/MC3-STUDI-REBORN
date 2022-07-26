@@ -56,7 +56,8 @@ final class AnimalInfoView: UIView {
     
     private func makeConstraints() {
         let noticeInfoViewConstraints = [noticeInfoView.topAnchor.constraint(equalTo: self.topAnchor),
-                                         noticeInfoView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)]
+                                         noticeInfoView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+                                         noticeInfoView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)]
         
         let dividerConstraints = [divider.topAnchor.constraint(equalTo: noticeInfoView.bottomAnchor, constant: 20),
                                   divider.leadingAnchor.constraint(equalTo: self.leadingAnchor),

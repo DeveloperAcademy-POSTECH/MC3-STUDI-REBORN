@@ -10,6 +10,11 @@ import UIKit
 final class AnimalInfoCell: UITableViewCell {
     static let reuseID = "AnimalInfoCell"
     static let rowHeight: CGFloat = 172
+    var animalItem: Item! {
+        didSet {
+            configureCell(animalItem: animalItem)
+        }
+    }
     
     private let photoView: UIImageView = {
         let imageView = UIImageView()
@@ -29,32 +34,7 @@ final class AnimalInfoCell: UITableViewCell {
         return imageView
     }()
     
-    private let daysLeftLabel: UILabel = {
-        let label = BaseLabel(size: 12, textColor: .white, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "공고 종료 1일 전"
-        
-        return label
-    }()
-    
-    private lazy var daysLeftView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .cRed
-        view.layer.cornerRadius = 12
-        view.clipsToBounds = true
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(daysLeftLabel)
-        
-        NSLayoutConstraint.activate([
-            daysLeftLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
-            daysLeftLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
-            daysLeftLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            view.heightAnchor.constraint(equalToConstant: 24)
-        ])
-        
-        return view
-    }()
+    let leftDaysView = LeftDaysView()
     
     private let speciesLabel: BaseLabel = {
         let label = BaseLabel(size: 14)
@@ -118,17 +98,17 @@ final class AnimalInfoCell: UITableViewCell {
             photoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
         
-        contentView.addSubview(daysLeftView)
+        contentView.addSubview(leftDaysView)
         NSLayoutConstraint.activate([
-            daysLeftView.topAnchor.constraint(equalTo: photoView.topAnchor),
-            daysLeftView.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20)
+            leftDaysView.topAnchor.constraint(equalTo: photoView.topAnchor),
+            leftDaysView.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20)
         ])
         
         let infoStack = generateInfoStack()
         contentView.addSubview(infoStack)
         NSLayoutConstraint.activate([
-            infoStack.leadingAnchor.constraint(equalTo: daysLeftView.leadingAnchor),
-            infoStack.topAnchor.constraint(equalTo: daysLeftView.bottomAnchor, constant: 14)
+            infoStack.leadingAnchor.constraint(equalTo: leftDaysView.leadingAnchor),
+            infoStack.topAnchor.constraint(equalTo: leftDaysView.bottomAnchor, constant: 14)
         ])
         
         contentView.addSubview(heartButton)
@@ -174,5 +154,21 @@ final class AnimalInfoCell: UITableViewCell {
     @objc private func changeHeartImage() {
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartButton.tintColor = isLiked ? .cRed : .cDarkGray
+    }
+    
+    private func configureCell(animalItem: Item) {
+        if let url = URL(string: animalItem.thumbnailImage ?? "") {
+            do {
+                let data = try Data(contentsOf: url)
+                photoView.image = UIImage(data: data)
+            } catch {
+                print("image not exists")
+            }
+        }
+        
+        leftDaysView.leftDays = animalItem.noticeLeftDays ?? 0
+        speciesLabel.text = animalItem.kind ?? "품종"
+        sexAgeLabel.text = "\(animalItem.sex ?? "성별 미상") · \(animalItem.age ?? 0)세"
+        shelterLabel.text = animalItem.shelterName ?? "보호소 미상"
     }
 }
