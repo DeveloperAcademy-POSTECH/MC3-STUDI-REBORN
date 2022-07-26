@@ -76,7 +76,6 @@ final class AnimalInfoCell: UITableViewCell {
     
     var isLiked = false {
         didSet {
-            // TODO: Core Data 작업 추가
             changeHeartImage()
         }
     }
@@ -148,6 +147,7 @@ final class AnimalInfoCell: UITableViewCell {
     }
     
     @objc private func toggleHeart() {
+        // TODO: Core Data 작업 추가
         isLiked.toggle()
     }
     
@@ -170,5 +170,14 @@ final class AnimalInfoCell: UITableViewCell {
         speciesLabel.text = animalItem.kind ?? "품종"
         sexAgeLabel.text = "\(animalItem.sex ?? "성별 미상") · \(animalItem.age ?? 0)세"
         shelterLabel.text = animalItem.shelterName ?? "보호소 미상"
+    }
+    
+    override func prepareForReuse() {
+        photoView.image = nil
+        isLiked = false
+        leftDaysView.leftDays = 0
+        speciesLabel.text = "품종"
+        sexAgeLabel.text = "성별 · 나이"
+        shelterLabel.text = "보호소"
     }
 }
