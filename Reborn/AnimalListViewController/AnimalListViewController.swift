@@ -307,6 +307,7 @@ extension AnimalListViewController: UITableViewDelegate {
 
 extension AnimalListViewController {
     @objc func refreshTable(refresh: UIRefreshControl) {
+        currentPage = 1
         fetchData()
     }
     
