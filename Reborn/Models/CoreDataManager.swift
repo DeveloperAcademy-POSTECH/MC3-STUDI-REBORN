@@ -24,18 +24,21 @@ class CoreDataManager {
         }
     }
     
-    func save() {
+    func save() -> Bool {
         do {
             try viewContext.save()
-            print("saved")
+            return true
         } catch {
             viewContext.rollback()
-            print("failed to save")
+            return false
         }
     }
     
-    func saveAnimal(_ item: Item) {
-        guard let itemId = item.id else { return }
+    func saveAnimal(_ item: Item) -> Bool {
+        guard let itemId = item.id else {
+            print("cannot save cause id is nil")
+            return false
+        }
         
         let likedAnimal = LikedAnimal(context: viewContext)
         
@@ -59,7 +62,7 @@ class CoreDataManager {
         likedAnimal.shelterAddress = item.shelterAddress
         likedAnimal.telNumber = item.telNumber
         
-        save()
+        return save()
     }
     
     func getAllLikedAnimals() -> [LikedAnimal] {
@@ -87,8 +90,8 @@ class CoreDataManager {
         }
     }
     
-    func deleteLikedAnimal(_ likedAnimal: LikedAnimal) {
+    func deleteLikedAnimal(_ likedAnimal: LikedAnimal) -> Bool {
         viewContext.delete(likedAnimal)
-        save()
+        return save()
     }
 }
