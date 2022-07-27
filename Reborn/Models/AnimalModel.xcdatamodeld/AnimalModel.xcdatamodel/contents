@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LikedAnimal" representedClassName="LikedAnimal" syncable="YES" codeGenerationType="class">
+        <attribute name="birth" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="descript" optional="YES" attributeType="String"/>
+        <attribute name="detailImage" optional="YES" attributeType="String"/>
+        <attribute name="discoveredPlace" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="kind" optional="YES" attributeType="String"/>
+        <attribute name="neutralizationStatus" optional="YES" attributeType="String"/>
+        <attribute name="noticeEndDate" optional="YES" attributeType="String"/>
+        <attribute name="noticeNumber" optional="YES" attributeType="String"/>
+        <attribute name="noticeStartDate" optional="YES" attributeType="String"/>
+        <attribute name="sexCd" optional="YES" attributeType="String"/>
+        <attribute name="shelterAddress" optional="YES" attributeType="String"/>
+        <attribute name="shelterName" optional="YES" attributeType="String"/>
+        <attribute name="telNumber" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="LikedAnimal" positionX="-63" positionY="-18" width="128" height="14"/>
+    </elements>
+</model>

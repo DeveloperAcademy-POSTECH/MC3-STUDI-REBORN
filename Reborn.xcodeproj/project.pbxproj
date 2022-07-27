@@ -18,6 +18,7 @@
 		AB08AF402887D6D7008A844D /* AnimalListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB08AF3F2887D6D7008A844D /* AnimalListTableViewHeader.swift */; };
 		AB17C7C2288562690045795E /* AnimalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C1288562690045795E /* AnimalListViewController.swift */; };
 		AB17C7C828857F880045795E /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C728857F880045795E /* UIImageView.swift */; };
+		AB5CD3D5289121FF00D6B1AB /* AnimalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB5CD3D3289121FF00D6B1AB /* AnimalModel.xcdatamodeld */; };
 		ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */; };
 		ABFBDDCE288A8E1200100D87 /* LeftDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */; };
 		B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF2829287D5E47002781F7 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		AB08AF3F2887D6D7008A844D /* AnimalListTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListTableViewHeader.swift; sourceTree = "<group>"; };
 		AB17C7C1288562690045795E /* AnimalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewController.swift; sourceTree = "<group>"; };
 		AB17C7C728857F880045795E /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		AB5CD3D4289121FF00D6B1AB /* AnimalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnimalModel.xcdatamodel; sourceTree = "<group>"; };
 		ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalInfoCell.swift; sourceTree = "<group>"; };
 		ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDaysView.swift; sourceTree = "<group>"; };
 		B7EF2826287D5E47002781F7 /* Reborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 			children = (
 				7BF76DCF2883D50500A3A370 /* Animal.swift */,
 				7BF76DCE2883D50500A3A370 /* NetworkManager.swift */,
+				AB5CD3D3289121FF00D6B1AB /* AnimalModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				B7F7EFF12885538E00D19B44 /* AnimalDetailViewController.swift in Sources */,
 				7BF76DD02883D50500A3A370 /* NetworkManager.swift in Sources */,
 				B7F7F0162887E3D100D19B44 /* AnimalInfoView.swift in Sources */,
+				AB5CD3D5289121FF00D6B1AB /* AnimalModel.xcdatamodeld in Sources */,
 				AB17C7C2288562690045795E /* AnimalListViewController.swift in Sources */,
 				B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */,
 				B7F7F01D2887E42B00D19B44 /* ShelterInfoView.swift in Sources */,
@@ -487,7 +491,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;
@@ -516,7 +519,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;
@@ -560,6 +562,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AB5CD3D3289121FF00D6B1AB /* AnimalModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AB5CD3D4289121FF00D6B1AB /* AnimalModel.xcdatamodel */,
+			);
+			currentVersion = AB5CD3D4289121FF00D6B1AB /* AnimalModel.xcdatamodel */;
+			path = AnimalModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B7EF281E287D5E47002781F7 /* Project object */;
 }
