@@ -170,7 +170,7 @@ final class AnimalListViewController: UIViewController {
     private func fetchData() {
         isFetchable = false
         
-        networkManager.fetchAnimal(pageNumber: currentPage, region: currentRegion, kind: currentKind) { result in
+        networkManager.fetchAnimal(pageNumber: currentPage, region: currentRegion, kind: currentKind) { [unowned self] result in
             switch result {
             case .success(let animalDatas):
                 if self.currentPage == 1 {
@@ -179,16 +179,19 @@ final class AnimalListViewController: UIViewController {
                     self.animalItems += animalDatas
                 }
                 
-                // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
-                    self.isFetchable = true
-                    self.hideActivityIndicator()
-                }
             case .failure(let error):
                 print(error)
+                self.animalItems = []
             }
+            
+            // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+                self.isFetchable = true
+                self.hideActivityIndicator()
+            }
+
         }
     }
     
