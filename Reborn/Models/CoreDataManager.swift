@@ -35,9 +35,11 @@ class CoreDataManager {
     }
     
     func saveAnimal(_ item: Item) {
+        guard let itemId = item.id else { return }
+        
         let likedAnimal = LikedAnimal(context: viewContext)
         
-        likedAnimal.id = item.id
+        likedAnimal.id = itemId
         
         likedAnimal.detailImage = item.detailImage
         likedAnimal.noticeNumber = item.noticeNumber
@@ -83,5 +85,10 @@ class CoreDataManager {
             print("failed to fetch liked animal")
             return nil
         }
+    }
+    
+    func deleteLikedAnimal(_ likedAnimal: LikedAnimal) {
+        viewContext.delete(likedAnimal)
+        save()
     }
 }
