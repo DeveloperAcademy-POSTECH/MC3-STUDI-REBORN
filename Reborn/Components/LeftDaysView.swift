@@ -24,7 +24,7 @@ class LeftDaysView: UIView {
     
     var viewColor: UIColor? {
         switch leftDays! {
-        case 1...3:
+        case 0...3:
             return .cRed
         case 4...6:
             return .cOrange
