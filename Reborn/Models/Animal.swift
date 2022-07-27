@@ -32,37 +32,39 @@ struct Items: Codable {
 // MARK: - 유기동물 데이터
 struct Item: Codable {
     
-    let thumbnailImage: String?         // 메인화면 이미지
+    var id: String?
     
-    let detailImage: String?            // 상세화면 이미지
-    let noticeNumber: String?
-    let noticeStartDate: String?
-    let noticeEndDate: String?
+    var detailImage: String? // 상세화면 이미지
+    var noticeNumber: String?
+    var noticeStartDate: String?
+    var noticeEndDate: String?
     
-    let kind: String?
-    let color: String?
-    let age: String?                    // 나이 - 2019(년생)
-    let sex: String?                    // 성별 - M, F, Q
-    let neutralizationStatus: String?   // 중성화 여부 - Y, N, U
-    let weight: String?
-    let description: String?            // 특징
-    let discoverdPlace: String?         // 발견장소
+    var kind: String?
+    var color: String?
+    var birth: String? // 나이 - 2019(년생)
+    var sexCd: String? // 성별 - M, F, Q
+    var neutralizationStatus: String? // 중성화 여부 - Y, N, U
+    var weight: String?
+    var description: String? // 특징
+    var discoverdPlace: String? // 발견장소
     
-    let shelterName: String?
-    let shelterAddress: String?
-    let telNumber: String?              // 담당자 연락처
-
+    var shelterName: String?
+    var shelterAddress: String?
+    var telNumber: String? // 담당자 연락처
+    
+    var isLiked: Bool = false
+    
     // 응답 메시지 항목명 원하는 이름으로
     enum CodingKeys: String, CodingKey {
-        case thumbnailImage = "filename"
+        case id = "desertionNo"
         case detailImage = "popfile"
         case noticeNumber = "noticeNo"
         case noticeStartDate = "noticeSdt"
         case noticeEndDate = "noticeEdt"
         case kind = "kindCd"
         case color = "colorCd"
-        case age = "age"
-        case sex = "sexCd"
+        case birth = "age"
+        case sexCd = "sexCd"
         case neutralizationStatus = "neuterYn"
         case weight = "weight"
         case description = "specialMark"
@@ -83,6 +85,20 @@ struct Item: Codable {
         return Int(leftDays)
     }
     
+    // 성별 한글로 바꿔줌
+    var sex: String? {
+        switch sexCd {
+        case "M": return "남"
+        case "F": return "여"
+        default: return "미상"
+        }
+    }
+    
+    // 나이 계산
+    var age: Int? {
+        Calendar.current.component(.year, from: Date()) - (Int(birth?.prefix(4) ?? "0") ?? 0) + 1
+    }
+    
 }
 
 // MARK: - Header
@@ -90,3 +106,4 @@ struct Header: Codable {
     let reqNo: Int
     let resultCode, resultMsg: String
 }
+

@@ -16,6 +16,11 @@
 		7BF76DD02883D50500A3A370 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF76DCE2883D50500A3A370 /* NetworkManager.swift */; };
 		7BF76DD12883D50500A3A370 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF76DCF2883D50500A3A370 /* Animal.swift */; };
 		7BF76DD42883D51400A3A370 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF76DD32883D51400A3A370 /* Constants.swift */; };
+		AB08AF402887D6D7008A844D /* AnimalListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB08AF3F2887D6D7008A844D /* AnimalListTableViewHeader.swift */; };
+		AB17C7C2288562690045795E /* AnimalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C1288562690045795E /* AnimalListViewController.swift */; };
+		AB17C7C828857F880045795E /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C728857F880045795E /* UIImageView.swift */; };
+		ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */; };
+		ABFBDDCE288A8E1200100D87 /* LeftDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */; };
 		B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF2829287D5E47002781F7 /* AppDelegate.swift */; };
 		B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF282B287D5E47002781F7 /* SceneDelegate.swift */; };
 		B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF282D287D5E47002781F7 /* ViewController.swift */; };
@@ -27,6 +32,12 @@
 		B7F7EFF12885538E00D19B44 /* AnimalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */; };
 		B7F7F01128864C3900D19B44 /* AnimalDetailTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01028864C3900D19B44 /* AnimalDetailTabbar.swift */; };
 		B7F7F01328864C7500D19B44 /* AnimalDetailTabbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */; };
+		B7F7F0162887E3D100D19B44 /* AnimalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F0152887E3D100D19B44 /* AnimalInfoView.swift */; };
+		B7F7F0192887E40C00D19B44 /* NoticeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F0182887E40C00D19B44 /* NoticeInfoView.swift */; };
+		B7F7F01B2887E42200D19B44 /* DescriptionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01A2887E42200D19B44 /* DescriptionInfoView.swift */; };
+		B7F7F01D2887E42B00D19B44 /* ShelterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F01C2887E42B00D19B44 /* ShelterInfoView.swift */; };
+		B7F7F02128881F0500D19B44 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F02028881F0500D19B44 /* DetailImageView.swift */; };
+		B7F7F02328881F0F00D19B44 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7F02228881F0F00D19B44 /* DetailImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +50,11 @@
 		7BF76DCE2883D50500A3A370 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7BF76DCF2883D50500A3A370 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		7BF76DD32883D51400A3A370 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AB08AF3F2887D6D7008A844D /* AnimalListTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListTableViewHeader.swift; sourceTree = "<group>"; };
+		AB17C7C1288562690045795E /* AnimalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewController.swift; sourceTree = "<group>"; };
+		AB17C7C728857F880045795E /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalInfoCell.swift; sourceTree = "<group>"; };
+		ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDaysView.swift; sourceTree = "<group>"; };
 		B7EF2826287D5E47002781F7 /* Reborn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reborn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EF2829287D5E47002781F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EF282B287D5E47002781F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +68,12 @@
 		B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailViewController.swift; sourceTree = "<group>"; };
 		B7F7F01028864C3900D19B44 /* AnimalDetailTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailTabbar.swift; sourceTree = "<group>"; };
 		B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailTabbarDelegate.swift; sourceTree = "<group>"; };
+		B7F7F0152887E3D100D19B44 /* AnimalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalInfoView.swift; sourceTree = "<group>"; };
+		B7F7F0182887E40C00D19B44 /* NoticeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeInfoView.swift; sourceTree = "<group>"; };
+		B7F7F01A2887E42200D19B44 /* DescriptionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionInfoView.swift; sourceTree = "<group>"; };
+		B7F7F01C2887E42B00D19B44 /* ShelterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterInfoView.swift; sourceTree = "<group>"; };
+		B7F7F02028881F0500D19B44 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
+		B7F7F02228881F0F00D19B44 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +125,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		AB17C7C0288562510045795E /* AnimalListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AB17C7C1288562690045795E /* AnimalListViewController.swift */,
+				ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */,
+				AB08AF3F2887D6D7008A844D /* AnimalListTableViewHeader.swift */,
+			);
+			path = AnimalListViewController;
+			sourceTree = "<group>";
+		};
 		B7EF281D287D5E47002781F7 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +154,7 @@
 		B7EF2828287D5E47002781F7 /* Reborn */ = {
 			isa = PBXGroup;
 			children = (
+				AB17C7C0288562510045795E /* AnimalListViewController */,
 				B7EF2829287D5E47002781F7 /* AppDelegate.swift */,
 				B7EF282B287D5E47002781F7 /* SceneDelegate.swift */,
 				B7F7EFE9288548BE00D19B44 /* Components */,
@@ -142,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F7EFE2288435F900D19B44 /* UIColor.swift */,
+				AB17C7C728857F880045795E /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F7EFEA2885490200D19B44 /* Base */,
+				ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -165,7 +200,8 @@
 		B7F7EFED2885534F00D19B44 /* AnimalDetail */ = {
 			isa = PBXGroup;
 			children = (
-				B7F7F00F28864C0F00D19B44 /* AnimalDetailTabbar */,
+				B7F7F01F28881EEF00D19B44 /* DetailImage */,
+				B7F7F01E28881EDF00D19B44 /* Components */,
 				B7F7EFEE2885537F00D19B44 /* AnimalDetailView.swift */,
 				B7F7EFF02885538E00D19B44 /* AnimalDetailViewController.swift */,
 			);
@@ -179,6 +215,43 @@
 				B7F7F01228864C7500D19B44 /* AnimalDetailTabbarDelegate.swift */,
 			);
 			path = AnimalDetailTabbar;
+			sourceTree = "<group>";
+		};
+		B7F7F0142887E33800D19B44 /* AnimalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7F0172887E3FE00D19B44 /* Components */,
+				B7F7F0152887E3D100D19B44 /* AnimalInfoView.swift */,
+			);
+			path = AnimalInfo;
+			sourceTree = "<group>";
+		};
+		B7F7F0172887E3FE00D19B44 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7F0182887E40C00D19B44 /* NoticeInfoView.swift */,
+				B7F7F01A2887E42200D19B44 /* DescriptionInfoView.swift */,
+				B7F7F01C2887E42B00D19B44 /* ShelterInfoView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B7F7F01E28881EDF00D19B44 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7F00F28864C0F00D19B44 /* AnimalDetailTabbar */,
+				B7F7F0142887E33800D19B44 /* AnimalInfo */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B7F7F01F28881EEF00D19B44 /* DetailImage */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7F02028881F0500D19B44 /* DetailImageView.swift */,
+				B7F7F02228881F0F00D19B44 /* DetailImageViewController.swift */,
+			);
+			path = DetailImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,12 +327,22 @@
 				B7F7F01128864C3900D19B44 /* AnimalDetailTabbar.swift in Sources */,
 				B7F7EFF12885538E00D19B44 /* AnimalDetailViewController.swift in Sources */,
 				7BF76DD02883D50500A3A370 /* NetworkManager.swift in Sources */,
+				B7F7F0162887E3D100D19B44 /* AnimalInfoView.swift in Sources */,
+				AB17C7C2288562690045795E /* AnimalListViewController.swift in Sources */,
 				B7F7EFE3288435F900D19B44 /* UIColor.swift in Sources */,
+				B7F7F01D2887E42B00D19B44 /* ShelterInfoView.swift in Sources */,
 				7B22404C2887D0760085731B /* CustomDelegates.swift in Sources */,
+				B7F7F01B2887E42200D19B44 /* DescriptionInfoView.swift in Sources */,
+				ABFBDDCE288A8E1200100D87 /* LeftDaysView.swift in Sources */,
 				B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */,
+				AB08AF402887D6D7008A844D /* AnimalListTableViewHeader.swift in Sources */,
 				7B2240462887D0090085731B /* FilterViewController.swift in Sources */,
+				B7F7F0192887E40C00D19B44 /* NoticeInfoView.swift in Sources */,
 				B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */,
+				B7F7F02328881F0F00D19B44 /* DetailImageViewController.swift in Sources */,
+				ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */,
 				B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */,
+				AB17C7C828857F880045795E /* UIImageView.swift in Sources */,
 				B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */,
 				3FA67785288F84FA000ED816 /* LikeListViewHeader.swift in Sources */,
 				3FA6775C288692C3000ED816 /* LikeListViewController.swift in Sources */,
@@ -267,6 +350,7 @@
 				7BF76DD12883D50500A3A370 /* Animal.swift in Sources */,
 				7BF76DD42883D51400A3A370 /* Constants.swift in Sources */,
 				7B22404A2887D0390085731B /* FilterCategoryButton.swift in Sources */,
+				B7F7F02128881F0500D19B44 /* DetailImageView.swift in Sources */,
 				B7F7F01328864C7500D19B44 /* AnimalDetailTabbarDelegate.swift in Sources */,
 				B7F7EFEF2885537F00D19B44 /* AnimalDetailView.swift in Sources */,
 			);
@@ -407,6 +491,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;
@@ -435,6 +520,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				DEVELOPMENT_TEAM = PAT7P9FCH3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Reborn/Info.plist;

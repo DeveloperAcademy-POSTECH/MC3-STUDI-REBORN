@@ -9,18 +9,12 @@ import UIKit
 
 final class FilterViewController: UIViewController {
     
-    private var filters: Set<String> = []
+    private var kind: Kind?
     
     weak var delegate: FilterDelegate?
     
-    enum Tag: Int {
-        case dog = 1
-        case cat
-        case etc
-    }
-    
     // MARK: - 품종
-    private let headerLabel: UILabel = {
+    private let kindLabel: UILabel = {
         let label = UILabel()
         label.text = "품종"
         label.font = .boldSystemFont(ofSize: 18)
@@ -30,29 +24,26 @@ final class FilterViewController: UIViewController {
     private let dogButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐶강아지", for: .normal)
-        button.tag = Tag.dog.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private let catButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("🐱고양이", for: .normal)
-        button.tag = Tag.cat.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private let etcButton: FilterCategoryButton = {
         let button = FilterCategoryButton()
         button.setTitle("기타", for: .normal)
-        button.tag = Tag.etc.rawValue
-        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kindButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private lazy var buttonStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [dogButton, catButton, etcButton])
+    private lazy var firstButtonStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [dogButton, catButton, spacer])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
@@ -60,13 +51,19 @@ final class FilterViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var superStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [headerLabel, buttonStack])
+    private lazy var firstSuperStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [kindLabel, firstButtonStack])
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 20
         return stackView
+    }()
+    
+    private let spacer: FilterCategoryButton = {
+        let button = FilterCategoryButton()
+        button.backgroundColor = .clear
+        return button
     }()
     
     // MARK: - 하단 버튼
@@ -102,69 +99,60 @@ final class FilterViewController: UIViewController {
     }()
     
     // MARK: - buttonSelected
-    @objc private func categoryButtonTapped(sender: FilterCategoryButton) {
+    
+    @objc private func kindButtonTapped(sender: FilterCategoryButton) {
+        deselectKindButtons()
         sender.isOn.toggle()
         
-        if sender.isOn == true {
-            switch sender.tag {
-            case Tag.dog.rawValue:
-                filters.insert("개")
-            case Tag.cat.rawValue:
-                filters.insert("고양이")
-            case Tag.etc.rawValue:
-                filters.insert("기타")
-            default:
-                filters.insert(sender.currentTitle ?? "")
-            }
-        } else {
-            switch sender.tag {
-            case Tag.dog.rawValue:
-                filters.remove("개")
-            case Tag.cat.rawValue:
-                filters.remove("고양이")
-            case Tag.etc.rawValue:
-                filters.remove("기타")
-            default:
-                filters.remove(sender.currentTitle ?? "")
-            }
+        switch sender.titleLabel?.text {
+        case "🐶강아지": kind = .dog
+        case "🐱고양이": kind = .cat
+        case "기타": kind = .etc
+        default: kind = nil
         }
         
-        print(filters)
+    }
+    
+    private func deselectKindButtons() {
+        dogButton.isOn = false
+        catButton.isOn = false
+        etcButton.isOn = false
     }
     
     @objc private func resetButtonTapped(sender: UIButton) {
         [dogButton, catButton, etcButton].forEach { $0.isOn = false }
-        filters.removeAll()
+        kind = nil
     }
     
     @objc private func applyButtonTapped(sender: UIButton) {
-        let filtersArray = Array(filters)
-        delegate?.applyFilter(by: filtersArray)
+        delegate?.applyFilter(kind: kind)
         dismiss(animated: true)
     }
     
     // MARK: - viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        setSuperStackConstraints()
+        setStackConstraints()
         setbottomButtonStackViewConstraints()
     }
     
     // MARK: - autolayouts
-    func setSuperStackConstraints() {
-        view.addSubview(superStack)
-        superStack.translatesAutoresizingMaskIntoConstraints = false
+    
+    private func setStackConstraints() {
+        view.addSubview(firstSuperStack)
+        firstSuperStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            superStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 65),
-            superStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            superStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            firstSuperStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 65),
+            firstSuperStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            firstSuperStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
     
-    func setbottomButtonStackViewConstraints() {
+    private func setbottomButtonStackViewConstraints() {
         view.addSubview(bottomButtonStackView)
         bottomButtonStackView.translatesAutoresizingMaskIntoConstraints = false
         

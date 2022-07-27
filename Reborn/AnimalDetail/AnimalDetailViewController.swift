@@ -13,9 +13,7 @@ final class AnimalDetailViewController: UIViewController {
     
     private var navBarAppearance: UINavigationBarAppearance = {
         let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = .clear
-        navBarAppearance.shadowColor = .clear
+        navBarAppearance.configureWithTransparentBackground()
         return navBarAppearance
     }()
     
@@ -23,14 +21,23 @@ final class AnimalDetailViewController: UIViewController {
     
     private var defaultScrollYOffset: CGFloat = 0
     
-    var item: Item?
+    var item: Item
+    
+    init(item: Item? = nil) {
+        self.item = item ?? Item(id: nil, detailImage: nil, noticeNumber: nil, noticeStartDate: nil, noticeEndDate: nil, kind: nil, color: nil, birth: nil, sexCd: nil, neutralizationStatus: nil, weight: nil, description: nil, discoverdPlace: nil, shelterName: nil, shelterAddress: nil, telNumber: nil)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpNavigationBar()
         setScrollView()
-        
-        animalDetailView.tabbar.delegate = self
+        setTabbar()
+        setUpTapGesture()
+        setAnimalInformation()
     }
     
     override func loadView() {
@@ -48,6 +55,44 @@ final class AnimalDetailViewController: UIViewController {
         self.navigationController?.navigationBar.standardAppearance = navBarAppearance
         self.navigationController?.navigationBar.compactAppearance = navBarAppearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Set Information
+
+extension AnimalDetailViewController {
+    private func setAnimalInformation() {
+        guard let imageURLstring = item.detailImage else { return }
+        let imageURL = URL(string: imageURLstring)
+        
+        // 이미지를 다운 받는 시간동안 멈춤 현상을 방지하기 위해
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL!)
+            DispatchQueue.main.async {
+                self.animalDetailView.animalImageView.image = UIImage(data: data!)
+                
+                self.animalDetailView.animalInfoView.noticeInfoView.noticeName.text = self.item.noticeNumber
+                self.animalDetailView.animalInfoView.noticeInfoView.noticeDateNumber.text = self.item.noticeStartDate! + " - " + self.item.noticeEndDate!
+                
+                self.animalDetailView.animalInfoView.descriptionInfoView.kindInfoLabel.text = self.item.kind!
+                self.animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = self.item.color!
+                self.animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = self.item.sex!
+                self.animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = self.item.neutralizationStatus!
+                self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(self.item.age ?? -1)
+                self.animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = self.item.weight!
+                self.animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = self.item.description!
+                self.animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = self.item.discoverdPlace!
+                
+                self.animalDetailView.animalInfoView.shelterInfoView.nameInfoLabel.text = self.item.shelterName!
+                self.animalDetailView.animalInfoView.shelterInfoView.addressInfoLabel.text = self.item.shelterAddress!
+                self.animalDetailView.animalInfoView.shelterInfoView.contactInfoLabel.text = self.item.telNumber!
+            }
+        }
+//        animalDetailView.
     }
 }
 
@@ -70,11 +115,12 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 일정 거리만큼 스크롤 시, 이미지의 비율을 변경하여 아래 정보들의 배치가 안 무너지게 설정
-        if scrollView.contentOffset.y > defaultScrollYOffset - 44 {
+        // 문제점: 해당 로직이 필요 없을 가능성이 있기에 전부 주석처리
+//        if scrollView.contentOffset.y > defaultScrollYOffset - 44 {
 //            detailView.animalImageView.contentMode = .scaleToFill
-        } else {
+//        } else {
 //            detailView.animalImageView.contentMode = .scaleAspectFill
-        }
+//        }
         
         // 밑으로 내릴수록 Navigation Bar의 아이템 색상을 검게, 배경색을 하얗게 변경
         if scrollView.contentOffset.y > defaultScrollYOffset {
@@ -99,16 +145,31 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
 
 extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
     
+    private func setTabbar() {
+        animalDetailView.tabbar.delegate = self
+    }
+    
     // TODO: - 전화 걸기 기능 추후 구현
     
     func contactButtonDidTap() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "전화 " + "010 1234 1234", style: .default , handler:{ _ in
-            print("전화 걸기")
+        alert.addAction(UIAlertAction(title: "전화 하기", style: .default, handler:{ _ in
+            guard let url = NSURL(string: "tel://" + "\(self.item.telNumber ?? "")"),
+                   UIApplication.shared.canOpenURL(url as URL) else { return }
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            print("전화 하기 탭")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "주소 복사", style: .default, handler:{ _ in
+            UIPasteboard.general.string = self.item.shelterAddress ?? ""
+            print("주소 복사 탭")
         }))
         
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler:{ _ in
+            if let storedString = UIPasteboard.general.string {
+                print(storedString)
+            }
             print("취소 버튼 탭")
         }))
         
@@ -121,5 +182,21 @@ extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
     
     func likeButtonDidTap() {
         
+    }
+}
+
+// MARK: - Animal Image View Tap
+
+extension AnimalDetailViewController {
+    private func setUpTapGesture() {
+        self.animalDetailView.animalImageView.isUserInteractionEnabled = true
+        self.animalDetailView.animalImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animalImageViewDidTap)))
+    }
+    
+    @objc func animalImageViewDidTap() {
+        let vc = DetailImageViewController()
+        vc.detailImageView.animalImageView.image = animalDetailView.animalImageView.image
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }
