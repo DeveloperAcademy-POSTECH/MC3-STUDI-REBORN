@@ -325,22 +325,14 @@ extension AnimalListViewController {
 // MARK: - likeItem
 extension AnimalListViewController {
     @objc private func goToLikeListViewController() {
-        // TODO: LikeListViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
-        
-        navigationController?.pushViewController(dummyVC, animated: true)
+        navigationController?.pushViewController(LikeListViewController(), animated: true)
     }
 }
 
 // MARK: - filterItem
 extension AnimalListViewController {
     @objc private func popUpFilterModal() {
-        // TODO: FilterViewController로 변경
-        let dummyVC = UIViewController()
-        dummyVC.view.backgroundColor = .black
-        
-        navigationController?.present(dummyVC, animated: true)
+        navigationController?.present(FilterViewController(), animated: true)
     }
 }
 
@@ -349,12 +341,25 @@ extension AnimalListViewController: UITableViewDataSource {
         return animals.count
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//            let detailVC = AnimalDetailViewController(item: animalItems[indexPath.row])
+//
+//            navigationController?.pushViewController(detailVC, animated: true)
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
             
         //cell에 데이터 전달
         cell.imageUrl = animals[indexPath.row].detailImage
         cell.animal = animals[indexPath.row]
+        
+        // TODO: - 관심 동물임을 알 수 있는 지표
+//        let currentAnimal = animals[indexPath.row]
+//        if currentAnimal.isLiked {
+//            cell.isLiked = true
+//        }
         
         cell.selectionStyle = .none
         

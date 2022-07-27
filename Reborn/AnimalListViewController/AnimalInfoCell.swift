@@ -129,6 +129,9 @@ final class AnimalInfoCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        // cell 재사용 전 하트 버튼 초기화
+        self.isLiked = false
+        
         // 이미지 바뀌는것처럼 보이는 현상 해결
         photoView.image = UIImage(systemName: "pawprint")
     }
