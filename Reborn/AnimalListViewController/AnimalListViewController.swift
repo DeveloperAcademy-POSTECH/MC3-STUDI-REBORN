@@ -225,7 +225,7 @@ final class AnimalListViewController: UIViewController {
                 print(error)
                 self.animalItems = []
                 DispatchQueue.main.async {
-                    self.showResultMessageView(message: "에러가 발생했습니다.")
+                    self.showResultMessageView(message: "네트워크가 원활하지 않습니다.")
                 }
             }
             
