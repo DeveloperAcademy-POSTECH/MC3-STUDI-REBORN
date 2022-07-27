@@ -70,4 +70,18 @@ class CoreDataManager {
             return []
         }
     }
+    
+    func getLikedAnimal(of item: Item) -> LikedAnimal? {
+        guard let id = item.id else { return nil }
+        
+        let fetchRequest = LikedAnimal.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+        
+        do {
+            return try viewContext.fetch(fetchRequest).first
+        } catch {
+            print("failed to fetch liked animal")
+            return nil
+        }
+    }
 }
