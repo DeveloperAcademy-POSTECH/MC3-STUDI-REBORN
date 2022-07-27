@@ -120,6 +120,47 @@ final class AnimalListViewController: UIViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private lazy var resultMessageView: UIView = {
+        let containerView = UIView()
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 10
+        
+        let resultImageView = UIImageView.ofSystemImage(systemName: "x.circle", fontSize: 60, color: .cRed)
+        
+        [resultImageView, resultMessageLabel].forEach { stackView.addArrangedSubview($0) }
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+        
+        view.addSubview(containerView)
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: tableView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
+        ])
+        return containerView
+    }()
+    
+    private let resultMessageLabel = BaseLabel(size: 14, textColor: .cBlack, weight: .regular)
+    
+    private func showResultMessageView(message: String) {
+        resultMessageLabel.text = message
+        resultMessageView.isHidden = false
+    }
+    
+    private func hideResultMessageView() {
+        resultMessageView.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -169,6 +210,7 @@ final class AnimalListViewController: UIViewController {
     
     private func fetchData() {
         isFetchable = false
+        hideResultMessageView()
         
         networkManager.fetchAnimal(pageNumber: currentPage, region: currentRegion, kind: currentKind) { [unowned self] result in
             switch result {
@@ -178,10 +220,13 @@ final class AnimalListViewController: UIViewController {
                 } else {
                     self.animalItems += animalDatas
                 }
-                
+
             case .failure(let error):
                 print(error)
                 self.animalItems = []
+                DispatchQueue.main.async {
+                    self.showResultMessageView(message: "에러가 발생했습니다.")
+                }
             }
             
             // 데이터 받아온 후 메인 쓰레드에서 테이블 뷰 리로드
@@ -191,7 +236,6 @@ final class AnimalListViewController: UIViewController {
                 self.isFetchable = true
                 self.hideActivityIndicator()
             }
-
         }
     }
     
