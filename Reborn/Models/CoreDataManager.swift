@@ -40,6 +40,11 @@ class CoreDataManager {
             return false
         }
         
+        if getLikedAnimal(of: item) != nil {
+            print("already saved entity exists")
+            return true
+        }
+        
         let likedAnimal = LikedAnimal(context: viewContext)
         
         likedAnimal.id = itemId
