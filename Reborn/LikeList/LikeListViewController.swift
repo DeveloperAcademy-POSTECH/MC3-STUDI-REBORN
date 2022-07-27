@@ -12,6 +12,8 @@ final class LikeListViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     private let flowLayout = UICollectionViewFlowLayout()
+    
+    var likedAnimals: [Item] = []
 
     //공고종료 배너
 //    private let label: UILabel = {
@@ -31,24 +33,21 @@ final class LikeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         setNavBar()
-//        setBanner()
         setCollectionView()
         setCollectionViewConstraints()
+        
+//        likedAnimals = Core Data에서 데이터들을 가져옴
     }
     //네비게이션 바
     func setNavBar() {
         navigationItem.title = "관심 목록"
         navigationController?.navigationBar.tintColor = .cBlack
     }
-    //배너
-//    func setBanner() {
-//        view.addSubview(label)
-//    }
     
     //컬렉션뷰
     func setCollectionView() {
+        collectionView.delegate = self
         collectionView.dataSource = self
         flowLayout.scrollDirection = .vertical
         flowLayout.itemSize = CGSize(width: 165, height: 210)
@@ -72,16 +71,18 @@ final class LikeListViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
 }
 
-extension LikeListViewController: UICollectionViewDataSource {
+extension LikeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return likedAnimals.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeCollectionViewCell.identifier, for: indexPath) as! LikeCollectionViewCell
+        
         return cell
     }
     
@@ -89,5 +90,33 @@ extension LikeListViewController: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "LikeListViewHeader", for: indexPath) as! LikeListViewHeader
         return header
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let vc = AnimalDetailViewController(likedAnimals[indexPath.row])
+//        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
+// 공부
+// 생성자
+// 스택이라는 자료구조
+// 화면 전환 - push/pop ViewController
+// present -> modal
+
+// 구현 - cell
+// 이미지를 url로 불러서 그리기
+//
+
+//extension LikeListViewController: UICollectionViewDelegate {
+//    func present(_ viewControllerToPresent: UIViewController,
+//        animated flag: Bool,
+//      completion: (() -> Void)? = nil)
+//}
+
+//extension LikeListViewController: UICollectionViewDelegate {
+//    func CollectionView(_ collectionView: UICollectionView, didSelectRowAt indexPath: IndexPath) {
+//        performSegue(withIdentifier: "AnimalDetailView", sender: nil)
+//    }
+//}

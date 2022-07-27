@@ -22,7 +22,9 @@ final class AnimalDetailViewController: UIViewController {
     private let animalDetailView = AnimalDetailView()
     
     private var defaultScrollYOffset: CGFloat = 0
-
+    
+    var item: Item?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
