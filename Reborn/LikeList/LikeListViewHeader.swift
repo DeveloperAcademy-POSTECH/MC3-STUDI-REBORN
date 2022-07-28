@@ -36,10 +36,10 @@ final class LikeListViewHeader: UICollectionReusableView {
         self.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: self.topAnchor),
+            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
         ])
     }
 

@@ -14,21 +14,6 @@ final class LikeListViewController: UIViewController {
     private let flowLayout = UICollectionViewFlowLayout()
     
     var likedAnimals: [Item] = []
-
-    //공고종료 배너
-//    private let label: UILabel = {
-//        let label = UILabel()
-//        label.frame = CGRect(x: 20, y: 108, width: 350, height: 66)
-//        label.textColor = .cBlack
-//        label.backgroundColor = .cBeige
-//        label.text = "🐶  공고 종료된 아이들은 \n자동으로 목록에서 사라져요"
-//        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-//        label.textAlignment = .center
-//        label.clipsToBounds = true
-//        label.layer.cornerRadius = 14
-//        label.numberOfLines = 0
-//        return label
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +36,13 @@ final class LikeListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: 165, height: 210)
+        let width = (UIScreen.main.bounds.width - 60) / 2
+        let height = width * 4 / 3
+        flowLayout.itemSize = CGSize(width: width, height: height)
         flowLayout.sectionInset = .init(top: 20, left: 20, bottom: 20, right: 20)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 16
-        flowLayout.headerReferenceSize = CGSize(width: 350, height: 66)
+        flowLayout.headerReferenceSize = CGSize(width: 350, height: 105)
         
         collectionView.register(LikeCollectionViewCell.self, forCellWithReuseIdentifier: LikeCollectionViewCell.identifier)
         collectionView.register(LikeListViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "LikeListViewHeader")
