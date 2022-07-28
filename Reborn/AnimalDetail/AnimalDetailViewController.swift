@@ -93,7 +93,7 @@ extension AnimalDetailViewController {
             let data = try? Data(contentsOf: imageURL)
             DispatchQueue.main.async {
                 guard let data = data else { return }
-                self.animalDetailView.animalImageView.image = UIImage(data: data)
+                self.animalDetailView.animalImageView.image = UIImage(data: data)?.resized()
             }
         }
     }
