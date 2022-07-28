@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LikeListViewController: UIViewController {
+final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
 
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
@@ -15,6 +15,7 @@ final class LikeListViewController: UIViewController {
     private let coreDataManager = CoreDataManager.shared
     
     lazy var likedAnimals = coreDataManager.getAllLikedAnimals()
+    var removeList = [String?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,15 @@ final class LikeListViewController: UIViewController {
         ])
     }
     
+    func didReceiveIsLiked(at index: Int, isLiked: Bool) {
+        if !isLiked {
+            removeList.append(likedAnimals[index].id)
+        } else {
+            removeList.remove(at: removeList.firstIndex(of: likedAnimals[index].id)!)
+        }
+        
+        print(removeList)
+    }
 }
 
 extension LikeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -72,6 +82,8 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeCollectionViewCell.identifier, for: indexPath) as! LikeCollectionViewCell
         cell.likedAnimal = likedAnimals[indexPath.row]
+        cell.delegate = self
+        cell.index = indexPath.row
         
         return cell
     }
@@ -83,21 +95,11 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = AnimalDetailViewController(likedAnimals[indexPath.row])
-//        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }
 
-
-//extension LikeListViewController: UICollectionViewDelegate {
-//    func present(_ viewControllerToPresent: UIViewController,
-//        animated flag: Bool,
-//      completion: (() -> Void)? = nil)
-//}
-
-//extension LikeListViewController: UICollectionViewDelegate {
-//    func CollectionView(_ collectionView: UICollectionView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "AnimalDetailView", sender: nil)
-//    }
-//}
+protocol LikedAnimalCellDelegate: AnyObject {
+    func didReceiveIsLiked(at index: Int, isLiked: Bool)
+}

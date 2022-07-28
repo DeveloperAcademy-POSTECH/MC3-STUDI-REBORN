@@ -10,6 +10,9 @@ import UIKit
 final class LikeCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "LikeCollectionViewCell"
+    private let coreDataManager = CoreDataManager.shared
+    weak var delegate: LikedAnimalCellDelegate?
+    var index: Int!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +41,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     //동물이미지
     private let animalImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "1.png")
+        imageView.backgroundColor = .gray
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 14
@@ -78,11 +81,16 @@ final class LikeCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    var isLiked = false
+    var isLiked = true
     
     //하트버튼 터치
     @objc func heartButtonTouch(){
         isLiked.toggle()
+        changeHeartImage()
+        delegate?.didReceiveIsLiked(at: index, isLiked: isLiked)
+    }
+    
+    private func changeHeartImage() {
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartButton.tintColor = isLiked ? .cRed : .cGray
     }
