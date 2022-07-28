@@ -12,8 +12,9 @@ final class LikeListViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     private let flowLayout = UICollectionViewFlowLayout()
+    private let coreDataManager = CoreDataManager.shared
     
-    var likedAnimals: [Item] = []
+    lazy var likedAnimals = coreDataManager.getAllLikedAnimals()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,7 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikeCollectionViewCell.identifier, for: indexPath) as! LikeCollectionViewCell
+        cell.likedAnimal = likedAnimals[indexPath.row]
         
         return cell
     }

@@ -18,6 +18,13 @@ final class LikeCollectionViewCell: UICollectionViewCell {
 
     }
     
+    var likedAnimal: LikedAnimal! {
+        didSet {
+            leftDaysView.leftDays = likedAnimal.leftDays
+            setImage(urlString: likedAnimal.detailImage)
+        }
+    }
+    
     //하트버튼
     private lazy var heartButton: UIButton = {
         let button = UIButton()
@@ -39,17 +46,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     }()
     
     //공고날짜 레이블
-    private let animalLabel: UILabel = {
-        let label = UILabel()
-        label.text = "공고 종료 1일 전"
-        label.backgroundColor = .cRed
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        label.textAlignment = .center
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        return label
-    }()
+    private let leftDaysView = LeftDaysView(leftDays: 1)
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,13 +63,11 @@ final class LikeCollectionViewCell: UICollectionViewCell {
             animalImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
-        self.addSubview(animalLabel)
-        animalLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(leftDaysView)
+        leftDaysView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            animalLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 27),
-            animalLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            animalLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6),
-            animalLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1)
+            leftDaysView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            leftDaysView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
         ])
         
         contentView.addSubview(heartButton)
@@ -90,6 +85,19 @@ final class LikeCollectionViewCell: UICollectionViewCell {
         isLiked.toggle()
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         heartButton.tintColor = isLiked ? .cRed : .cGray
+    }
+    
+    private func setImage(urlString: String?) {
+        guard let urlString = urlString, let url = URL(string: urlString) else { return }
+        
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            guard urlString == url.absoluteString else { return }
+            
+            DispatchQueue.main.async {
+                self.animalImageView.image = UIImage(data: data)
+            }
+        }
     }
 }
 
