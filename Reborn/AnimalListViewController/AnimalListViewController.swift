@@ -332,6 +332,7 @@ extension AnimalListViewController: UITableViewDataSource {
 
 extension AnimalListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        animalItems[indexPath.row].isLiked = coreDataManager.getLikedAnimal(of: animalItems[indexPath.row]) != nil
         let detailVC = AnimalDetailViewController(item: animalItems[indexPath.row])
         
         navigationController?.pushViewController(detailVC, animated: true)

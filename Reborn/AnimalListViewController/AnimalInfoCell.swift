@@ -159,6 +159,7 @@ final class AnimalInfoCell: UITableViewCell {
         }
         
         isLiked = coreDataManager.getLikedAnimal(of: animalItem) != nil
+        animalItem.isLiked = isLiked
         print(coreDataManager.getAllLikedAnimals().map { $0.id })
     }
     

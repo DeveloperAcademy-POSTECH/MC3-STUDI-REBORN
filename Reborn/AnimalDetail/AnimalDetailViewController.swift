@@ -40,6 +40,10 @@ final class AnimalDetailViewController: UIViewController {
         setAnimalInformation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupHeartButton()
+    }
+    
     override func loadView() {
         super.loadView()
         self.view = animalDetailView
@@ -198,5 +202,16 @@ extension AnimalDetailViewController {
         vc.detailImageView.animalImageView.image = animalDetailView.animalImageView.image
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+    }
+    
+    private func setupHeartButton() {
+        let button = animalDetailView.tabbar.likeButton
+        
+        let image = UIImage(systemName: item.isLiked ? "heart.fill" : "heart")
+        print(item.isLiked)
+        let tintColor: UIColor? = item.isLiked ? .cRed : .cGray
+        
+        button.setBackgroundImage(image, for: .normal)
+        button.tintColor = tintColor
     }
 }
