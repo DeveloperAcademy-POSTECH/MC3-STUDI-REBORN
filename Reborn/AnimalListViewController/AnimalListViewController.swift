@@ -173,10 +173,19 @@ final class AnimalListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        let appearnace = UINavigationBarAppearance()
+        appearnace.configureWithOpaqueBackground()
+        appearnace.backgroundColor = .white
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.standardAppearance = appearnace
+        navigationController?.navigationBar.compactAppearance = appearnace
+        navigationController?.navigationBar.scrollEdgeAppearance = appearnace
     }
     
     private func configureNavigationBar() {
         navigationItem.leftBarButtonItem = locationItem
+        navigationItem.backButtonTitle = ""
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 15
@@ -191,7 +200,7 @@ final class AnimalListViewController: UIViewController {
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
