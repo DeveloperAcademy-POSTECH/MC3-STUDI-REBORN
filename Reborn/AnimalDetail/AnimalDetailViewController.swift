@@ -69,30 +69,29 @@ extension AnimalDetailViewController {
         guard let imageURLstring = item.detailImage else { return }
         let imageURL = URL(string: imageURLstring)
         
+        self.animalDetailView.animalInfoView.noticeInfoView.noticeName.text = self.item.noticeNumber
+        self.animalDetailView.animalInfoView.noticeInfoView.noticeDateNumber.text = self.item.noticeStartDate! + " - " + self.item.noticeEndDate!
+        
+        self.animalDetailView.animalInfoView.descriptionInfoView.kindInfoLabel.text = self.item.kind!
+        self.animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = self.item.color!
+        self.animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = self.item.sex!
+        self.animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = self.item.neutralizationStatus!
+        self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(self.item.age ?? -1)
+        self.animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = self.item.weight!
+        self.animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = self.item.description!
+        self.animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = self.item.discoverdPlace!
+        
+        self.animalDetailView.animalInfoView.shelterInfoView.nameInfoLabel.text = self.item.shelterName!
+        self.animalDetailView.animalInfoView.shelterInfoView.addressInfoLabel.text = self.item.shelterAddress!
+        self.animalDetailView.animalInfoView.shelterInfoView.contactInfoLabel.text = self.item.telNumber!
+        
         // 이미지를 다운 받는 시간동안 멈춤 현상을 방지하기 위해
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: imageURL!)
             DispatchQueue.main.async {
                 self.animalDetailView.animalImageView.image = UIImage(data: data!)
-                
-                self.animalDetailView.animalInfoView.noticeInfoView.noticeName.text = self.item.noticeNumber
-                self.animalDetailView.animalInfoView.noticeInfoView.noticeDateNumber.text = self.item.noticeStartDate! + " - " + self.item.noticeEndDate!
-                
-                self.animalDetailView.animalInfoView.descriptionInfoView.kindInfoLabel.text = self.item.kind!
-                self.animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = self.item.color!
-                self.animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = self.item.sex!
-                self.animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = self.item.neutralizationStatus!
-                self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(self.item.age ?? -1)
-                self.animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = self.item.weight!
-                self.animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = self.item.description!
-                self.animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = self.item.discoverdPlace!
-                
-                self.animalDetailView.animalInfoView.shelterInfoView.nameInfoLabel.text = self.item.shelterName!
-                self.animalDetailView.animalInfoView.shelterInfoView.addressInfoLabel.text = self.item.shelterAddress!
-                self.animalDetailView.animalInfoView.shelterInfoView.contactInfoLabel.text = self.item.telNumber!
             }
         }
-//        animalDetailView.
     }
 }
 
@@ -111,17 +110,7 @@ extension AnimalDetailViewController: UIScrollViewDelegate {
         defaultScrollYOffset = self.animalDetailView.scrollView.contentOffset.y
     }
     
-    // TODO: - 이미지 비율 자연스럽게 변경 추후 구현
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 일정 거리만큼 스크롤 시, 이미지의 비율을 변경하여 아래 정보들의 배치가 안 무너지게 설정
-        // 문제점: 해당 로직이 필요 없을 가능성이 있기에 전부 주석처리
-//        if scrollView.contentOffset.y > defaultScrollYOffset - 44 {
-//            detailView.animalImageView.contentMode = .scaleToFill
-//        } else {
-//            detailView.animalImageView.contentMode = .scaleAspectFill
-//        }
-        
         // 밑으로 내릴수록 Navigation Bar의 아이템 색상을 검게, 배경색을 하얗게 변경
         if scrollView.contentOffset.y > defaultScrollYOffset {
             let position = scrollView.contentOffset.y + defaultScrollYOffset
