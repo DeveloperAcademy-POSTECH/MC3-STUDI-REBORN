@@ -37,6 +37,7 @@ final class LikeListViewController: UIViewController {
         setCollectionView()
         setCollectionViewConstraints()
         
+        
 //        likedAnimals = Core Data에서 데이터들을 가져옴
     }
     //네비게이션 바
@@ -99,15 +100,6 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
     
 }
 
-// 공부
-// 생성자
-// 스택이라는 자료구조
-// 화면 전환 - push/pop ViewController
-// present -> modal
-
-// 구현 - cell
-// 이미지를 url로 불러서 그리기
-//
 
 //extension LikeListViewController: UICollectionViewDelegate {
 //    func present(_ viewControllerToPresent: UIViewController,
