@@ -66,30 +66,34 @@ final class AnimalDetailViewController: UIViewController {
 
 extension AnimalDetailViewController {
     private func setAnimalInformation() {
+        animalDetailView.animalInfoView.noticeInfoView.leftDaysView.leftDays = item.noticeLeftDays
+        animalDetailView.animalInfoView.noticeInfoView.noticeName.text = item.noticeNumber
+        animalDetailView.animalInfoView.noticeInfoView.noticeDateNumber.text = (item.noticeStartDate ?? "") + " - " + (item.noticeEndDate ?? "")
+        
+        animalDetailView.animalInfoView.descriptionInfoView.kindInfoLabel.text = item.kind ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = item.color ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = item.sex ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = item.neutralizationStatus ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(item.age ?? -1)
+        animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = item.weight ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = item.description ?? ""
+        animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = item.discoverdPlace ?? ""
+        
+        animalDetailView.animalInfoView.shelterInfoView.nameInfoLabel.text = item.shelterName ?? ""
+        animalDetailView.animalInfoView.shelterInfoView.addressInfoLabel.text = item.shelterAddress ?? ""
+        animalDetailView.animalInfoView.shelterInfoView.contactInfoLabel.text = item.telNumber ?? ""
+        
         guard let imageURLstring = item.detailImage else { return }
         let imageURL = URL(string: imageURLstring)
         
-        self.animalDetailView.animalInfoView.noticeInfoView.noticeName.text = self.item.noticeNumber
-        self.animalDetailView.animalInfoView.noticeInfoView.noticeDateNumber.text = self.item.noticeStartDate! + " - " + self.item.noticeEndDate!
-        
-        self.animalDetailView.animalInfoView.descriptionInfoView.kindInfoLabel.text = self.item.kind!
-        self.animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = self.item.color!
-        self.animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = self.item.sex!
-        self.animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = self.item.neutralizationStatus!
-        self.animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(self.item.age ?? -1)
-        self.animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = self.item.weight!
-        self.animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = self.item.description!
-        self.animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = self.item.discoverdPlace!
-        
-        self.animalDetailView.animalInfoView.shelterInfoView.nameInfoLabel.text = self.item.shelterName!
-        self.animalDetailView.animalInfoView.shelterInfoView.addressInfoLabel.text = self.item.shelterAddress!
-        self.animalDetailView.animalInfoView.shelterInfoView.contactInfoLabel.text = self.item.telNumber!
-        
         // 이미지를 다운 받는 시간동안 멈춤 현상을 방지하기 위해
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageURL!)
+            guard let imageURL = imageURL else { return }
+
+            let data = try? Data(contentsOf: imageURL)
             DispatchQueue.main.async {
-                self.animalDetailView.animalImageView.image = UIImage(data: data!)
+                guard let data = data else { return }
+                self.animalDetailView.animalImageView.image = UIImage(data: data)
             }
         }
     }

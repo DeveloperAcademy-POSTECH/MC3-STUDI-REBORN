@@ -21,9 +21,7 @@ final class ShelterInfoView: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 0
+        stackView.spacing = 14
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
