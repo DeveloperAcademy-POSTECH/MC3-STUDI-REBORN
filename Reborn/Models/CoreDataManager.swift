@@ -24,25 +24,23 @@ class CoreDataManager {
         }
     }
     
-    func save() -> Bool {
+    func save() {
         do {
             try viewContext.save()
-            return true
         } catch {
             viewContext.rollback()
-            return false
         }
     }
     
-    func saveAnimal(_ item: Item) -> Bool {
+    func saveAnimal(_ item: Item) {
         guard let itemId = item.id else {
             print("cannot save cause id is nil")
-            return false
+            return
         }
         
         if getLikedAnimal(of: item) != nil {
             print("already saved entity exists")
-            return true
+            return
         }
         
         let likedAnimal = LikedAnimal(context: viewContext)
@@ -67,7 +65,7 @@ class CoreDataManager {
         likedAnimal.shelterAddress = item.shelterAddress
         likedAnimal.telNumber = item.telNumber
         
-        return save()
+        save()
     }
     
     func getAllLikedAnimals() -> [LikedAnimal] {
@@ -95,8 +93,14 @@ class CoreDataManager {
         }
     }
     
-    func deleteLikedAnimal(_ likedAnimal: LikedAnimal) -> Bool {
+    func deleteLikedAnimal(_ likedAnimal: LikedAnimal) {
         viewContext.delete(likedAnimal)
-        return save()
+        save()
+    }
+    
+    func deleteLikedAnimal(_ item: Item) {
+        guard let likedAnimal = getLikedAnimal(of: item) else { return }
+        
+        deleteLikedAnimal(likedAnimal)
     }
 }
