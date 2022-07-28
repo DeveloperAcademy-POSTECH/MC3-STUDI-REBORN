@@ -17,6 +17,7 @@ final class CustomButton: UIButton {
 
 final class AnimalListViewController: UIViewController {
     private let networkManager = NetworkManager.shared
+    private let coreDataManager = CoreDataManager.shared
     
     var currentPage = 1
     var currentRegion: Region = .none
@@ -322,6 +323,7 @@ extension AnimalListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
+        animalItems[indexPath.row].isLiked = coreDataManager.getLikedAnimal(of: animalItems[indexPath.row]) != nil
         
         cell.animalItem = animalItems[indexPath.row]
         return cell

@@ -16,6 +16,10 @@ final class AnimalInfoCell: UITableViewCell {
         }
     }
     
+    var coreDataManager: CoreDataManager {
+        CoreDataManager.shared
+    }
+    
     private let photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -65,7 +69,7 @@ final class AnimalInfoCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
         button.tintColor = isLiked ? .cRed : .cDarkGray
-        button.addTarget(self, action: #selector(toggleHeart), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapHeartButton), for: .touchUpInside)
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 22),
             button.heightAnchor.constraint(equalToConstant: 22)
@@ -146,9 +150,16 @@ final class AnimalInfoCell: UITableViewCell {
         return stack
     }
     
-    @objc private func toggleHeart() {
+    @objc private func tapHeartButton() {
         // TODO: Core Data 작업 추가
-        isLiked.toggle()
+        if isLiked {
+            coreDataManager.deleteLikedAnimal(animalItem)
+        } else {
+            coreDataManager.saveAnimal(animalItem)
+        }
+        
+        isLiked = coreDataManager.getLikedAnimal(of: animalItem) != nil
+        print(coreDataManager.getAllLikedAnimals().map { $0.id })
     }
     
     @objc private func changeHeartImage() {
@@ -161,6 +172,7 @@ final class AnimalInfoCell: UITableViewCell {
         speciesLabel.text = animalItem.kind ?? "품종"
         sexAgeLabel.text = "\(animalItem.sex ?? "성별 미상") · \(animalItem.age ?? 0)세"
         shelterLabel.text = animalItem.shelterName ?? "보호소 미상"
+        isLiked = animalItem.isLiked
         
         guard let urlString = animalItem.detailImage, let url = URL(string: urlString) else { return }
         
