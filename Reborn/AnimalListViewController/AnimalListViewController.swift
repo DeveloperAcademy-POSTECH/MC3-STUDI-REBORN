@@ -171,6 +171,10 @@ final class AnimalListViewController: UIViewController {
         initializeData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     private func configureNavigationBar() {
         navigationItem.leftBarButtonItem = locationItem
         

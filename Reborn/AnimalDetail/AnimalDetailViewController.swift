@@ -20,6 +20,7 @@ final class AnimalDetailViewController: UIViewController {
     private let animalDetailView = AnimalDetailView()
     
     private var defaultScrollYOffset: CGFloat = 0
+    private let coreDataManager = CoreDataManager.shared
     
     var item: Item
     
@@ -185,7 +186,14 @@ extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
     // TODO: - 관심 목록 추가 기능 추후 구현
     
     func likeButtonDidTap() {
+        if item.isLiked {
+            coreDataManager.deleteLikedAnimal(item)
+        } else {
+            coreDataManager.saveAnimal(item)
+        }
         
+        item.isLiked = coreDataManager.getLikedAnimal(of: item) != nil
+        setupHeartButton()
     }
 }
 
