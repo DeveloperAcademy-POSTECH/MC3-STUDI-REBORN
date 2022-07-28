@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3FA6775C288692C3000ED816 /* LikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6775B288692C3000ED816 /* LikeListViewController.swift */; };
 		3FA6775E28869341000ED816 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */; };
+		3FA67785288F84FA000ED816 /* LikeListViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA67784288F84FA000ED816 /* LikeListViewHeader.swift */; };
 		7B2240462887D0090085731B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2240452887D0090085731B /* FilterViewController.swift */; };
 		7B22404A2887D0390085731B /* FilterCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2240492887D0390085731B /* FilterCategoryButton.swift */; };
 		7B22404C2887D0760085731B /* CustomDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22404B2887D0760085731B /* CustomDelegates.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		3FA6775B288692C3000ED816 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
 		3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
+		3FA67784288F84FA000ED816 /* LikeListViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewHeader.swift; sourceTree = "<group>"; };
 		7B2240452887D0090085731B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		7B2240492887D0390085731B /* FilterCategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCategoryButton.swift; sourceTree = "<group>"; };
 		7B22404B2887D0760085731B /* CustomDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDelegates.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				3FA6775B288692C3000ED816 /* LikeListViewController.swift */,
 				3FA6775D28869341000ED816 /* LikeCollectionViewCell.swift */,
+				3FA67784288F84FA000ED816 /* LikeListViewHeader.swift */,
 			);
 			path = LikeList;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				B7EF282C287D5E47002781F7 /* SceneDelegate.swift in Sources */,
 				AB17C7C828857F880045795E /* UIImageView.swift in Sources */,
 				B7F7EFEC2885491D00D19B44 /* BaseLabel.swift in Sources */,
+				3FA67785288F84FA000ED816 /* LikeListViewHeader.swift in Sources */,
 				3FA6775C288692C3000ED816 /* LikeListViewController.swift in Sources */,
 				3FA6775E28869341000ED816 /* LikeCollectionViewCell.swift in Sources */,
 				7BF76DD12883D50500A3A370 /* Animal.swift in Sources */,
