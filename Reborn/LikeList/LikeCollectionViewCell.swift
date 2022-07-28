@@ -87,7 +87,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     @objc func heartButtonTouch(){
         isLiked.toggle()
         changeHeartImage()
-        delegate?.didReceiveIsLiked(at: index, isLiked: isLiked)
+        delegate?.didClickHeartButton(at: index)
     }
     
     private func changeHeartImage() {

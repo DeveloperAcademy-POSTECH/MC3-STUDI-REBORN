@@ -15,7 +15,6 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
     private let coreDataManager = CoreDataManager.shared
     
     lazy var likedAnimals = coreDataManager.getAllLikedAnimals()
-    var removeList = [String?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,14 +61,15 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
         ])
     }
     
-    func didReceiveIsLiked(at index: Int, isLiked: Bool) {
-        if !isLiked {
-            removeList.append(likedAnimals[index].id)
-        } else {
-            removeList.remove(at: removeList.firstIndex(of: likedAnimals[index].id)!)
-        }
-        
-        print(removeList)
+    func didClickHeartButton(at index: Int) {
+        let deleted = likedAnimals.remove(at: index)
+        coreDataManager.deleteLikedAnimal(deleted)
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        likedAnimals = coreDataManager.getAllLikedAnimals()
+        collectionView.reloadData()
     }
 }
 
@@ -95,11 +95,14 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let likedAnimal = likedAnimals[indexPath.row]
         
+        let detailVC = AnimalDetailViewController(item: likedAnimal.item)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }
 
 protocol LikedAnimalCellDelegate: AnyObject {
-    func didReceiveIsLiked(at index: Int, isLiked: Bool)
+    func didClickHeartButton(at index: Int)
 }
