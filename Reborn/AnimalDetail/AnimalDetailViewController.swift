@@ -79,7 +79,7 @@ extension AnimalDetailViewController {
         animalDetailView.animalInfoView.descriptionInfoView.colorInfoLabel.text = item.color ?? ""
         animalDetailView.animalInfoView.descriptionInfoView.sexInfoLabel.text = item.sex ?? ""
         animalDetailView.animalInfoView.descriptionInfoView.neuteringInfoLabel.text = item.neutralizationStatus ?? ""
-        animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(item.age ?? -1)
+        animalDetailView.animalInfoView.descriptionInfoView.ageInfoLabel.text = String(item.age ?? -1) + "세"
         animalDetailView.animalInfoView.descriptionInfoView.weightInfoLabel.text = item.weight ?? ""
         animalDetailView.animalInfoView.descriptionInfoView.charactersInfoLabel.text = item.description ?? ""
         animalDetailView.animalInfoView.descriptionInfoView.locationInfoLabel.text = item.discoverdPlace ?? ""
