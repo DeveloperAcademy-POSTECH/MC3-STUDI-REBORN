@@ -31,10 +31,10 @@ final class FilterCategoryButton: UIButton {
     // MARK: - setView
     private func setView() {
         if isOn == false {
-            self.backgroundColor = .systemGray6
+            self.backgroundColor = .cLightGray
             self.setTitleColor(.systemGray, for: .normal)
         } else {
-            self.backgroundColor = .systemGreen
+            self.backgroundColor = .cGreen
             self.setTitleColor(.white, for: .normal)
         }
     }

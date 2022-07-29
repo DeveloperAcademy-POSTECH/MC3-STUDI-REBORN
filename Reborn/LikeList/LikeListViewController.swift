@@ -30,6 +30,7 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
     func setNavBar() {
         navigationItem.title = "관심 목록"
         navigationController?.navigationBar.tintColor = .cBlack
+        navigationItem.backButtonTitle = ""
     }
     
     //컬렉션뷰
@@ -70,6 +71,15 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
     override func viewWillAppear(_ animated: Bool) {
         likedAnimals = coreDataManager.getAllLikedAnimals()
         collectionView.reloadData()
+        
+        let appearnace = UINavigationBarAppearance()
+        appearnace.configureWithOpaqueBackground()
+        appearnace.backgroundColor = .white
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.standardAppearance = appearnace
+        navigationController?.navigationBar.compactAppearance = appearnace
+        navigationController?.navigationBar.scrollEdgeAppearance = appearnace
     }
 }
 
