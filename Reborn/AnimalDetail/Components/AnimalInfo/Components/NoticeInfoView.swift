@@ -11,6 +11,12 @@ final class NoticeInfoView: UIView {
     
     // MARK: - Properties
     
+    let leftDaysView: LeftDaysView = {
+        let view = LeftDaysView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let noticeName: BaseLabel = {
         let label = BaseLabel(size: 18, weight: .bold)
         label.text = "경남-함안-2022-00286"
@@ -53,18 +59,25 @@ final class NoticeInfoView: UIView {
     private func makeSubviews() {
         [noticeDateTitle, noticeDateNumber].forEach { self.noticeDate.addArrangedSubview($0) }
         
-        [noticeName, noticeDate].forEach { self.addSubview($0) }
+        [leftDaysView,
+         noticeName,
+         noticeDate].forEach { self.addSubview($0) }
     }
     
     private func makeConstraints() {
+        let leftDaysViewConstraints = [leftDaysView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                                       leftDaysView.topAnchor.constraint(equalTo: self.topAnchor)]
+        
         let noticeNameConstraints = [noticeName.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                                     noticeName.topAnchor.constraint(equalTo: self.topAnchor),]
+                                     noticeName.topAnchor.constraint(equalTo: leftDaysView.bottomAnchor, constant: 10),]
 
         let noticeDateConstraints = [noticeDate.topAnchor.constraint(equalTo: noticeName.bottomAnchor, constant: 8),
                                      noticeDate.leadingAnchor.constraint(equalTo: noticeName.leadingAnchor),
                                      noticeDate.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
         
-        [noticeNameConstraints, noticeDateConstraints].forEach { NSLayoutConstraint.activate($0) }
+        [leftDaysViewConstraints,
+         noticeNameConstraints,
+         noticeDateConstraints].forEach { NSLayoutConstraint.activate($0) }
     }
     
     required init?(coder: NSCoder) {
