@@ -24,31 +24,29 @@ final class AnimalListViewController: UIViewController {
     var currentKind: Kind?
     var animalItems = [Item]()
     
-    let container: UIView = {
-        let container: UIView = UIView()
-        container.backgroundColor = .cDarkGray!.withAlphaComponent(0.5)
-        return container
-    }()
-    
-    let activityView: UIActivityIndicatorView = {
+    lazy var activityIndiactor: UIActivityIndicatorView = {
         let activityView = UIActivityIndicatorView(style: .large)
-        activityView.color = .white
+        activityView.color = .cDarkGray
+        
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityView)
+        NSLayoutConstraint.activate([
+            activityView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            activityView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+        ])
+        
         return activityView
     }()
     
     func showActivityIndicator() {
-        container.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        activityView.center = view.center
+        activityIndiactor.isHidden = false
         
-        container.addSubview(activityView)
-        self.view.addSubview(container)
-        
-        activityView.startAnimating()
+        activityIndiactor.startAnimating()
     }
     
     func hideActivityIndicator() {
-        activityView.stopAnimating()
-        container.removeFromSuperview()
+        activityIndiactor.stopAnimating()
+        activityIndiactor.isHidden = true
     }
     
     private lazy var regionLabel: BaseLabel = {
