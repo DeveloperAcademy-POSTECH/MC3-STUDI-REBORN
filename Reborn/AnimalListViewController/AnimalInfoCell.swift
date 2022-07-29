@@ -33,7 +33,7 @@ final class AnimalInfoCell: UITableViewCell {
         
         imageView.layer.cornerRadius = 14
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "paw")
+        imageView.backgroundColor = .cLightGray
         
         return imageView
     }()
@@ -189,7 +189,7 @@ final class AnimalInfoCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        photoView.image = UIImage(named: "paw")
+        photoView.image = nil
         isLiked = false
         leftDaysView.leftDays = 0
         speciesLabel.text = "품종"
