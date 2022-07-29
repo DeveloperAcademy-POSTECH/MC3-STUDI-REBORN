@@ -33,7 +33,7 @@ final class AnimalInfoCell: UITableViewCell {
         
         imageView.layer.cornerRadius = 14
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .cLightGray
         
         return imageView
     }()
@@ -68,7 +68,7 @@ final class AnimalInfoCell: UITableViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
-        button.tintColor = isLiked ? .cRed : .cDarkGray
+        button.tintColor = isLiked ? .cRed : .cGray
         button.addTarget(self, action: #selector(tapHeartButton), for: .touchUpInside)
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 22),
@@ -165,7 +165,7 @@ final class AnimalInfoCell: UITableViewCell {
     
     @objc private func changeHeartImage() {
         heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
-        heartButton.tintColor = isLiked ? .cRed : .cDarkGray
+        heartButton.tintColor = isLiked ? .cRed : .cGray
     }
     
     private func configureCell(animalItem: Item) {
