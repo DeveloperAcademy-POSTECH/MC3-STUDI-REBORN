@@ -165,9 +165,9 @@
 		B7EF2828287D5E47002781F7 /* Reborn */ = {
 			isa = PBXGroup;
 			children = (
-				AB17C7C0288562510045795E /* AnimalListViewController */,
 				B7EF2829287D5E47002781F7 /* AppDelegate.swift */,
 				B7EF282B287D5E47002781F7 /* SceneDelegate.swift */,
+				AB17C7C0288562510045795E /* AnimalListViewController */,
 				B7F7EFE9288548BE00D19B44 /* Components */,
 				7BF76DCD2883D50500A3A370 /* Models */,
 				7BF76DD22883D51400A3A370 /* Helpers */,
@@ -514,6 +514,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -542,6 +543,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
