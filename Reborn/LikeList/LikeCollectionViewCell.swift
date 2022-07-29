@@ -29,7 +29,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     }
     
     //하트버튼
-    private lazy var heartButton: UIButton = {
+    lazy var heartButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
         button.clipsToBounds = true
@@ -85,14 +85,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     
     //하트버튼 터치
     @objc func heartButtonTouch(){
-        isLiked.toggle()
-        changeHeartImage()
-        delegate?.didClickHeartButton(at: index)
-    }
-    
-    private func changeHeartImage() {
-        heartButton.setBackgroundImage(UIImage(systemName: isLiked ? "heart.fill" : "heart"), for: .normal)
-        heartButton.tintColor = isLiked ? .cRed : .cGray
+        delegate?.didClickHeartButton(cell: self, at: index)
     }
     
     private func setImage(urlString: String?) {
