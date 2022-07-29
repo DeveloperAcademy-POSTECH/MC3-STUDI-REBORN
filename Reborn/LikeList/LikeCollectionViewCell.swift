@@ -21,6 +21,12 @@ final class LikeCollectionViewCell: UICollectionViewCell {
 
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        animalImageView.image = nil
+    }
+    
     var likedAnimal: LikedAnimal! {
         didSet {
             leftDaysView.leftDays = likedAnimal.leftDays

@@ -167,6 +167,7 @@
 			children = (
 				B7EF2829287D5E47002781F7 /* AppDelegate.swift */,
 				B7EF282B287D5E47002781F7 /* SceneDelegate.swift */,
+				B7EF2834287D5E49002781F7 /* LaunchScreen.storyboard */,
 				AB17C7C0288562510045795E /* AnimalListViewController */,
 				B7F7EFE9288548BE00D19B44 /* Components */,
 				7BF76DCD2883D50500A3A370 /* Models */,
@@ -176,7 +177,6 @@
 				7B22407D288923280085731B /* LikeList */,
 				B7EF282D287D5E47002781F7 /* ViewController.swift */,
 				B7EF2832287D5E49002781F7 /* Assets.xcassets */,
-				B7EF2834287D5E49002781F7 /* LaunchScreen.storyboard */,
 				B7EF2837287D5E49002781F7 /* Info.plist */,
 			);
 			path = Reborn;
