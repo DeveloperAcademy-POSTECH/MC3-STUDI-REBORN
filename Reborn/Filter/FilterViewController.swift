@@ -79,7 +79,7 @@ final class FilterViewController: UIViewController {
         let button = UIButton()
         button.clipsToBounds = true
         button.layer.cornerRadius = 14
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .cGreen
         
         button.setTitle("적용하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
