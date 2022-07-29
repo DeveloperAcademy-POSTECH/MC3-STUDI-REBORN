@@ -20,6 +20,7 @@ final class AnimalDetailViewController: UIViewController {
     private let animalDetailView = AnimalDetailView()
     
     private var defaultScrollYOffset: CGFloat = 0
+    private let coreDataManager = CoreDataManager.shared
     
     var item: Item
     
@@ -38,6 +39,10 @@ final class AnimalDetailViewController: UIViewController {
         setTabbar()
         setUpTapGesture()
         setAnimalInformation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupHeartButton()
     }
     
     override func loadView() {
@@ -174,7 +179,14 @@ extension AnimalDetailViewController: AnimalDetailTabbarDelegate {
     // TODO: - 관심 목록 추가 기능 추후 구현
     
     func likeButtonDidTap() {
+        if item.isLiked {
+            coreDataManager.deleteLikedAnimal(item)
+        } else {
+            coreDataManager.saveAnimal(item)
+        }
         
+        item.isLiked = coreDataManager.getLikedAnimal(of: item) != nil
+        setupHeartButton()
     }
 }
 
@@ -191,5 +203,16 @@ extension AnimalDetailViewController {
         vc.detailImageView.animalImageView.image = animalDetailView.animalImageView.image
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+    }
+    
+    private func setupHeartButton() {
+        let button = animalDetailView.tabbar.likeButton
+        
+        let image = UIImage(systemName: item.isLiked ? "heart.fill" : "heart")
+        print(item.isLiked)
+        let tintColor: UIColor? = item.isLiked ? .cRed : .cGray
+        
+        button.setBackgroundImage(image, for: .normal)
+        button.tintColor = tintColor
     }
 }

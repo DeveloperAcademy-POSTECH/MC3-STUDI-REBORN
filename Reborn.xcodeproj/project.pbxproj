@@ -21,6 +21,7 @@
 		AB17C7C828857F880045795E /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17C7C728857F880045795E /* UIImageView.swift */; };
 		AB5CD3D5289121FF00D6B1AB /* AnimalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB5CD3D3289121FF00D6B1AB /* AnimalModel.xcdatamodeld */; };
 		AB5CD3D72891246B00D6B1AB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5CD3D62891246B00D6B1AB /* CoreDataManager.swift */; };
+		AB6319EE28927ADF0063A9E1 /* LikedAnimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6319ED28927ADF0063A9E1 /* LikedAnimal+Extensions.swift */; };
 		ABD855B6288696570045CEE6 /* AnimalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */; };
 		ABFBDDCE288A8E1200100D87 /* LeftDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */; };
 		B74849462892F1E800137E9A /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74849452892F1E800137E9A /* UIImage.swift */; };
@@ -58,6 +59,7 @@
 		AB17C7C728857F880045795E /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		AB5CD3D4289121FF00D6B1AB /* AnimalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnimalModel.xcdatamodel; sourceTree = "<group>"; };
 		AB5CD3D62891246B00D6B1AB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AB6319ED28927ADF0063A9E1 /* LikedAnimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedAnimal+Extensions.swift"; sourceTree = "<group>"; };
 		ABD855B5288696570045CEE6 /* AnimalInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalInfoCell.swift; sourceTree = "<group>"; };
 		ABFBDDCD288A8E1200100D87 /* LeftDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDaysView.swift; sourceTree = "<group>"; };
 		B74849452892F1E800137E9A /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				7BF76DCE2883D50500A3A370 /* NetworkManager.swift */,
 				AB5CD3D3289121FF00D6B1AB /* AnimalModel.xcdatamodeld */,
 				AB5CD3D62891246B00D6B1AB /* CoreDataManager.swift */,
+				AB6319ED28927ADF0063A9E1 /* LikedAnimal+Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				ABFBDDCE288A8E1200100D87 /* LeftDaysView.swift in Sources */,
 				B7EF282E287D5E47002781F7 /* ViewController.swift in Sources */,
 				AB08AF402887D6D7008A844D /* AnimalListTableViewHeader.swift in Sources */,
+				AB6319EE28927ADF0063A9E1 /* LikedAnimal+Extensions.swift in Sources */,
 				7B2240462887D0090085731B /* FilterViewController.swift in Sources */,
 				B7F7F0192887E40C00D19B44 /* NoticeInfoView.swift in Sources */,
 				B7EF282A287D5E47002781F7 /* AppDelegate.swift in Sources */,
