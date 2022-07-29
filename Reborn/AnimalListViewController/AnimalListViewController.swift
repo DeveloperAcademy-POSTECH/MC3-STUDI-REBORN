@@ -179,6 +179,8 @@ final class AnimalListViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.separatorInset = UIEdgeInsets.zero
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(AnimalInfoCell.self, forCellReuseIdentifier: AnimalInfoCell.reuseID)
         tableView.rowHeight = AnimalInfoCell.rowHeight

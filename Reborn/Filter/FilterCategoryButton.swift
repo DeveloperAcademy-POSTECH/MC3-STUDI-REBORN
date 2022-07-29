@@ -34,7 +34,7 @@ final class FilterCategoryButton: UIButton {
             self.backgroundColor = .systemGray6
             self.setTitleColor(.systemGray, for: .normal)
         } else {
-            self.backgroundColor = .systemGreen
+            self.backgroundColor = .cGreen
             self.setTitleColor(.white, for: .normal)
         }
     }
