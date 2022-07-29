@@ -41,7 +41,7 @@ final class LikeCollectionViewCell: UICollectionViewCell {
     //동물이미지
     private let animalImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .cLightGray
+        imageView.image = UIImage(named: "paw")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 14
