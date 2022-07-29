@@ -20,25 +20,6 @@ final class ShelterInfoView: UIView {
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 0
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    let categoryStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    let informationStackView: UIStackView = {
-        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.spacing = 10
@@ -47,40 +28,70 @@ final class ShelterInfoView: UIView {
     }()
     
     // Name
+    let nameStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let nameInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "보호소명"
         return label
     }()
     let nameInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "경주시 동물사랑보호센터"
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     // Address
+    let addressStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let addressInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "주소"
         return label
     }()
     let addressInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "경상북도 경주시 천북면 천북로 8-4"
+        label.text = ""
         label.numberOfLines = 0
         return label
     }()
     
     // Contact
+    let contactStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let contactInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "연락처"
         return label
     }()
     let contactInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "010-1234-1234"
+        label.text = ""
         return label
     }()
     
@@ -94,16 +105,13 @@ final class ShelterInfoView: UIView {
     }
     
     private func makeSubviews() {
-        [nameInfoTitle,
-         addressInfoTitle,
-         contactInfoTitle].forEach { categoryStackView.addArrangedSubview($0) }
+        [nameInfoTitle, nameInfoLabel].forEach { nameStackView.addArrangedSubview($0) }
+        [addressInfoTitle, addressInfoLabel].forEach { addressStackView.addArrangedSubview($0) }
+        [contactInfoTitle, contactInfoLabel].forEach { contactStackView.addArrangedSubview($0) }
         
-        [nameInfoLabel,
-         addressInfoLabel,
-         contactInfoLabel].forEach { informationStackView.addArrangedSubview($0) }
-        
-        [categoryStackView,
-         informationStackView].forEach { stackView.addArrangedSubview($0) }
+        [nameStackView,
+         addressStackView,
+         contactStackView].forEach { stackView.addArrangedSubview($0) }
         
         [title, stackView].forEach { self.addSubview($0) }
     }
