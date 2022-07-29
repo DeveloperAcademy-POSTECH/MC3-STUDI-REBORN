@@ -68,7 +68,12 @@ final class AnimalListViewController: UIViewController {
         return UIMenu(children: actions)
     }
     
-    var tableView = UITableView()
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        
+        return tableView
+    }()
     var isFetchable = true // tableView의 스크롤이 맨 밑에 닿을 때 데이터를 한번만 fetch하도록 하기 위해 사용
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -164,7 +169,7 @@ final class AnimalListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         configureNavigationBar()
         setupTableView()
@@ -341,6 +346,7 @@ extension AnimalListViewController: UITableViewDataSource {
         animalItems[indexPath.row].isLiked = coreDataManager.getLikedAnimal(of: animalItems[indexPath.row]) != nil
         
         cell.animalItem = animalItems[indexPath.row]
+        cell.contentView.backgroundColor = .white
         return cell
     }
 }

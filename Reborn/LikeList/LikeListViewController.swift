@@ -37,6 +37,8 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
     func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .white
+        
         flowLayout.scrollDirection = .vertical
         let width = (UIScreen.main.bounds.width - 60) / 2
         let height = width * 4 / 3
