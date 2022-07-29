@@ -17,6 +17,7 @@ final class CustomButton: UIButton {
 
 final class AnimalListViewController: UIViewController {
     private let networkManager = NetworkManager.shared
+    private let coreDataManager = CoreDataManager.shared
     
     var currentPage = 1
     var currentRegion: Region = .none
@@ -170,8 +171,21 @@ final class AnimalListViewController: UIViewController {
         initializeData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        let appearnace = UINavigationBarAppearance()
+        appearnace.configureWithOpaqueBackground()
+        appearnace.backgroundColor = .white
+        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.standardAppearance = appearnace
+        navigationController?.navigationBar.compactAppearance = appearnace
+        navigationController?.navigationBar.scrollEdgeAppearance = appearnace
+    }
+    
     private func configureNavigationBar() {
         navigationItem.leftBarButtonItem = locationItem
+        navigationItem.backButtonTitle = ""
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 15
@@ -188,7 +202,7 @@ final class AnimalListViewController: UIViewController {
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -324,6 +338,7 @@ extension AnimalListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnimalInfoCell.reuseID, for: indexPath) as! AnimalInfoCell
+        animalItems[indexPath.row].isLiked = coreDataManager.getLikedAnimal(of: animalItems[indexPath.row]) != nil
         
         cell.animalItem = animalItems[indexPath.row]
         return cell
@@ -332,6 +347,7 @@ extension AnimalListViewController: UITableViewDataSource {
 
 extension AnimalListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        animalItems[indexPath.row].isLiked = coreDataManager.getLikedAnimal(of: animalItems[indexPath.row]) != nil
         let detailVC = AnimalDetailViewController(item: animalItems[indexPath.row])
         
         navigationController?.pushViewController(detailVC, animated: true)
