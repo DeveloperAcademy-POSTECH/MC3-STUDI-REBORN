@@ -64,10 +64,21 @@ final class LikeListViewController: UIViewController, LikedAnimalCellDelegate {
         ])
     }
     
-    func didClickHeartButton(at index: Int) {
-        let deleted = likedAnimals.remove(at: index)
-        coreDataManager.deleteLikedAnimal(deleted)
-        collectionView.reloadData()
+    func didClickHeartButton(cell: LikeCollectionViewCell, at index: Int) {
+        let alert = UIAlertController(title: "관심 목록에서 삭제하시겠습니까?", message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "취소", style: .default))
+        
+        alert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler:{ _ in
+            let deleted = self.likedAnimals.remove(at: index)
+            self.coreDataManager.deleteLikedAnimal(deleted)
+            self.collectionView.reloadData()
+        }))
+        
+        self.present(alert, animated: true) {
+            cell.heartButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            cell.heartButton.tintColor = .cRed
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,5 +127,5 @@ extension LikeListViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 protocol LikedAnimalCellDelegate: AnyObject {
-    func didClickHeartButton(at index: Int)
+    func didClickHeartButton(cell: LikeCollectionViewCell, at index: Int)
 }
