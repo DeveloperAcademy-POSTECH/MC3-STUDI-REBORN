@@ -20,23 +20,6 @@ final class DescriptionInfoView: UIView {
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 14
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    let categoryStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    let informationStackView: UIStackView = {
-        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.spacing = 10
@@ -45,99 +28,173 @@ final class DescriptionInfoView: UIView {
     }()
     
     // Kind
+    let kindStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let kindInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "품종"
         return label
     }()
     let kindInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "[개] 불독"
+        label.text = ""
         return label
     }()
     
     // Color
+    let colorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let colorInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "색상"
         return label
     }()
     let colorInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "베이지"
+        label.text = ""
         return label
     }()
     
     // Sex
+    let sexStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let sexInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "성별"
         return label
     }()
     let sexInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "M"
+        label.text = ""
         return label
     }()
     
     // Neutering
+    let neuteringStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let neuteringInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "중성화"
         return label
     }()
     let neuteringInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "Y"
+        label.text = ""
         return label
     }()
     
     // Age
+    let ageStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let ageInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "나이"
         return label
     }()
     let ageInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "2018(년생)"
+        label.text = ""
         return label
     }()
     
     // Weight
+    let weightStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let weightInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "체중"
         return label
     }()
     let weightInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "5(Kg)"
+        label.text = ""
         return label
     }()
     
     // Characters
+    let charactersStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let charactersInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "특징"
         return label
     }()
     let charactersInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "온순하고 차분함, 사상충감염"
+        label.text = ""
         label.numberOfLines = 0
         return label
     }()
     
     // Location
+    let locationStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.spacing = 14
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     let locationInfoTitle: BaseLabel = {
         let label = BaseLabel(size: 14, textColor: .cDarkGray, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         label.text = "발견장소"
         return label
     }()
     let locationInfoLabel: BaseLabel = {
         let label = BaseLabel(size: 14, weight: .regular)
-        label.text = "가야읍 왕궁2길 19-1"
+        label.text = ""
         label.numberOfLines = 0
         return label
     }()
@@ -152,26 +209,23 @@ final class DescriptionInfoView: UIView {
     }
     
     private func makeSubviews() {
-        [kindInfoTitle,
-         colorInfoTitle,
-         sexInfoTitle,
-         neuteringInfoTitle,
-         ageInfoTitle,
-         weightInfoTitle,
-         charactersInfoTitle,
-         locationInfoTitle].forEach { categoryStackView.addArrangedSubview($0) }
+        [kindInfoTitle, kindInfoLabel].forEach { kindStackView.addArrangedSubview($0)}
+        [colorInfoTitle, colorInfoLabel].forEach { colorStackView.addArrangedSubview($0)}
+        [sexInfoTitle, sexInfoLabel].forEach { sexStackView.addArrangedSubview($0)}
+        [neuteringInfoTitle, neuteringInfoLabel].forEach { neuteringStackView.addArrangedSubview($0)}
+        [ageInfoTitle, ageInfoLabel].forEach { ageStackView.addArrangedSubview($0)}
+        [weightInfoTitle, weightInfoLabel].forEach { weightStackView.addArrangedSubview($0)}
+        [charactersInfoTitle, charactersInfoLabel].forEach { charactersStackView.addArrangedSubview($0)}
+        [locationInfoTitle, locationInfoLabel].forEach { locationStackView.addArrangedSubview($0)}
         
-        [kindInfoLabel,
-         colorInfoLabel,
-         sexInfoLabel,
-         neuteringInfoLabel,
-         ageInfoLabel,
-         weightInfoLabel,
-         charactersInfoLabel,
-         locationInfoLabel].forEach { informationStackView.addArrangedSubview($0) }
-        
-        [categoryStackView,
-         informationStackView].forEach { stackView.addArrangedSubview($0) }
+        [kindStackView,
+         colorStackView,
+         sexStackView,
+         neuteringStackView,
+         ageStackView,
+         weightStackView,
+         charactersStackView,
+         locationStackView].forEach { stackView.addArrangedSubview($0) }
         
         [title, stackView].forEach { self.addSubview($0) }
     }

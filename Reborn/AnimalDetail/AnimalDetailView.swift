@@ -85,7 +85,7 @@ final class AnimalDetailView: UIView {
                                          animalInfoView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                                          animalInfoView.topAnchor.constraint(equalTo: animalImageContainer.bottomAnchor, constant: 20),
                                          animalInfoView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)]
-        let animalInfoViewHeightConstraints = animalInfoView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, constant: -300)
+        let animalInfoViewHeightConstraints = animalInfoView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, constant: -240)
         animalInfoViewHeightConstraints.priority = .required
         
         let tabbarConstraints = [tabbar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
