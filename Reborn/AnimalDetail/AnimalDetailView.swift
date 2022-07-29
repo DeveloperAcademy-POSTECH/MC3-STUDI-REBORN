@@ -25,7 +25,7 @@ final class AnimalDetailView: UIView {
     
     let animalImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "paw")
+        imageView.backgroundColor = .cLightGray
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
