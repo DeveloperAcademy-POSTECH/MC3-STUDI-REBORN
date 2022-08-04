@@ -4,7 +4,7 @@
 우리 주변에 어떤 유기동물들이 있을까요?
 해당 소식들을 리본으로 모두 확인하고 입양하세요.
 
-||![KakaoTalk_Photo_2022-08-04-14-43-52 001](https://user-images.githubusercontent.com/40821203/182771772-38502344-e589-4b71-b5f7-ddebd0dd8a54.png)|![KakaoTalk_Photo_2022-08-04-14-43-53 002](https://user-images.githubusercontent.com/40821203/182771809-36897b9c-268a-466d-84d4-7cbaf2c98ade.png)|![KakaoTalk_Photo_2022-08-04-14-43-54 003](https://user-images.githubusercontent.com/40821203/182771839-daf03f7f-3bb2-45d3-ad3e-71c9f9a06a22.png)|
+|![KakaoTalk_Photo_2022-08-04-15-13-18](https://user-images.githubusercontent.com/73037262/182776005-64a72b1a-40b4-4fd0-ad91-54159a84941a.png)|![KakaoTalk_Photo_2022-08-04-14-43-52 001](https://user-images.githubusercontent.com/40821203/182771772-38502344-e589-4b71-b5f7-ddebd0dd8a54.png)|![KakaoTalk_Photo_2022-08-04-14-43-53 002](https://user-images.githubusercontent.com/40821203/182771809-36897b9c-268a-466d-84d4-7cbaf2c98ade.png)|![KakaoTalk_Photo_2022-08-04-14-43-54 003](https://user-images.githubusercontent.com/40821203/182771839-daf03f7f-3bb2-45d3-ad3e-71c9f9a06a22.png)|
 |-|-|-|-|
 
 
