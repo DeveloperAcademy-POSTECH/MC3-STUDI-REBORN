@@ -1,45 +1,34 @@
-# MC3-STUDI-REBORN
+# 리본 REBORN
+전국의 유기동물이 다시(Re) 태어날 수 있는(Born) 기회를 제공하는 앱입니다.
 
-# Commit Template
+우리 주변에 어떤 유기동물들이 있을까요?
+해당 소식들을 리본으로 모두 확인하고 입양하세요.
 
-커밋 메시지 템플릿입니다. 어기면 밖에서 물구나무 1분 서기.
+|![KakaoTalk_Photo_2022-08-04-14-43-52 001](https://user-images.githubusercontent.com/40821203/182771772-38502344-e589-4b71-b5f7-ddebd0dd8a54.png)|![KakaoTalk_Photo_2022-08-04-14-43-53 002](https://user-images.githubusercontent.com/40821203/182771809-36897b9c-268a-466d-84d4-7cbaf2c98ade.png)|![KakaoTalk_Photo_2022-08-04-14-43-54 003](https://user-images.githubusercontent.com/40821203/182771839-daf03f7f-3bb2-45d3-ad3e-71c9f9a06a22.png)|
+|-|-|-|
 
----
 
-type: subject
 
-body (optional)
 
-footer (optional)
 
----
 
-## type - 타입	설명
+# 주요 기능
+* 시, 도별 유기동물 정보 조회
+* 동물의 상세 정보 한 눈에 확인하기
+* 관심있는 동물들만 모아보기
+* 해당 보호소에 연락하기
 
-|type|설명|
-|-|-|
-|`feat`|새로운 기능 추가|
-|`fix`|버그 수정|
-|`docs`|문서 수정|
-|`style`|공백, 세미콜론 등 스타일 수정|
-|`refactor`|코드 리팩토링|
-|`perf`|성능 개선|
-|`test`|테스트 추가|
-|`chore`|빌드 과정 또는 보조 기능(문서 생성기능 등) 수정|
+작은 관심으로 이 친구들에게 리본을 달 수 있도록 해주세요.
 
-## 예시
+리본은 정부 및 해당 동물 보호소들과 무관합니다.
+해당 정보의 출처는 농림축산식품부에서 제공하는 동물 보호 관리 시스템의 유기동물 정보 조회 서비스에 있습니다.
 
-아래처럼 작성하면 됩니다.
+# Skills & Tech Stack
+`UIKit`
+`CoreData`
 
----
+# OUR TEAM
+STUDI([Digi](https://github.com/pagh2322), [Gun](https://github.com/namgeon1106), [Stem](https://github.com/stemmmm), [K](https://github.com/rkddnr330), [Choi](https://github.com/Hyeminchio))
 
-feat: 압축파일 미리보기 기능 추가
 
-사용자의 편의를 위해 압축을 풀기 전에
-다음과 같이 압축파일 미리보기를 할 수 있도록 함
- - 마우스 오른쪽 클릭
- - 윈도우 탐색기 또는 맥 파인더의 미리보기 창
 
-Closes #125
-
----
